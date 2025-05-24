@@ -66,7 +66,7 @@ const Header = () => {
                 />
               )}
               <Icon className={`w-4 h-4 z-10 ${isActive ? 'text-primary-foreground' : ''}`} />
-              <span className="z-10">{item.label}</span>
+              <span className="z-10 hidden md:inline">{item.label}</span>
             </motion.button>
           );
         })}

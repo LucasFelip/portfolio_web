@@ -1,0 +1,101 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment variables
+.env
+.env*.local
+.env.*.local
+
+# Next.js build output
+.next
+out
+
+# Nuxt.js build output
+.nuxt
+dist
+
+# Gatsby files
+.cache/
+# Comment in the public line in if your project uses Gatsby and not Next.js
+# https://nextjs.org/blog/next-9-1#public-directory-support
+# public
+
+# vuepress build output
+.vuepress/dist
+
+# vuepress v2.x temp and cache directory
+.temp
+.cache
+
+# Docusaurus cache and generated files
+.docusaurus
+
+# SvelteKit build output
+.svelte-kit
+build
+
+# Remix build output
+build/
+public/build/
+
+# Astro build output
+dist/
+.astro/
+
+# Vite
+.vite
+vite.config.js.timestamp*
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Optional Prettier cache
+.prettiercache
+
+# Optional Parcel cache
+.parcel-cache
+
+# Optional Sentry files
+.sentryclirc
+
+# Optional Netlify folder
+.netlify
+
+# Optional Vercel folder
+.vercel
+
+# Optional Remix files
+.cache
+dev.db
+dev.db-journal
+
+# Optional Expo files
+.expo

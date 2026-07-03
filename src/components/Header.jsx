@@ -1,11 +1,12 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Home, Briefcase, Mail, Github } from 'lucide-react';
+import { Home, Briefcase, Mail, Github, Wrench } from 'lucide-react';
 
 const navItems = [
   { id: 'principal', label: 'Principal', icon: Home },
   { id: 'experiencias', label: 'Experiências', icon: Briefcase },
+  { id: 'servicos', label: 'Serviços', icon: Wrench },
   { id: 'projetos', label: 'Projetos', icon: Github },
   { id: 'contatos', label: 'Contatos', icon: Mail },
 ];
@@ -45,7 +46,12 @@ const Header = () => {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="fixed top-0 left-0 right-0 z-50 flex justify-center py-3"
     >
-      <nav className="glassmorphism flex items-center space-x-1 rounded-xl p-2 shadow-2xl">
+      <nav className="flex items-center gap-1 rounded-lg border border-border bg-card/80 backdrop-blur-md pl-3 pr-1.5 py-1.5 shadow-2xl shadow-black/40">
+        <div className="hidden xs:flex items-center gap-1.5 pr-3 mr-1 border-r border-border">
+          <span className="w-2 h-2 rounded-full bg-destructive/70" />
+          <span className="w-2 h-2 rounded-full bg-yellow-500/70" />
+          <span className="w-2 h-2 rounded-full bg-primary/70" />
+        </div>
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeSection === item.id;
@@ -53,7 +59,7 @@ const Header = () => {
             <motion.button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`relative flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300
+              className={`relative flex items-center space-x-2 px-3 py-1.5 rounded-md font-mono text-xs uppercase tracking-wide transition-colors duration-300
                 ${isActive ? 'text-primary-foreground' : 'text-muted-foreground hover:text-foreground'}`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -61,11 +67,11 @@ const Header = () => {
               {isActive && (
                 <motion.div
                   layoutId="active-nav-item-header"
-                  className="absolute inset-0 bg-primary rounded-lg z-0"
+                  className="absolute inset-0 bg-primary rounded-md z-0"
                   transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                 />
               )}
-              <Icon className={`w-4 h-4 z-10 ${isActive ? 'text-primary-foreground' : ''}`} />
+              <Icon className={`w-3.5 h-3.5 z-10 ${isActive ? 'text-primary-foreground' : ''}`} />
               <span className="z-10 hidden md:inline">{item.label}</span>
             </motion.button>
           );

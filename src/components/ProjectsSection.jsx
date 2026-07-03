@@ -28,6 +28,9 @@ const ProjectsSection = () => {
   return (
     <section id="projetos" className="py-20 md:py-32 bg-background">
       <div className="container mx-auto px-4">
+        <div className="text-center">
+          <span className="section-label">04 — Projetos</span>
+        </div>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

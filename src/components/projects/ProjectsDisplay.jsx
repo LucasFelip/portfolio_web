@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProjectCard from './ProjectCard';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Github, AlertTriangle } from 'lucide-react';
+import { Github, AlertTriangle, ChevronDown } from 'lucide-react';
 
 const GITHUB_USERNAME = 'LucasFelip';
+const MOBILE_VISIBLE_COUNT = 2;
 
 const ProjectsDisplay = ({ projects, loading, error }) => {
+  const [expanded, setExpanded] = useState(false);
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -49,13 +51,28 @@ const ProjectsDisplay = ({ projects, loading, error }) => {
     );
   }
 
+  const hasMore = projects.length > MOBILE_VISIBLE_COUNT;
+
   return (
     <>
       <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 xs:gap-6 px-4 xs:px-0">
-        {projects.map((repo) => (
-          <ProjectCard key={repo.id} repo={repo} />
+        {projects.map((repo, index) => (
+          <div
+            key={repo.id}
+            className={!expanded && index >= MOBILE_VISIBLE_COUNT ? 'hidden md:block' : ''}
+          >
+            <ProjectCard repo={repo} />
+          </div>
         ))}
       </div>
+      {hasMore && (
+        <div className="md:hidden text-center mt-6 px-4">
+          <Button variant="outline" size="sm" onClick={() => setExpanded(!expanded)}>
+            {expanded ? 'Ver menos' : `Ver mais projetos (${projects.length - MOBILE_VISIBLE_COUNT})`}
+            <ChevronDown className={`w-4 h-4 ml-2 transition-transform ${expanded ? 'rotate-180' : ''}`} />
+          </Button>
+        </div>
+      )}
       {projects.length > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}

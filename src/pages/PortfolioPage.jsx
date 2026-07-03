@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import HeroSection from '@/components/HeroSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import ExperienceSection from '@/components/ExperienceSection';
+import ServicesSection from '@/components/ServicesSection';
 import ContactSection from '@/components/ContactSection';
 import { Toaster } from '@/components/ui/toaster';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -22,6 +23,7 @@ const PortfolioPage = () => {
         >
             <HeroSection />
             <ExperienceSection />
+            <ServicesSection />
             <ProjectsSection />
             <ContactSection />
         </motion.main>

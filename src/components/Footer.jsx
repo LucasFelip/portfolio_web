@@ -1,10 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Home, Briefcase, Mail, Github } from 'lucide-react';
+import { Home, Briefcase, Mail, Github, Wrench } from 'lucide-react';
 
 const navItems = [
   { id: 'principal', label: 'Principal', icon: Home },
   { id: 'experiencias', label: 'Experiências', icon: Briefcase },
+  { id: 'servicos', label: 'Serviços', icon: Wrench },
   { id: 'projetos', label: 'Projetos', icon: Github },
   { id: 'contatos', label: 'Contatos', icon: Mail },
 ];
@@ -42,10 +43,16 @@ const Footer = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="py-12 mt-16 border-t border-border/20"
+          className="relative overflow-hidden py-12 mt-16 border-t border-border/20"
       >
-        <div className="container mx-auto px-4 flex flex-col items-center">
-          <nav className="flex items-center space-x-1 rounded-xl p-2 mb-6 shadow-2xl bg-background border border-border/30">
+        <div className="absolute inset-0 bg-grid" />
+        <div className="container relative mx-auto px-4 flex flex-col items-center">
+          <nav className="flex items-center gap-1 rounded-lg border border-border bg-card/80 backdrop-blur-md pl-3 pr-1.5 py-1.5 mb-6 shadow-2xl shadow-black/40">
+            <div className="hidden xs:flex items-center gap-1.5 pr-3 mr-1 border-r border-border">
+              <span className="w-2 h-2 rounded-full bg-destructive/70" />
+              <span className="w-2 h-2 rounded-full bg-yellow-500/70" />
+              <span className="w-2 h-2 rounded-full bg-primary/70" />
+            </div>
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeSection === item.id;
@@ -53,7 +60,7 @@ const Footer = () => {
                   <motion.button
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
-                      className={`relative flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300
+                      className={`relative flex items-center space-x-2 px-3 py-1.5 rounded-md font-mono text-xs uppercase tracking-wide transition-colors duration-300
                   ${isActive ? 'text-primary-foreground' : 'text-muted-foreground hover:text-foreground'}`}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
@@ -61,20 +68,23 @@ const Footer = () => {
                     {isActive && (
                         <motion.div
                             layoutId="active-nav-item-footer"
-                            className="absolute inset-0 bg-primary rounded-lg z-0"
+                            className="absolute inset-0 bg-primary rounded-md z-0"
                             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                         />
                     )}
-                    <Icon className={`w-4 h-4 z-10 ${isActive ? 'text-primary-foreground' : ''}`} />
+                    <Icon className={`w-3.5 h-3.5 z-10 ${isActive ? 'text-primary-foreground' : ''}`} />
                     {/* Alteração para ocultar o texto em mobile */}
                     <span className="z-10 hidden md:inline">{item.label}</span>
                   </motion.button>
               );
             })}
           </nav>
-          <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} Lucas Ferreira. Todos os direitos reservados.
-          </p>
+          <div className="flex flex-col items-center gap-2 font-mono text-xs text-muted-foreground text-center">
+            <p>&copy; {new Date().getFullYear()} Lucas Ferreira. Todos os direitos reservados.</p>
+            <p className="flex items-center gap-1.5 text-muted-foreground/70">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" /> built with React · Vite · Tailwind
+            </p>
+          </div>
         </div>
       </motion.footer>
   );

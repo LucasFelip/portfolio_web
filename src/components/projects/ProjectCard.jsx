@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Github, Star, GitFork, ExternalLink, ThumbsUp } from 'lucide-react';
+import { Github, Star, GitFork, ExternalLink } from 'lucide-react';
 
 const ProjectCard = ({ repo }) => (
   <motion.div
@@ -15,11 +15,6 @@ const ProjectCard = ({ repo }) => (
       <div className="flex items-center gap-2 px-4 py-2.5 border-b border-border bg-black/20">
         <Github className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
         <span className="font-mono text-xs text-foreground/90 truncate">{repo.name}</span>
-        {repo.isPinned && (
-          <span className="ml-auto shrink-0 inline-flex items-center gap-1 font-mono text-[0.6rem] uppercase tracking-wide text-primary border border-primary/30 rounded-full px-1.5 py-0.5">
-            <ThumbsUp className="w-2.5 h-2.5" /> fixado
-          </span>
-        )}
       </div>
       <div className="p-5 flex flex-col flex-grow">
         <p className="text-sm text-muted-foreground md:h-16 overflow-hidden text-ellipsis mb-4">

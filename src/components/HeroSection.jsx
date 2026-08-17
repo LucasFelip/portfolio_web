@@ -2,11 +2,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { experiencesData } from '@/data/experiences';
+import { tempoDesde } from '@/lib/dateUtils';
 
-const statusItems = [
-  'Em produção @ Pulse - Grupo Mateus',
-  'Pesquisa voluntária @ LSDI-UFMA',
-];
+// só entram aqui experiências sem terminoAno (em andamento) e com statusLabel definido
+const statusItems = experiencesData
+  .filter((exp) => !exp.terminoAno && exp.statusLabel)
+  .map((exp) => `${exp.statusLabel} @ ${exp.instituicao} (${tempoDesde(exp.inicioMes, exp.inicioAno)})`);
 
 const stack = ['Java', 'Spring', 'Angular', 'Flutter', 'Docker', 'Azure', 'Go', 'Selenium'];
 

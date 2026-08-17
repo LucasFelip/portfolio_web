@@ -4,78 +4,17 @@ import { motion } from 'framer-motion';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { MapPin, CalendarDays, ExternalLink, ChevronDown } from 'lucide-react';
+import { experiencesData } from '@/data/experiences';
+import { tempoDesde } from '@/lib/dateUtils';
 
 const MOBILE_VISIBLE_COUNT = 2;
-
-const experiencesData = [
-    {
-        imagemLink: '/logos/pulse.jpg',
-        instituicao: 'Pulse - Grupo Mateus',
-        localizacao: 'São Luís, MA',
-        inicioMes: 'Junho',
-        inicioAno: '2025',
-        terminoMes: '',
-        terminoAno: '',
-        cargo: 'Programador Pleno - Engenheiro de Software',
-        atuacao: 'Atuo na construção de soluções inovadoras e escaláveis, utilizando tecnologias de ponta para otimizar processos e melhorar a experiência do cliente. Farei parte de uma equipe multidisciplinar, colaborando com profissionais de diversas áreas para desenvolver produtos que atendam às necessidades do mercado.',
-        link: 'https://www.grupomateus.com.br/inovacao/'
-    },
-    {
-        imagemLink: '/logos/lsdi.png',
-        instituicao: 'LSDI - UFMA',
-        localizacao: 'São Luís, MA',
-        inicioMes: 'Janeiro',
-        inicioAno: '2025',
-        terminoMes: '',
-        terminoAno: '',
-        cargo: 'Voluntário em Administração de Laboratório',
-        atuacao: 'Atuo voluntariamente na administração do Laboratório de Sistemas Distribuídos e Inteligentes (LSDI), desenvolvendo novas tecnologias e mantendo os recursos e serviços de infraestrutura que sustentam as pesquisas do laboratório.',
-        link: 'https://ufma.br'
-    },
-    {
-        imagemLink: '/logos/coreplan.png',
-        instituicao: 'Coreplan Gestão Tecnologia e Serviços',
-        localizacao: 'Fortaleza, CE',
-        inicioMes: 'Novembro',
-        inicioAno: '2023',
-        terminoMes: 'Maio',
-        terminoAno: '2025',
-        cargo: 'Analista de Suporte de TI',
-        atuacao: 'Atuo na manutenção do Sistema de Processos Automatizados (SPA), prestando suporte técnico especializado para procuradorias estaduais e municipais (PGE e PGM) e participando do processo de análise e uso do sistema junto ao cliente.',
-        link: 'https://www.coreplan.com.br/'
-    },
-    {
-        imagemLink: 'https://www.tjma.jus.br/imagens/logo_share.png',
-        instituicao: 'Tribunal de Justiça do Maranhão',
-        localizacao: 'São Luís, MA',
-        inicioMes: 'Agosto',
-        inicioAno: '2022',
-        terminoMes: 'Novembro',
-        terminoAno: '2023',
-        cargo: 'Estagiário de Desenvolvimento de Software',
-        atuacao: 'Participei do desenvolvimento e manutenção do sistema SAPRE, focado na gestão de precatórios. Contribuí para o gerenciamento de demandas, organização da equipe via metodologias ágeis (Scrum), e auxiliei na análise de código e resolução de bugs.',
-        link: 'https://www.tjma.jus.br/'
-    },
-    {
-        imagemLink: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSqmXO8nCMqO8lMGqTnKM_7vgims6zAf9fEvVWRJw&s',
-        instituicao: 'Junta Comercial do Estado do Maranhão',
-        localizacao: 'São Luís, MA',
-        inicioMes: 'Outubro',
-        inicioAno: '2021',
-        terminoMes: 'Agosto',
-        terminoAno: '2022',
-        cargo: 'Estagiário de Desenvolvimento de Software',
-        atuacao: 'Atuei na migração do banco de dados do sistema de Consulta Empresarial, transferindo dados do banco PL/SQL  para o banco Apache Pinot, e posteriormente para o MongoDB, visando melhorar a performance e os resultados das consultas.',
-        link: 'https://www.jucema.ma.gov.br/'
-    }
-];
 
 const ExperienceCard = ({ experience, index, isLast }) => {
   const { imagemLink, instituicao, localizacao, inicioMes, inicioAno, terminoMes, terminoAno, cargo, atuacao, link } = experience;
   const fallbackText = instituicao.substring(0, 2).toUpperCase();
   const isCurrent = !terminoAno;
   const periodo = isCurrent
-    ? `${inicioMes} ${inicioAno} — atual`
+    ? `${inicioMes} ${inicioAno} — atual · ${tempoDesde(inicioMes, inicioAno)}`
     : `${inicioMes} ${inicioAno} — ${terminoMes} ${terminoAno}`;
 
   return (

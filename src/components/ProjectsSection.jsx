@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { getProjects } from '@/services/githubService';
 import ProjectsDisplay from '@/components/projects/ProjectsDisplay';
 import ActivityFeed from '@/components/projects/ActivityFeed';
+import GithubStatsCard from '@/components/projects/GithubStatsCard';
 
 const ProjectsSection = () => {
   const [projects, setProjects] = useState([]);
@@ -52,6 +53,7 @@ const ProjectsSection = () => {
         </motion.p>
         <ProjectsDisplay projects={projects} loading={loading} error={error} />
         <ActivityFeed />
+        <GithubStatsCard />
       </div>
     </section>
   );

@@ -1,0 +1,19 @@
+name: Lembrete trimestral de sincronização
+
+on:
+  schedule:
+    - cron: '0 9 1 1,4,7,10 *' # dia 1 de jan/abr/jul/out, 09:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Abrir issue de lembrete
+        uses: JasonEtco/create-an-issue@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          filename: .github/ISSUE_TEMPLATE/quarterly-sync.md

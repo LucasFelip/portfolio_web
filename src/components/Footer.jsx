@@ -1,12 +1,15 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Home, Briefcase, Mail, Github, Wrench } from 'lucide-react';
+import { Home, Briefcase, Mail, Github, Wrench, FlaskConical, FileText } from 'lucide-react';
+import changelog from '@/data/changelog.generated.json';
 
 const navItems = [
   { id: 'principal', label: 'Principal', icon: Home },
   { id: 'experiencias', label: 'Experiências', icon: Briefcase },
+  { id: 'pesquisa', label: 'Pesquisa', icon: FlaskConical },
   { id: 'servicos', label: 'Serviços', icon: Wrench },
   { id: 'projetos', label: 'Projetos', icon: Github },
+  { id: 'notas', label: 'Notas', icon: FileText },
   { id: 'contatos', label: 'Contatos', icon: Mail },
 ];
 
@@ -84,6 +87,14 @@ const Footer = () => {
             <p className="flex items-center gap-1.5 text-muted-foreground/70">
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" /> built with React · Vite · Tailwind
             </p>
+            {changelog.lastUpdated && (
+              <p
+                className="text-muted-foreground/50"
+                title={changelog.entries.map((e) => `${e.date} — ${e.message}`).join('\n')}
+              >
+                site atualizado em {changelog.lastUpdated.split('-').reverse().join('/')}
+              </p>
+            )}
           </div>
         </div>
       </motion.footer>

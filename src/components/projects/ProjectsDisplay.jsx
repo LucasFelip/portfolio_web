@@ -23,7 +23,7 @@ const ProjectsDisplay = ({ projects, loading, error }) => {
         <AlertTriangle className="w-12 h-12 mb-4"/>
         <p className="text-xl font-semibold">Oops! Algo deu errado.</p>
         <p>{error}</p>
-        <p className="mt-2 text-sm">Por favor, tente novamente mais tarde. Se o erro persistir, pode ser necessário configurar um token de acesso do GitHub (VITE_GITHUB_TOKEN) no arquivo .env para evitar limites de taxa ou acessar repositórios fixados.</p>
+        <p className="mt-2 text-sm">Por favor, tente novamente mais tarde. A API pública do GitHub tem um limite de requisições por hora.</p>
       </div>
     );
   }

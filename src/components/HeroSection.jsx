@@ -8,7 +8,7 @@ const statusItems = [
   'Pesquisa voluntária @ LSDI-UFMA',
 ];
 
-const stack = ['Java', 'Spring', 'Angular', 'Flutter', 'Docker', 'Azure', 'Go'];
+const stack = ['Java', 'Spring', 'Angular', 'Flutter', 'Docker', 'Azure', 'Go', 'Selenium'];
 
 const HeroSection = () => {
   const name = "Lucas Ferreira";
@@ -30,7 +30,7 @@ const HeroSection = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="inline-flex items-center gap-2 font-mono text-sm text-muted-foreground border border-border rounded-full px-4 py-1.5 mb-6"
           >
-            <span className="text-primary">●</span> engenheiro_software --backend
+            <span className="text-primary">●</span> engenheiro_software --backend --devops
           </motion.span>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}

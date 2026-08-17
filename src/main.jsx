@@ -4,6 +4,9 @@ import App from '@/App';
 import '@/index.css';
 import {DevSupport} from "@react-buddy/ide-toolbox";
 import {ComponentPreviews, useInitial} from "@/dev/index.js";
+import { initAnalytics } from '@/lib/analytics';
+
+initAnalytics();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>

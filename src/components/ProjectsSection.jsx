@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { getProjects } from '@/services/githubService';
 import ProjectsDisplay from '@/components/projects/ProjectsDisplay';
+import ActivityFeed from '@/components/projects/ActivityFeed';
 
 const ProjectsSection = () => {
   const [projects, setProjects] = useState([]);
@@ -29,7 +30,7 @@ const ProjectsSection = () => {
     <section id="projetos" className="py-20 md:py-32 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <span className="section-label">04 — Projetos</span>
+          <span className="section-label">05 — Projetos</span>
         </div>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -47,9 +48,10 @@ const ProjectsSection = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-lg text-muted-foreground text-center mb-12 max-w-2xl mx-auto"
         >
-          Uma seleção dos meus projetos fixados e mais recentes no GitHub.
+          Uma seleção dos meus projetos mais recentes no GitHub.
         </motion.p>
         <ProjectsDisplay projects={projects} loading={loading} error={error} />
+        <ActivityFeed />
       </div>
     </section>
   );

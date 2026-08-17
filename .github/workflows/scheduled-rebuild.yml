@@ -1,0 +1,19 @@
+name: Rebuild semanal
+
+on:
+  schedule:
+    - cron: '0 9 * * 1' # toda segunda, 09:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  trigger-netlify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Disparar build hook da Netlify
+        if: ${{ secrets.NETLIFY_BUILD_HOOK_URL != '' }}
+        run: curl -sf -X POST "${{ secrets.NETLIFY_BUILD_HOOK_URL }}"
+
+      - name: Secret não configurado
+        if: ${{ secrets.NETLIFY_BUILD_HOOK_URL == '' }}
+        run: |
+          echo "::warning::NETLIFY_BUILD_HOOK_URL não configurado. Crie um Build Hook na Netlify (Site settings > Build & deploy > Build hooks) e adicione como secret do repositório."

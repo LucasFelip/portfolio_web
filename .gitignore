@@ -28,6 +28,9 @@ dist-ssr
 .env*.local
 .env.*.local
 
+# Gerado em build-time por scripts/generate-changelog.js
+src/data/changelog.generated.json
+
 # Next.js build output
 .next
 out

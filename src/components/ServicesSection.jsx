@@ -38,7 +38,7 @@ const ServicesSection = () => {
       <div className="absolute inset-0 bg-grid" />
       <div className="container relative mx-auto px-4">
         <div className="text-center">
-          <span className="section-label">03 — Serviços</span>
+          <span className="section-label">04 — Serviços</span>
         </div>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

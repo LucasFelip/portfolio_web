@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Linkedin, Github, CalendarClock } from 'lucide-react';
+import { Mail, Linkedin, Github, CalendarClock, Fingerprint } from 'lucide-react';
 
 const SCHEDULING_LINK = 'https://cal.com/lusca-ferreira/30min';
 
@@ -34,6 +34,11 @@ const contactLinks = [
     label: "GitHub",
   },
   {
+    href: "https://orcid.org/0009-0000-8662-9675",
+    icon: Fingerprint,
+    label: "ORCID",
+  },
+  {
     href: "https://discord.com/users/luckylusca",
     icon: DiscordIcon,
     label: "Discord",
@@ -49,7 +54,7 @@ const ContactSection = () => {
   return (
     <section id="contatos" className="py-20 md:py-32 bg-background">
       <div className="container mx-auto px-4 text-center">
-        <span className="section-label">05 — Contato</span>
+        <span className="section-label">07 — Contato</span>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

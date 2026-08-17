@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Home, Briefcase, Mail, Github, Wrench, FlaskConical, FileText } from 'lucide-react';
+import { Home, Briefcase, Mail, Github, Wrench, FlaskConical } from 'lucide-react';
 
 const navItems = [
   { id: 'principal', label: 'Principal', icon: Home },
@@ -9,7 +9,6 @@ const navItems = [
   { id: 'pesquisa', label: 'Pesquisa', icon: FlaskConical },
   { id: 'servicos', label: 'Serviços', icon: Wrench },
   { id: 'projetos', label: 'Projetos', icon: Github },
-  { id: 'notas', label: 'Notas', icon: FileText },
   { id: 'contatos', label: 'Contatos', icon: Mail },
 ];
 

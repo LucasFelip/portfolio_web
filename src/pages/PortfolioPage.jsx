@@ -6,7 +6,6 @@ import ProjectsSection from '@/components/ProjectsSection';
 import ExperienceSection from '@/components/ExperienceSection';
 import ResearchSection from '@/components/ResearchSection';
 import ServicesSection from '@/components/ServicesSection';
-import NotesSection from '@/components/NotesSection';
 import ContactSection from '@/components/ContactSection';
 import { Toaster } from '@/components/ui/toaster';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -28,7 +27,6 @@ const PortfolioPage = () => {
             <ResearchSection />
             <ServicesSection />
             <ProjectsSection />
-            <NotesSection />
             <ContactSection />
         </motion.main>
       </AnimatePresence>

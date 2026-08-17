@@ -54,7 +54,7 @@ const ContactSection = () => {
   return (
     <section id="contatos" className="py-20 md:py-32 bg-background">
       <div className="container mx-auto px-4 text-center">
-        <span className="section-label">07 — Contato</span>
+        <span className="section-label">06 — Contato</span>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

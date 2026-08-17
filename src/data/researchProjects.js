@@ -3,7 +3,7 @@ export const researchProjects = [
   {
     titulo: 'Tabuleiro BD',
     subtitulo: 'Um tabuleiro inclusivo para o ensino de Banco de Dados',
-    periodo: '2024 — atual',
+    periodo: '2024 — 2025',
     papel: 'Coordenador',
     natureza: 'Pesquisa',
     descricao: 'Jogo de tabuleiro inclusivo para o ensino de Banco de Dados, aplicando gamificação para facilitar o aprendizado de conceitos complexos.',

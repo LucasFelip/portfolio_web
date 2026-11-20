@@ -2,8 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Github, Star, GitFork, ExternalLink } from 'lucide-react';
+import { useI18n } from '@/i18n';
 
-const ProjectCard = ({ repo }) => (
+const ProjectCard = ({ repo }) => {
+  const { t, lang } = useI18n();
+  return (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -18,7 +21,7 @@ const ProjectCard = ({ repo }) => (
       </div>
       <div className="p-5 flex flex-col flex-grow">
         <p className="text-sm text-muted-foreground md:h-16 overflow-hidden text-ellipsis mb-4">
-          {repo.description || 'Sem descrição disponível.'}
+          {repo.description || t.projects.noDescription}
         </p>
         <div className="mt-auto">
           <div className="flex items-center gap-4 font-mono text-xs text-muted-foreground mb-2">
@@ -36,17 +39,18 @@ const ProjectCard = ({ repo }) => (
             </span>
           </div>
           <p className="font-mono text-[0.7rem] text-muted-foreground/70 mb-4">
-            atualizado em {new Date(repo.pushedAt || repo.pushed_at).toLocaleDateString('pt-BR')}
+            {t.projects.updatedAt} {new Date(repo.pushedAt || repo.pushed_at).toLocaleDateString(lang === 'pt' ? 'pt-BR' : 'en-US')}
           </p>
           <Button variant="outline" size="sm" asChild className="w-full">
             <a href={repo.url || repo.html_url} target="_blank" rel="noopener noreferrer">
-              Ver no GitHub <ExternalLink className="w-4 h-4 ml-2" />
+              {t.projects.viewOnGithub} <ExternalLink className="w-4 h-4 ml-2" />
             </a>
           </Button>
         </div>
       </div>
     </div>
   </motion.div>
-);
+  );
+};
 
 export default ProjectCard;

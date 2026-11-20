@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useI18n } from '@/i18n';
 
 const GITHUB_USERNAME = 'LucasFelip';
 const STATS_URL = `https://github-readme-stats.vercel.app/api?username=${GITHUB_USERNAME}&show_icons=true&hide_border=true&bg_color=00000000&title_color=5C7237&text_color=A6A6A6&icon_color=5C7237&hide_title=true`;
 
 const GithubStatsCard = () => {
+  const { t } = useI18n();
   const [broken, setBroken] = useState(false);
   if (broken) return null;
 
@@ -11,7 +13,7 @@ const GithubStatsCard = () => {
     <div className="dashboard-card max-w-md mx-auto mt-6 flex justify-center">
       <img
         src={STATS_URL}
-        alt="Estatísticas do GitHub de Lucas Ferreira"
+        alt={t.projects.statsAlt}
         className="w-full"
         loading="lazy"
         onError={() => setBroken(true)}

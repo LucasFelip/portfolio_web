@@ -5,17 +5,20 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { MapPin, CalendarDays, ExternalLink, ChevronDown } from 'lucide-react';
 import { experiencesData } from '@/data/experiences';
-import { tempoDesde } from '@/lib/dateUtils';
+import { tempoDesde, nomeDoMes } from '@/lib/dateUtils';
+import { useI18n } from '@/i18n';
 
 const MOBILE_VISIBLE_COUNT = 2;
 
 const ExperienceCard = ({ experience, index, isLast }) => {
+  const { t, tr } = useI18n();
   const { imagemLink, instituicao, localizacao, inicioMes, inicioAno, terminoMes, terminoAno, cargo, atuacao, link } = experience;
   const fallbackText = instituicao.substring(0, 2).toUpperCase();
   const isCurrent = !terminoAno;
+  const inicio = `${nomeDoMes(inicioMes, t.months)} ${inicioAno}`;
   const periodo = isCurrent
-    ? `${inicioMes} ${inicioAno} — atual · ${tempoDesde(inicioMes, inicioAno)}`
-    : `${inicioMes} ${inicioAno} — ${terminoMes} ${terminoAno}`;
+    ? `${inicio} — ${t.experience.present} · ${tempoDesde(inicioMes, inicioAno, t.time)}`
+    : `${inicio} — ${nomeDoMes(terminoMes, t.months)} ${terminoAno}`;
 
   return (
     <motion.div
@@ -32,10 +35,10 @@ const ExperienceCard = ({ experience, index, isLast }) => {
 
       <div className="dashboard-card hover:border-primary/50 transition-colors">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 mb-1">
-          <h3 className="text-xl font-semibold text-foreground">{cargo}</h3>
+          <h3 className="text-xl font-semibold text-foreground">{tr(cargo)}</h3>
           {isCurrent && (
             <span className="inline-flex items-center gap-1.5 font-mono text-[0.65rem] uppercase tracking-wide text-primary border border-primary/30 rounded-full px-2 py-0.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" /> atual
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" /> {t.experience.current}
             </span>
           )}
         </div>
@@ -46,7 +49,7 @@ const ExperienceCard = ({ experience, index, isLast }) => {
           <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {localizacao}</span>
           <span className="flex items-center gap-1"><CalendarDays className="w-3 h-3" /> {periodo}</span>
         </div>
-        <p className="text-sm text-foreground/80 leading-relaxed mt-3">{atuacao}</p>
+        <p className="text-sm text-foreground/80 leading-relaxed mt-3">{tr(atuacao)}</p>
       </div>
     </motion.div>
   );
@@ -54,6 +57,7 @@ const ExperienceCard = ({ experience, index, isLast }) => {
 
 
 const ExperienceSection = () => {
+  const { t } = useI18n();
   const [expanded, setExpanded] = useState(false);
   const hasMore = experiencesData.length > MOBILE_VISIBLE_COUNT;
 
@@ -61,7 +65,7 @@ const ExperienceSection = () => {
     <section id="experiencias" className="py-20 md:py-32">
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <span className="section-label">02 — Experiência</span>
+          <span className="section-label">{t.experience.label}</span>
         </div>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -70,7 +74,7 @@ const ExperienceSection = () => {
           transition={{ duration: 0.5 }}
           className="text-4xl md:text-5xl font-bold text-center mb-4"
         >
-          Experiências
+          {t.experience.title}
         </motion.h2>
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
@@ -79,7 +83,7 @@ const ExperienceSection = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-lg text-muted-foreground text-center mb-12 max-w-2xl mx-auto"
         >
-          Minha trajetória profissional e as contribuições que fiz em cada função.
+          {t.experience.subtitle}
         </motion.p>
         <div className="relative max-w-3xl mx-auto">
           <div className="absolute left-6 xs:left-8 top-6 xs:top-8 bottom-6 xs:bottom-8 w-px bg-border" />
@@ -95,7 +99,7 @@ const ExperienceSection = () => {
         {hasMore && (
           <div className="md:hidden text-center mt-6">
             <Button variant="outline" size="sm" onClick={() => setExpanded(!expanded)}>
-              {expanded ? 'Ver menos' : `Ver mais experiências (${experiencesData.length - MOBILE_VISIBLE_COUNT})`}
+              {expanded ? t.experience.showLess : t.experience.showMore(experiencesData.length - MOBILE_VISIBLE_COUNT)}
               <ChevronDown className={`w-4 h-4 ml-2 transition-transform ${expanded ? 'rotate-180' : ''}`} />
             </Button>
           </div>

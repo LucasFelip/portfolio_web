@@ -4,8 +4,10 @@ import { getProjects } from '@/services/githubService';
 import ProjectsDisplay from '@/components/projects/ProjectsDisplay';
 import ActivityFeed from '@/components/projects/ActivityFeed';
 import GithubStatsCard from '@/components/projects/GithubStatsCard';
+import { useI18n } from '@/i18n';
 
 const ProjectsSection = () => {
+  const { t } = useI18n();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -31,7 +33,7 @@ const ProjectsSection = () => {
     <section id="projetos" className="py-20 md:py-32 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <span className="section-label">05 — Projetos</span>
+          <span className="section-label">{t.projects.label}</span>
         </div>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -40,7 +42,7 @@ const ProjectsSection = () => {
           transition={{ duration: 0.5 }}
           className="text-4xl md:text-5xl font-bold text-center mb-4"
         >
-          Projetos em Destaque
+          {t.projects.title}
         </motion.h2>
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
@@ -49,7 +51,7 @@ const ProjectsSection = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-lg text-muted-foreground text-center mb-12 max-w-2xl mx-auto"
         >
-          Uma seleção dos meus projetos mais recentes no GitHub.
+          {t.projects.subtitle}
         </motion.p>
         <ProjectsDisplay projects={projects} loading={loading} error={error} />
         <ActivityFeed />

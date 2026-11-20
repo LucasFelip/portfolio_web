@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Linkedin, Github, CalendarClock, Fingerprint } from 'lucide-react';
+import { useI18n } from '@/i18n';
 
 const SCHEDULING_LINK = 'https://cal.com/lusca-ferreira/30min';
 
@@ -46,15 +47,16 @@ const contactLinks = [
   {
     href: SCHEDULING_LINK,
     icon: CalendarClock,
-    label: "Agendar",
+    labelKey: "schedule",
   }
 ];
 
 const ContactSection = () => {
+  const { t } = useI18n();
   return (
     <section id="contatos" className="py-20 md:py-32 bg-background">
       <div className="container mx-auto px-4 text-center">
-        <span className="section-label">06 — Contato</span>
+        <span className="section-label">{t.contact.label}</span>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -70,7 +72,7 @@ const ContactSection = () => {
           </div>
 
           <div className="p-10 md:p-16 text-left">
-            <p className="font-mono text-sm text-primary mb-4">$ echo "Vamos conversar?"</p>
+            <p className="font-mono text-sm text-primary mb-4">{t.contact.prompt}</p>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -78,7 +80,7 @@ const ContactSection = () => {
               transition={{ duration: 0.5 }}
               className="text-4xl md:text-5xl font-bold mb-4"
             >
-              Entre em Contato
+              {t.contact.title}
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -87,7 +89,7 @@ const ContactSection = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-lg text-muted-foreground mb-12 max-w-xl"
             >
-              Conecte-se comigo através das redes abaixo. Estou sempre aberto a novas oportunidades, colaborações e projetos freelance!
+              {t.contact.subtitle}
             </motion.p>
 
             <motion.div
@@ -99,13 +101,14 @@ const ContactSection = () => {
             >
               {contactLinks.map((link, index) => {
                 const IconComponent = link.icon;
+                const label = link.labelKey ? t.contact[link.labelKey] : link.label;
                 return (
                   <motion.a
                     key={index}
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={link.label}
+                    aria-label={label}
                     className="flex flex-col items-center gap-2 w-24 p-4 rounded-lg border border-border bg-background/40 text-muted-foreground transition-colors hover:border-primary hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
                     whileHover={{ y: -3 }}
                     initial={{ opacity: 0, scale: 0.5 }}
@@ -113,7 +116,7 @@ const ContactSection = () => {
                     transition={{ type: "spring", stiffness: 260, damping: 20, delay: index * 0.1 }}
                   >
                     <IconComponent className="h-6 w-6" />
-                    <span className="font-mono text-xs">{link.label}</span>
+                    <span className="font-mono text-xs">{label}</span>
                   </motion.a>
                 );
               })}

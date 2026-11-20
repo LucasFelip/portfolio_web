@@ -2,43 +2,20 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Server, Network, Database, Smartphone } from 'lucide-react';
+import { useI18n } from '@/i18n';
 
 const WHATSAPP_NUMBER = '5598991530102';
 
-const servicesData = [
-  {
-    icon: Server,
-    title: 'Sistemas sob medida',
-    description: 'Crio o programa que a sua empresa precisa: aquele que organiza processos e economiza seu tempo no dia a dia.',
-    whatsappMessage: 'Olá Lucas! Vi seu portfólio e preciso de um sistema sob medida para minha empresa. Podemos conversar?',
-  },
-  {
-    icon: Network,
-    title: 'Mais velocidade e estabilidade',
-    description: 'Se o seu sistema está lento ou trava quando muita gente usa ao mesmo tempo, eu resolvo isso.',
-    whatsappMessage: 'Olá Lucas! Meu sistema está lento/travando e preciso de ajuda. Podemos conversar?',
-  },
-  {
-    icon: Database,
-    title: 'Cuido dos seus dados',
-    description: 'Organizo as informações da sua empresa — clientes, vendas, cadastros — com segurança e sem risco de perder nada.',
-    whatsappMessage: 'Olá Lucas! Preciso organizar/migrar os dados da minha empresa com segurança. Podemos conversar?',
-  },
-  {
-    icon: Smartphone,
-    title: 'Sites e aplicativos',
-    description: 'Do zero ao ar: seu site ou aplicativo pronto para os seus clientes usarem.',
-    whatsappMessage: 'Olá Lucas! Quero um site/aplicativo desenvolvido. Podemos conversar?',
-  },
-];
+const serviceIcons = [Server, Network, Database, Smartphone];
 
 const ServicesSection = () => {
+  const { t } = useI18n();
   return (
     <section id="servicos" className="relative overflow-hidden py-20 md:py-32 bg-background">
       <div className="absolute inset-0 bg-grid" />
       <div className="container relative mx-auto px-4">
         <div className="text-center">
-          <span className="section-label">04 — Serviços</span>
+          <span className="section-label">{t.services.label}</span>
         </div>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -47,7 +24,7 @@ const ServicesSection = () => {
           transition={{ duration: 0.5 }}
           className="text-4xl md:text-5xl font-bold text-center mb-4"
         >
-          Serviços para o seu projeto
+          {t.services.title}
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -56,14 +33,14 @@ const ServicesSection = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-lg text-muted-foreground text-center mb-12 max-w-2xl mx-auto"
         >
-          Disponível para projetos freelance, da ideia à entrega pronta para usar.
+          {t.services.subtitle}
         </motion.p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {servicesData.map((service, index) => {
-            const Icon = service.icon;
+          {t.services.items.map((service, index) => {
+            const Icon = serviceIcons[index];
             return (
               <motion.div
-                key={service.title}
+                key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -84,7 +61,7 @@ const ServicesSection = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Solicitar orçamento
+                    {t.services.quote}
                   </a>
                 </Button>
               </motion.div>

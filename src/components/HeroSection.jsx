@@ -4,23 +4,24 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { experiencesData } from '@/data/experiences';
 import { tempoDesde } from '@/lib/dateUtils';
+import { useI18n } from '@/i18n';
 import { CV_URL } from '@/lib/constants';
 import { Download } from 'lucide-react';
 import { scrollToSection } from '@/hooks/useActiveSection';
 
 // só entram aqui experiências sem terminoAno (em andamento) e com statusLabel definido
-const statusItems = experiencesData
-  .filter((exp) => !exp.terminoAno && exp.statusLabel)
-  .map((exp) => `${exp.statusLabel} @ ${exp.instituicao} (${tempoDesde(exp.inicioMes, exp.inicioAno)})`);
+const currentExperiences = experiencesData.filter((exp) => !exp.terminoAno && exp.statusLabel);
 
 const stack = ['Java', 'Spring', 'Angular', 'Flutter', 'Docker', 'Azure', 'Go', 'Selenium'];
 
 const HeroSection = () => {
+  const { t, tr } = useI18n();
   const name = "Lucas Ferreira";
-  const title = "Engenheiro de Software";
-  const bio = "Engenheiro de software especializado em Java e sistemas backend, com experiência em arquitetura de software, sistemas distribuídos e um leque amplo de outras tecnologias. Formação técnica em Redes de Computadores e bacharelado em Sistemas de Informação. Minha trajetória é marcada pela busca contínua por aprendizado, inovação e pelo desejo de contribuir com soluções tecnológicas que impactem positivamente pessoas e organizações.";
-
-  const { scrollToSection } = useActiveSection();
+  const title = t.hero.title;
+  const bio = t.hero.bio;
+  const statusItems = currentExperiences.map(
+    (exp) => `${tr(exp.statusLabel)} @ ${exp.instituicao} (${tempoDesde(exp.inicioMes, exp.inicioAno, t.time)})`,
+  );
 
   return (
     <section id="principal" className="relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden">
@@ -66,15 +67,15 @@ const HeroSection = () => {
             className="flex flex-wrap items-center justify-center md:justify-start gap-4 mt-8 xs:mt-10"
           >
             <Button size="lg" onClick={() => scrollToSection('projetos')}>
-              Ver projetos
+              {t.hero.viewProjects}
             </Button>
             <Button size="lg" variant="outline" asChild>
               <a href={CV_URL} download>
-                <Download aria-hidden="true" className="w-4 h-4 mr-2" /> Baixar CV
+                <Download aria-hidden="true" className="w-4 h-4 mr-2" /> {t.cv.download}
               </a>
             </Button>
             <Button size="lg" variant="ghost" onClick={() => scrollToSection('contatos')}>
-              Contato
+              {t.hero.contact}
             </Button>
           </motion.div>
         </div>

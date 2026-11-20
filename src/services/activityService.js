@@ -10,19 +10,16 @@ function describeEvent(event) {
     case 'PushEvent': {
       const count = event.payload.commits?.length || 0;
       const lastMessage = event.payload.commits?.[count - 1]?.message?.split('\n')[0];
-      return {
-        label: count > 1 ? `${count} commits em` : 'commit em',
-        repo,
-        detail: lastMessage,
-      };
+      // `kind` é traduzido na UI (ActivityFeed); `count` só importa para commits.
+      return { kind: 'commit', count, repo, detail: lastMessage };
     }
     case 'ReleaseEvent':
-      return { label: 'release em', repo, detail: event.payload.release?.tag_name };
+      return { kind: 'release', repo, detail: event.payload.release?.tag_name };
     case 'CreateEvent':
       if (event.payload.ref_type !== 'repository') return null;
-      return { label: 'novo repositório', repo, detail: null };
+      return { kind: 'newRepo', repo, detail: null };
     case 'PublicEvent':
-      return { label: 'tornou público', repo, detail: null };
+      return { kind: 'madePublic', repo, detail: null };
     default:
       return null;
   }

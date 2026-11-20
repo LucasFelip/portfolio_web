@@ -1,4 +1,5 @@
-// statusLabel só existe pra experiências atuais (sem terminoAno) — usado no Hero pra montar o "$ status --current".
+// Campos de texto são { pt, en }. statusLabel só existe pra experiências atuais (sem terminoAno)
+// — usado no Hero pra montar o "$ status --current". Meses ficam em português (usados no cálculo de tempo).
 export const experiencesData = [
   {
     imagemLink: '/logos/pulse.jpg',
@@ -8,9 +9,15 @@ export const experiencesData = [
     inicioAno: '2025',
     terminoMes: '',
     terminoAno: '',
-    cargo: 'Programador Pleno - Engenheiro de Software',
-    statusLabel: 'Em produção',
-    atuacao: 'Atuo na construção de soluções inovadoras e escaláveis, utilizando tecnologias de ponta para otimizar processos e melhorar a experiência do cliente. Farei parte de uma equipe multidisciplinar, colaborando com profissionais de diversas áreas para desenvolver produtos que atendam às necessidades do mercado.',
+    cargo: {
+      pt: 'Programador Pleno - Engenheiro de Software',
+      en: 'Mid-level Developer - Software Engineer',
+    },
+    statusLabel: { pt: 'Em produção', en: 'In production' },
+    atuacao: {
+      pt: 'Atuo na construção de soluções inovadoras e escaláveis, utilizando tecnologias de ponta para otimizar processos e melhorar a experiência do cliente. Farei parte de uma equipe multidisciplinar, colaborando com profissionais de diversas áreas para desenvolver produtos que atendam às necessidades do mercado.',
+      en: 'I build innovative, scalable solutions using cutting-edge technologies to optimize processes and improve the customer experience. I will be part of a multidisciplinary team, collaborating with professionals from different areas to develop products that meet market needs.',
+    },
     link: 'https://www.grupomateus.com.br/inovacao/',
   },
   {
@@ -21,9 +28,15 @@ export const experiencesData = [
     inicioAno: '2025',
     terminoMes: '',
     terminoAno: '',
-    cargo: 'Voluntário em Administração de Laboratório',
-    statusLabel: 'Pesquisa voluntária',
-    atuacao: 'Atuo voluntariamente na administração do Laboratório de Sistemas Distribuídos e Inteligentes (LSDI), desenvolvendo novas tecnologias e mantendo os recursos e serviços de infraestrutura que sustentam as pesquisas do laboratório.',
+    cargo: {
+      pt: 'Voluntário em Administração de Laboratório',
+      en: 'Laboratory Administration Volunteer',
+    },
+    statusLabel: { pt: 'Pesquisa voluntária', en: 'Volunteer research' },
+    atuacao: {
+      pt: 'Atuo voluntariamente na administração do Laboratório de Sistemas Distribuídos e Inteligentes (LSDI), desenvolvendo novas tecnologias e mantendo os recursos e serviços de infraestrutura que sustentam as pesquisas do laboratório.',
+      en: "I volunteer in the administration of the Distributed and Intelligent Systems Laboratory (LSDI), developing new technologies and maintaining the infrastructure resources and services that support the lab's research.",
+    },
     link: 'https://ufma.br',
   },
   {
@@ -34,8 +47,11 @@ export const experiencesData = [
     inicioAno: '2023',
     terminoMes: 'Maio',
     terminoAno: '2025',
-    cargo: 'Analista de Suporte de TI',
-    atuacao: 'Atuo na manutenção do Sistema de Processos Automatizados (SPA), prestando suporte técnico especializado para procuradorias estaduais e municipais (PGE e PGM) e participando do processo de análise e uso do sistema junto ao cliente.',
+    cargo: { pt: 'Analista de Suporte de TI', en: 'IT Support Analyst' },
+    atuacao: {
+      pt: 'Atuo na manutenção do Sistema de Processos Automatizados (SPA), prestando suporte técnico especializado para procuradorias estaduais e municipais (PGE e PGM) e participando do processo de análise e uso do sistema junto ao cliente.',
+      en: 'I maintained the Automated Process System (SPA), providing specialized technical support to state and municipal attorney offices (PGE and PGM) and taking part in the analysis and use of the system together with the client.',
+    },
     link: 'https://www.coreplan.com.br/',
   },
   {
@@ -46,8 +62,11 @@ export const experiencesData = [
     inicioAno: '2022',
     terminoMes: 'Novembro',
     terminoAno: '2023',
-    cargo: 'Estagiário de Desenvolvimento de Software',
-    atuacao: 'Participei do desenvolvimento e manutenção do sistema SAPRE, focado na gestão de precatórios. Contribuí para o gerenciamento de demandas, organização da equipe via metodologias ágeis (Scrum), e auxiliei na análise de código e resolução de bugs.',
+    cargo: { pt: 'Estagiário de Desenvolvimento de Software', en: 'Software Development Intern' },
+    atuacao: {
+      pt: 'Participei do desenvolvimento e manutenção do sistema SAPRE, focado na gestão de precatórios. Contribuí para o gerenciamento de demandas, organização da equipe via metodologias ágeis (Scrum), e auxiliei na análise de código e resolução de bugs.',
+      en: 'I took part in the development and maintenance of SAPRE, a court-ordered payment management system. I contributed to demand management, team organization through agile methodologies (Scrum), and helped with code analysis and bug fixing.',
+    },
     link: 'https://www.tjma.jus.br/',
   },
   {
@@ -58,8 +77,11 @@ export const experiencesData = [
     inicioAno: '2021',
     terminoMes: 'Agosto',
     terminoAno: '2022',
-    cargo: 'Estagiário de Desenvolvimento de Software',
-    atuacao: 'Atuei na migração do banco de dados do sistema de Consulta Empresarial, transferindo dados do banco PL/SQL  para o banco Apache Pinot, e posteriormente para o MongoDB, visando melhorar a performance e os resultados das consultas.',
+    cargo: { pt: 'Estagiário de Desenvolvimento de Software', en: 'Software Development Intern' },
+    atuacao: {
+      pt: 'Atuei na migração do banco de dados do sistema de Consulta Empresarial, transferindo dados do banco PL/SQL  para o banco Apache Pinot, e posteriormente para o MongoDB, visando melhorar a performance e os resultados das consultas.',
+      en: 'I worked on migrating the database of the Business Lookup system, moving data from PL/SQL to Apache Pinot and later to MongoDB, aiming to improve query performance and results.',
+    },
     link: 'https://www.jucema.ma.gov.br/',
   },
 ];

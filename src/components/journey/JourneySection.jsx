@@ -12,19 +12,20 @@ const LATTES_URL = 'https://lattes.cnpq.br/1631585272117041';
 const ORCID_URL = 'https://orcid.org/0009-0000-8662-9675';
 const ROW_HEIGHT = 40; // barras com ~34 px de altura: alvo de toque confortável
 const START_YEAR = 2017;
-const MIN_SPAN = 0.7; // largura mínima visual de uma barra (em anos), para períodos curtos continuarem clicáveis
+const MIN_SPAN = 0.7;
+const MIN_SPAN_COMPACT = 1; // no celular cada ano tem poucos pixels: barras de períodos curtos ficam mais largas // largura mínima visual de uma barra (em anos), para períodos curtos continuarem clicáveis
 
 const period = (item, present) =>
   item.endLabel === item.startLabel ? `${item.startLabel}` : `${item.startLabel}–${item.endLabel ?? present}`;
 
 // Distribui as barras de uma faixa em linhas, sem sobreposição.
-function packRows(items, endOfTime) {
+function packRows(items, endOfTime, minSpan) {
   const rows = [];
   return items
     .slice()
     .sort((a, b) => a.start - b.start)
     .map((item) => {
-      const end = Math.max(item.end ?? endOfTime, item.start + MIN_SPAN);
+      const end = Math.max(item.end ?? endOfTime, item.start + minSpan);
       let row = rows.findIndex((rowEnd) => rowEnd <= item.start);
       if (row === -1) row = rows.length;
       rows[row] = end;
@@ -177,84 +178,9 @@ const Detail = ({ item }) => {
   );
 };
 
-const VERTICAL_UNIT = 84; // px por ano na versão vertical
-
-// Mesma tabela, girada para o celular: o tempo corre de cima para baixo e as faixas viram colunas.
-// Cabe na largura da tela (sem rolagem horizontal); tocar numa barra mostra os detalhes logo abaixo.
-const VerticalChart = ({ lanes, years, span, selectedId, onSelect }) => {
-  const { t, tr } = useI18n();
-  const pct = (year) => ((year - START_YEAR) / span) * 100;
-  // Cada faixa ocupa uma parte da largura proporcional às suas colunas (mínimo 2), então todas as barras ficam
-  // com largura parecida e confortável para o toque, mesmo onde os períodos se sobrepõem.
-  const units = lanes.map(({ rows }) => Math.max(rows, 2));
-  const totalUnits = units.reduce((sum, value) => sum + value, 0);
-  const laneStart = units.map((_, index) => (units.slice(0, index).reduce((sum, value) => sum + value, 0) / totalUnits) * 100);
-
-  return (
-    <div className="dashboard-card !p-2">
-      <div className="flex">
-        <div className="w-8 shrink-0" aria-hidden="true" />
-        <div className="grid flex-1" style={{ gridTemplateColumns: units.map((value) => `${value}fr`).join(' ') }}>
-          {lanes.map(({ lane }) => (
-            <p key={lane} className="truncate text-center font-mono text-[0.55rem] uppercase text-primary-text">
-              {t.timeline.lanes[lane]}
-            </p>
-          ))}
-        </div>
-      </div>
-
-      <div className="relative mt-3 flex" style={{ height: span * VERTICAL_UNIT }}>
-        <div className="relative w-8 shrink-0" aria-hidden="true">
-          {years.map((year) => (
-            <span key={year} className="absolute -translate-y-1/2 font-mono text-[0.6rem] text-muted-foreground" style={{ top: `${pct(year)}%` }}>
-              {year}
-            </span>
-          ))}
-        </div>
-        <div className="relative flex-1">
-          {years.map((year) => (
-            <span key={year} aria-hidden="true" className="absolute left-0 right-0 h-px bg-border/40" style={{ top: `${pct(year)}%` }} />
-          ))}
-          {lanes.map(({ lane, items, rows }, laneIndex) =>
-            items.map((item) => {
-              const isSelected = item.id === selectedId;
-              const laneWidth = (units[laneIndex] / totalUnits) * 100;
-              const sub = laneWidth / rows;
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => onSelect(item.id)}
-                  aria-pressed={isSelected}
-                  aria-label={`${item.barLabel ? `${tr(item.barLabel)}: ` : ''}${tr(item.label)}, ${period(item, t.timeline.present)}`}
-                  title={`${tr(item.label)} · ${period(item, t.timeline.present)}`}
-                  className={`absolute flex items-start overflow-hidden rounded-sm border px-0.5 py-1 text-left font-mono text-[0.6rem] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-                    isSelected
-                      ? 'border-primary-text bg-primary text-primary-foreground'
-                      : 'border-primary/40 bg-primary/25 text-foreground hover:border-primary-text hover:bg-primary/40'
-                  }`}
-                  style={{
-                    left: `calc(${laneStart[laneIndex] + item.row * sub}% + 1px)`,
-                    width: `calc(${sub}% - 2px)`,
-                    top: `${pct(item.start)}%`,
-                    height: `${pct(item.end) - pct(item.start)}%`,
-                    writingMode: 'vertical-rl',
-                  }}
-                >
-                  <span className="truncate">{tr(item.barLabel ?? item.label)}</span>
-                </button>
-              );
-            }),
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const JourneySection = () => {
   const { t, tr } = useI18n();
-  const isDesktop = useMediaQuery('(min-width: 1024px)');
+  const compact = !useMediaQuery('(min-width: 1024px)'); // celular/tablet: tabela compacta, sem rolagem lateral
   const [selectedId, setSelectedId] = useState(defaultItemId);
   const scrollerRef = useRef(null);
   const detailRef = useRef(null);
@@ -269,11 +195,12 @@ const JourneySection = () => {
   const lanes = useMemo(
     () =>
       timelineLanes.map((lane) => {
-        const items = packRows(timelineItems.filter((item) => item.lane === lane), endOfTime);
+        const items = packRows(timelineItems.filter((item) => item.lane === lane), endOfTime, compact ? MIN_SPAN_COMPACT : MIN_SPAN);
         return { lane, items, rows: Math.max(1, ...items.map((item) => item.row + 1)) };
       }),
-    [endOfTime],
+    [endOfTime, compact],
   );
+  const labelYears = compact ? years.filter((year) => (year - START_YEAR) % 2 === 0) : years;
 
   const selected = timelineItems.find((item) => item.id === selectedId) ?? timelineItems[0];
   const index = chronologicalItems.findIndex((item) => item.id === selected.id);
@@ -293,7 +220,7 @@ const JourneySection = () => {
   };
 
   return (
-    <section id="trajetoria" className="py-16 md:py-24">
+    <section id="trajetoria" className="py-12 md:py-24">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <span className="section-label">{t.journey.label}</span>
@@ -317,65 +244,58 @@ const JourneySection = () => {
           {t.journey.subtitle}
         </motion.p>
 
-        {isDesktop ? (
-          <div className="dashboard-card overflow-x-auto" ref={scrollerRef}>
-            <div className="min-w-[44rem]">
-              <div className="relative ml-24 h-6 border-b border-border font-mono text-[0.65rem] text-muted-foreground" aria-hidden="true">
-                {years.map((year) => (
-                  <span key={year} className="absolute -translate-x-1/2" style={{ left: percent(year) }}>
-                    {year}
-                  </span>
-                ))}
-              </div>
-
-              {lanes.map(({ lane, items, rows }) => (
-                <div key={lane} className="flex border-b border-border/60 last:border-b-0">
-                  <p className="w-24 shrink-0 py-3 font-mono text-[0.65rem] uppercase tracking-wide text-primary-text">{t.timeline.lanes[lane]}</p>
-                  <div className="relative flex-1" style={{ height: rows * ROW_HEIGHT + 12 }}>
-                    {years.map((year) => (
-                      <span key={year} aria-hidden="true" className="absolute bottom-0 top-0 w-px bg-border/40" style={{ left: percent(year) }} />
-                    ))}
-                    {items.map((item) => {
-                      const isSelected = item.id === selected.id;
-                      return (
-                        <button
-                          key={item.id}
-                          type="button"
-                          data-item={item.id}
-                          onClick={() => select(item.id, { showDetail: true })}
-                          aria-pressed={isSelected}
-                          aria-label={`${item.barLabel ? `${tr(item.barLabel)}: ` : ''}${tr(item.label)}, ${period(item, t.timeline.present)}`}
-                          title={`${tr(item.label)} · ${period(item, t.timeline.present)}`}
-                          className={`absolute flex items-center overflow-hidden rounded-sm border px-1.5 text-left font-mono text-[0.6rem] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-                            isSelected
-                              ? 'border-primary-text bg-primary text-primary-foreground'
-                              : 'border-primary/40 bg-primary/25 text-foreground hover:border-primary-text hover:bg-primary/40'
-                          }`}
-                          style={{
-                            left: percent(item.start),
-                            width: `calc(${percent(item.end)} - ${percent(item.start)})`,
-                            top: 6 + item.row * ROW_HEIGHT,
-                            height: ROW_HEIGHT - 6,
-                          }}
-                        >
-                          <span className="truncate">{tr(item.barLabel ?? item.label)}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
+        <div className={compact ? 'dashboard-card !p-2' : 'dashboard-card overflow-x-auto'} ref={scrollerRef}>
+          <div className={compact ? 'w-full' : 'min-w-[44rem]'}>
+            <div className={`relative ${compact ? '' : 'ml-24'} h-6 border-b border-border font-mono text-[0.6rem] text-muted-foreground`} aria-hidden="true">
+              {labelYears.map((year) => (
+                <span key={year} className="absolute -translate-x-1/2" style={{ left: percent(year) }}>
+                  {year}
+                </span>
               ))}
             </div>
+
+            {lanes.map(({ lane, items, rows }) => (
+              <div key={lane} className={`${compact ? '' : 'flex '}border-b border-border/60 last:border-b-0`}>
+                <p className={compact ? 'pb-0.5 pt-2 font-mono text-[0.55rem] uppercase text-primary-text' : 'w-24 shrink-0 py-3 font-mono text-[0.65rem] uppercase tracking-wide text-primary-text'}>
+          {t.timeline.lanes[lane]}
+        </p>
+                <div className={compact ? 'relative' : 'relative flex-1'} style={{ height: rows * ROW_HEIGHT + 12 }}>
+                  {years.map((year) => (
+                    <span key={year} aria-hidden="true" className="absolute bottom-0 top-0 w-px bg-border/40" style={{ left: percent(year) }} />
+                  ))}
+                  {items.map((item) => {
+                    const isSelected = item.id === selected.id;
+            const shown = tr(compact ? item.shortLabel ?? item.barLabel ?? item.label : item.barLabel ?? item.label);
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        data-item={item.id}
+                        onClick={() => select(item.id, { showDetail: true })}
+                        aria-pressed={isSelected}
+                        aria-label={`${shown === tr(item.label) ? '' : `${shown}: `}${tr(item.label)}, ${period(item, t.timeline.present)}`}
+                        title={`${tr(item.label)} · ${period(item, t.timeline.present)}`}
+                        className={`absolute flex items-center overflow-hidden rounded-sm border ${compact ? 'px-0.5 text-[0.55rem]' : 'px-1.5 text-[0.6rem]'} text-left font-mono transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                          isSelected
+                            ? 'border-primary-text bg-primary text-primary-foreground'
+                            : 'border-primary/40 bg-primary/25 text-foreground hover:border-primary-text hover:bg-primary/40'
+                        }`}
+                        style={{
+                          left: percent(item.start),
+                          width: `calc(${percent(item.end)} - ${percent(item.start)})`,
+                          top: 6 + item.row * ROW_HEIGHT,
+                          height: ROW_HEIGHT - 6,
+                        }}
+                      >
+                        <span className="truncate">{shown}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
-        ) : (
-          <VerticalChart
-            lanes={lanes}
-            years={years}
-            span={span}
-            selectedId={selected.id}
-            onSelect={(id) => select(id, { showDetail: true })}
-          />
-        )}
+        </div>
 
         {/* Anúncio curto para leitores de tela; o painel inteiro não é uma região live. */}
         <p className="sr-only" aria-live="polite">

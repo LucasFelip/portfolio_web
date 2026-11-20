@@ -1,5 +1,6 @@
-// Campos de texto são { pt, en }. statusLabel só existe pra experiências atuais (sem terminoAno)
-// — usado no Hero pra montar o "$ status --current". Meses ficam em português (usados no cálculo de tempo).
+// Campos de texto são { pt, en }. Fonte do conteúdo: currículo (PDF em /public).
+// statusLabel só existe pra experiências atuais (sem terminoAno) — usado no Hero pra montar o "$ status --current".
+// Meses ficam em português (usados no cálculo de tempo). `destaques` são os bullets exibidos no card.
 export const experiencesData = [
   {
     imagemLink: '/logos/pulse.jpg',
@@ -14,10 +15,21 @@ export const experiencesData = [
       en: 'Mid-level Developer - Software Engineer',
     },
     statusLabel: { pt: 'Em produção', en: 'In production' },
-    atuacao: {
-      pt: 'Atuo na construção de soluções inovadoras e escaláveis, utilizando tecnologias de ponta para otimizar processos e melhorar a experiência do cliente. Farei parte de uma equipe multidisciplinar, colaborando com profissionais de diversas áreas para desenvolver produtos que atendam às necessidades do mercado.',
-      en: 'I build innovative, scalable solutions using cutting-edge technologies to optimize processes and improve the customer experience. I will be part of a multidisciplinary team, collaborating with professionals from different areas to develop products that meet market needs.',
+    destaques: {
+      pt: [
+        'Engenharia de software na frente de pesquisa e inovação: projetos internos que ampliam a capacidade dos demais times, como ferramentas de engenharia e arquitetura e bibliotecas compartilhadas.',
+        'Full stack com front-end em Angular e arquitetura de micro frontends (MFE) e back-end em microsserviços.',
+        'Diagnóstico de falhas em serviços de outros times a partir de logs e evidências, com correção quando o problema está nas soluções da equipe.',
+        'Contribuição na definição de boas práticas de desenvolvimento e arquitetura.',
+      ],
+      en: [
+        'Software engineering on the research and innovation front: internal projects that expand other teams\' capabilities, such as engineering and architecture tooling and shared libraries.',
+        'Full stack work with Angular front-ends in a micro frontends (MFE) architecture and microservices back-ends.',
+        'Diagnosing failures in other teams\' services from logs and evidence, fixing them when the issue lies in our own solutions.',
+        'Contributing to the definition of development and architecture best practices.',
+      ],
     },
+    tecnologias: ['Angular', 'Micro Frontends', { pt: 'Microsserviços', en: 'Microservices' }, 'Java', 'Spring Boot'],
     link: 'https://www.grupomateus.com.br/inovacao/',
   },
   {
@@ -33,10 +45,19 @@ export const experiencesData = [
       en: 'Laboratory Administration Volunteer',
     },
     statusLabel: { pt: 'Pesquisa voluntária', en: 'Volunteer research' },
-    atuacao: {
-      pt: 'Atuo voluntariamente na administração do Laboratório de Sistemas Distribuídos e Inteligentes (LSDI), desenvolvendo novas tecnologias e mantendo os recursos e serviços de infraestrutura que sustentam as pesquisas do laboratório.',
-      en: "I volunteer in the administration of the Distributed and Intelligent Systems Laboratory (LSDI), developing new technologies and maintaining the infrastructure resources and services that support the lab's research.",
+    destaques: {
+      pt: [
+        'Administração do GitLab institucional do laboratório: repositórios, automações de pipeline e políticas de versionamento.',
+        'Participação na definição da arquitetura de infraestrutura para armazenamento de dados brutos e eventos de Gêmeos Digitais Humanos (HDTs), contribuindo para escalabilidade e segurança.',
+        'Suporte técnico a pesquisadores e desenvolvedores em boas práticas DevOps, provisionamento de ambientes e integração de ferramentas.',
+      ],
+      en: [
+        "Administration of the lab's institutional GitLab: repositories, pipeline automation and versioning policies.",
+        'Contributing to the definition of the infrastructure architecture for raw data and event storage for Human Digital Twins (HDTs), supporting scalability and security.',
+        'Technical support for researchers and developers on DevOps best practices, environment provisioning and tool integration.',
+      ],
     },
+    tecnologias: ['GitLab CI/CD', 'DevOps', { pt: 'Armazenamento distribuído', en: 'Distributed storage' }],
     link: 'https://ufma.br',
   },
   {
@@ -48,14 +69,25 @@ export const experiencesData = [
     terminoMes: 'Maio',
     terminoAno: '2025',
     cargo: { pt: 'Analista de Suporte de TI', en: 'IT Support Analyst' },
-    atuacao: {
-      pt: 'Atuo na manutenção do Sistema de Processos Automatizados (SPA), prestando suporte técnico especializado para procuradorias estaduais e municipais (PGE e PGM) e participando do processo de análise e uso do sistema junto ao cliente.',
-      en: 'I maintained the Automated Process System (SPA), providing specialized technical support to state and municipal attorney offices (PGE and PGM) and taking part in the analysis and use of the system together with the client.',
+    destaques: {
+      pt: [
+        'Otimização da tramitação de demandas e integração de sistemas complexos em procuradorias (PGE-MA e PGM-SLZ), garantindo a continuidade do Sistema de Processos Automatizado (SPA).',
+        'Automações em Python e Selenium que aumentaram em 40% os pagamentos pelo fluxo de RPV.',
+        'Manuais, tutoriais e treinamentos personalizados que levaram cada colaborador a resolver, em média, 20 chamados por semana.',
+        'Documentação de fluxos de processos em Bizagi, padronizando informações e a consistência dos dados.',
+      ],
+      en: [
+        'Optimized demand handling and integrated complex systems at state and municipal attorney offices (PGE-MA and PGM-SLZ), ensuring continuity of the Automated Process System (SPA).',
+        'Python and Selenium automations that increased payments through the RPV flow by 40%.',
+        'Manuals, tutorials and tailored training that led each employee to resolve 20 tickets per week on average.',
+        'Process flow documentation in Bizagi, standardizing information and data consistency.',
+      ],
     },
+    tecnologias: ['Python', 'Selenium', 'Bizagi'],
     link: 'https://www.coreplan.com.br/',
   },
   {
-    imagemLink: 'https://www.tjma.jus.br/imagens/logo_share.png',
+    imagemLink: '/logos/tjma.png',
     instituicao: 'Tribunal de Justiça do Maranhão',
     localizacao: 'São Luís, MA',
     inicioMes: 'Agosto',
@@ -63,14 +95,25 @@ export const experiencesData = [
     terminoMes: 'Novembro',
     terminoAno: '2023',
     cargo: { pt: 'Estagiário de Desenvolvimento de Software', en: 'Software Development Intern' },
-    atuacao: {
-      pt: 'Participei do desenvolvimento e manutenção do sistema SAPRE, focado na gestão de precatórios. Contribuí para o gerenciamento de demandas, organização da equipe via metodologias ágeis (Scrum), e auxiliei na análise de código e resolução de bugs.',
-      en: 'I took part in the development and maintenance of SAPRE, a court-ordered payment management system. I contributed to demand management, team organization through agile methodologies (Scrum), and helped with code analysis and bug fixing.',
+    destaques: {
+      pt: [
+        'Redução do tempo médio de pagamento de precatórios de 7–8 meses para 2–3 meses, no sistema SAPRE.',
+        'Workflow estruturado no Jira para padronizar os processos internos do projeto.',
+        'Geração automatizada de documentos com Jasper Reports, com relatórios dinâmicos e validados.',
+        'Integração de ferramentas (DBeaver, Eclipse, Wildfly 17+) em ambiente Java EE (Java 11) com JSP/XHTML e PostgreSQL.',
+      ],
+      en: [
+        'Cut the average payment time for court-ordered payments from 7–8 months to 2–3 months in the SAPRE system.',
+        "Structured a Jira workflow to standardize the project's internal processes.",
+        'Automated document generation with Jasper Reports, producing dynamic, validated reports.',
+        'Integrated tools (DBeaver, Eclipse, Wildfly 17+) in a Java EE (Java 11) environment with JSP/XHTML and PostgreSQL.',
+      ],
     },
+    tecnologias: ['Java EE', 'PostgreSQL', 'Jasper Reports', 'Jira'],
     link: 'https://www.tjma.jus.br/',
   },
   {
-    imagemLink: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSqmXO8nCMqO8lMGqTnKM_7vgims6zAf9fEvVWRJw&s',
+    imagemLink: '/logos/jucema.png',
     instituicao: 'Junta Comercial do Estado do Maranhão',
     localizacao: 'São Luís, MA',
     inicioMes: 'Outubro',
@@ -78,10 +121,19 @@ export const experiencesData = [
     terminoMes: 'Agosto',
     terminoAno: '2022',
     cargo: { pt: 'Estagiário de Desenvolvimento de Software', en: 'Software Development Intern' },
-    atuacao: {
-      pt: 'Atuei na migração do banco de dados do sistema de Consulta Empresarial, transferindo dados do banco PL/SQL  para o banco Apache Pinot, e posteriormente para o MongoDB, visando melhorar a performance e os resultados das consultas.',
-      en: 'I worked on migrating the database of the Business Lookup system, moving data from PL/SQL to Apache Pinot and later to MongoDB, aiming to improve query performance and results.',
+    destaques: {
+      pt: [
+        'Modernização do sistema de Consulta Empresarial: reestruturação da arquitetura e migração gradual da base legada (PL/SQL no Oracle).',
+        'Testes comparativos com melhoria de 15–20% usando MongoDB e de 40% com Apache Pinot.',
+        'Continuidade dos sistemas legados em Java 8, JSP e XHTML durante a migração.',
+      ],
+      en: [
+        'Modernized the Business Lookup system: restructured the architecture and gradually migrated the legacy database (PL/SQL on Oracle).',
+        'Comparative tests showing 15–20% improvement with MongoDB and 40% with Apache Pinot.',
+        'Kept legacy Java 8, JSP and XHTML systems running throughout the migration.',
+      ],
     },
+    tecnologias: ['Apache Pinot', 'MongoDB', 'Oracle PL/SQL', 'Java EE'],
     link: 'https://www.jucema.ma.gov.br/',
   },
 ];

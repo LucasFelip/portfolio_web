@@ -12,6 +12,7 @@ export const en = {
   },
   nav: {
     principal: 'Home',
+    sobre: 'About',
     experiencias: 'Experience',
     pesquisa: 'Research',
     servicos: 'Services',
@@ -35,12 +36,28 @@ export const en = {
   ],
   hero: {
     title: 'Software Engineer',
-    bio: "Software engineer specialized in Java and backend systems, with experience in software architecture, distributed systems and a broad range of other technologies. Technical degree in Computer Networks and a bachelor's degree in Information Systems. My path is driven by continuous learning, innovation and the wish to build technology that positively impacts people and organizations.",
+    bio: 'Software engineer focused on backend (Java, Spring Boot), with experience in microservices, micro frontends and DevOps. I build scalable solutions in complex environments.',
     viewProjects: 'View projects',
     contact: 'Contact',
   },
+  about: {
+    label: '02 — About',
+    title: 'About me',
+    summary: 'Full stack professional with a strong backend focus and solid knowledge of frontend, DevOps and infrastructure. I love learning, taking on challenges and turning problems into scalable, efficient solutions, with hands-on experience in complex environments.',
+    skillsTitle: 'Technologies',
+    educationTitle: 'Education',
+    languagesTitle: 'Languages',
+    education: [
+      { school: 'Instituto Federal do Maranhão', degree: "Bachelor's degree in Information Systems", period: '2019 — 2024' },
+      { school: 'SENAI Maranhão', degree: 'Technical degree in Computer Networks', period: '2017 — 2018' },
+    ],
+    languages: [
+      { name: 'Portuguese', level: 'Native' },
+      { name: 'English', level: 'C1 (EF SET 63/100) · reading C2 · listening B1' },
+    ],
+  },
   experience: {
-    label: '02 — Experience',
+    label: '03 — Experience',
     title: 'Experience',
     subtitle: 'My professional path and the contributions I made in each role.',
     current: 'current',
@@ -49,12 +66,12 @@ export const en = {
     showLess: 'Show less',
   },
   research: {
-    label: '03 — Research & Outreach',
+    label: '04 — Research & Outreach',
     title: 'Research & Outreach',
     subtitle: 'Academic projects I coordinated, from my Lattes résumé.',
   },
   services: {
-    label: '04 — Services',
+    label: '05 — Services',
     title: 'Services for your project',
     subtitle: 'Available for freelance projects, from idea to a ready-to-use delivery.',
     quote: 'Request a quote',
@@ -82,7 +99,7 @@ export const en = {
     ],
   },
   projects: {
-    label: '05 — Projects',
+    label: '06 — Projects',
     title: 'Featured Projects',
     subtitle: 'A selection of my most recent projects on GitHub.',
     errorTitle: 'Oops! Something went wrong.',
@@ -106,7 +123,7 @@ export const en = {
     madePublic: 'made public',
   },
   contact: {
-    label: '06 — Contact',
+    label: '07 — Contact',
     prompt: '$ echo "Let\'s talk?"',
     title: 'Get in Touch',
     subtitle: "Connect with me through the channels below. I'm always open to new opportunities, collaborations and freelance projects!",

@@ -1,12 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Home, Briefcase, Mail, Github, Wrench, FlaskConical } from 'lucide-react';
+import { Home, User, Briefcase, Mail, Github, Wrench, FlaskConical } from 'lucide-react';
 import changelog from '@/data/changelog.generated.json';
 import { navItems, useActiveSection } from '@/hooks/useActiveSection';
 import { useI18n } from '@/i18n';
 
 const icons = {
   principal: Home,
+  sobre: User,
   experiencias: Briefcase,
   pesquisa: FlaskConical,
   servicos: Wrench,
@@ -46,7 +47,7 @@ const Footer = () => {
                       onClick={() => scrollToSection(item.id)}
                       aria-label={t.nav[item.id]}
                       aria-current={isActive ? 'location' : undefined}
-                      className={`relative flex items-center space-x-2 px-2 xs:px-3 py-1.5 rounded-md font-mono text-xs uppercase tracking-wide transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
+                      className={`relative flex items-center space-x-2 px-1.5 xs:px-3 py-1.5 rounded-md font-mono text-xs uppercase tracking-wide transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
                   ${isActive ? 'text-primary-foreground' : 'text-muted-foreground hover:text-foreground'}`}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}

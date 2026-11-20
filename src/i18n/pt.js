@@ -12,6 +12,7 @@ export const pt = {
   },
   nav: {
     principal: 'Principal',
+    sobre: 'Sobre',
     experiencias: 'Experiências',
     pesquisa: 'Pesquisa',
     servicos: 'Serviços',
@@ -35,12 +36,28 @@ export const pt = {
   ],
   hero: {
     title: 'Engenheiro de Software',
-    bio: 'Engenheiro de software especializado em Java e sistemas backend, com experiência em arquitetura de software, sistemas distribuídos e um leque amplo de outras tecnologias. Formação técnica em Redes de Computadores e bacharelado em Sistemas de Informação. Minha trajetória é marcada pela busca contínua por aprendizado, inovação e pelo desejo de contribuir com soluções tecnológicas que impactem positivamente pessoas e organizações.',
+    bio: 'Engenheiro de software com foco em backend (Java, Spring Boot) e experiência em microsserviços, micro frontends e DevOps. Construo soluções escaláveis em ambientes complexos.',
     viewProjects: 'Ver projetos',
     contact: 'Contato',
   },
+  about: {
+    label: '02 — Sobre',
+    title: 'Sobre mim',
+    summary: 'Profissional full stack com forte foco em backend e conhecimentos sólidos em frontend, DevOps e infraestrutura. Apaixonado por aprender, enfrentar desafios e transformar problemas em soluções escaláveis e eficientes, com experiência prática em ambientes complexos.',
+    skillsTitle: 'Tecnologias',
+    educationTitle: 'Formação',
+    languagesTitle: 'Idiomas',
+    education: [
+      { school: 'Instituto Federal do Maranhão', degree: 'Bacharelado em Sistemas de Informação', period: '2019 — 2024' },
+      { school: 'SENAI Maranhão', degree: 'Técnico em Redes de Computadores', period: '2017 — 2018' },
+    ],
+    languages: [
+      { name: 'Português', level: 'Nativo' },
+      { name: 'Inglês', level: 'C1 (EF SET 63/100) · leitura C2 · compreensão oral B1' },
+    ],
+  },
   experience: {
-    label: '02 — Experiência',
+    label: '03 — Experiência',
     title: 'Experiências',
     subtitle: 'Minha trajetória profissional e as contribuições que fiz em cada função.',
     current: 'atual',
@@ -49,12 +66,12 @@ export const pt = {
     showLess: 'Ver menos',
   },
   research: {
-    label: '03 — Pesquisa & Extensão',
+    label: '04 — Pesquisa & Extensão',
     title: 'Pesquisa & Extensão',
     subtitle: 'Projetos acadêmicos que coordenei, do currículo Lattes.',
   },
   services: {
-    label: '04 — Serviços',
+    label: '05 — Serviços',
     title: 'Serviços para o seu projeto',
     subtitle: 'Disponível para projetos freelance, da ideia à entrega pronta para usar.',
     quote: 'Solicitar orçamento',
@@ -82,7 +99,7 @@ export const pt = {
     ],
   },
   projects: {
-    label: '05 — Projetos',
+    label: '06 — Projetos',
     title: 'Projetos em Destaque',
     subtitle: 'Uma seleção dos meus projetos mais recentes no GitHub.',
     errorTitle: 'Oops! Algo deu errado.',
@@ -106,7 +123,7 @@ export const pt = {
     madePublic: 'tornou público',
   },
   contact: {
-    label: '06 — Contato',
+    label: '07 — Contato',
     prompt: '$ echo "Vamos conversar?"',
     title: 'Entre em Contato',
     subtitle: 'Conecte-se comigo através das redes abaixo. Estou sempre aberto a novas oportunidades, colaborações e projetos freelance!',

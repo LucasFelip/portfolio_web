@@ -12,7 +12,7 @@ const MOBILE_VISIBLE_COUNT = 2;
 
 const ExperienceCard = ({ experience, index, isLast }) => {
   const { t, tr } = useI18n();
-  const { imagemLink, instituicao, localizacao, inicioMes, inicioAno, terminoMes, terminoAno, cargo, atuacao, link } = experience;
+  const { imagemLink, instituicao, localizacao, inicioMes, inicioAno, terminoMes, terminoAno, cargo, destaques, tecnologias, link } = experience;
   const fallbackText = instituicao.substring(0, 2).toUpperCase();
   const isCurrent = !terminoAno;
   const inicio = `${nomeDoMes(inicioMes, t.months)} ${inicioAno}`;
@@ -49,7 +49,23 @@ const ExperienceCard = ({ experience, index, isLast }) => {
           <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {localizacao}</span>
           <span className="flex items-center gap-1"><CalendarDays className="w-3 h-3" /> {periodo}</span>
         </div>
-        <p className="text-sm text-foreground/80 leading-relaxed mt-3">{tr(atuacao)}</p>
+        <ul className="mt-3 space-y-2 text-sm text-foreground/80 leading-relaxed">
+          {tr(destaques).map((item) => (
+            <li key={item} className="flex gap-2">
+              <span aria-hidden="true" className="text-primary mt-1.5 w-1 h-1 shrink-0 rounded-full bg-current" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        {tecnologias?.length > 0 && (
+          <div className="mt-4 flex flex-wrap gap-2">
+            {tecnologias.map((tech) => (
+              <span key={tr(tech)} className="border border-border rounded px-2 py-0.5 font-mono text-[0.7rem] text-foreground/80">
+                {tr(tech)}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
     </motion.div>
   );

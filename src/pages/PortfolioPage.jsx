@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeroSection from '@/components/HeroSection';
+import AboutSection from '@/components/AboutSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import ExperienceSection from '@/components/ExperienceSection';
 import ResearchSection from '@/components/ResearchSection';
@@ -34,6 +35,7 @@ const PortfolioPage = () => {
           className="flex-grow"
         >
             <HeroSection />
+            <AboutSection />
             <ExperienceSection />
             <ResearchSection />
             <ServicesSection />

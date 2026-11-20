@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 // Seções navegáveis do site. Fonte única para Header e Footer.
 export const navItems = [
   { id: 'principal', label: 'Principal' },
+  { id: 'sobre', label: 'Sobre' },
   { id: 'experiencias', label: 'Experiências' },
   { id: 'pesquisa', label: 'Pesquisa' },
   { id: 'servicos', label: 'Serviços' },

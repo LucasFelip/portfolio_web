@@ -30,7 +30,7 @@ const HeroSection = () => {
       <div className="container relative mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
         <div className="text-center md:text-left">
           <m.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
             className="mb-6 flex items-center justify-center gap-4 md:justify-start"
@@ -41,7 +41,7 @@ const HeroSection = () => {
             </span>
           </m.div>
           <m.span
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
             className="inline-flex items-center gap-2 font-mono text-sm text-muted-foreground border border-border rounded-full px-4 py-1.5 mb-6"
@@ -49,7 +49,7 @@ const HeroSection = () => {
             <span className="text-primary-text">●</span> {t.hero.badge}
           </m.span>
           <m.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.05, ease: "easeOut" }}
             className="text-4xl xs:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 text-foreground"
@@ -57,7 +57,7 @@ const HeroSection = () => {
             {name}
           </m.h1>
           <m.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
             className="text-xl xs:text-2xl md:text-3xl text-primary-text mb-6 xs:mb-8"
@@ -67,7 +67,7 @@ const HeroSection = () => {
           {/* Sem animação de entrada: este parágrafo é o maior elemento da página (LCP). */}
           <p className="max-w-xl mx-auto md:mx-0 text-base xs:text-lg md:text-xl">{bio}</p>
           <m.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.15, ease: "easeOut" }}
             className="flex flex-wrap items-center justify-center md:justify-start gap-4 mt-8 xs:mt-10"
@@ -87,7 +87,7 @@ const HeroSection = () => {
         </div>
 
         <m.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.15, ease: "easeOut" }}
           className="flex flex-col gap-4"

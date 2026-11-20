@@ -7,7 +7,7 @@
     "predev": "node scripts/generate-changelog.js && node scripts/generate-github-projects.js",
     "dev": "vite",
     "prebuild": "node scripts/generate-changelog.js && node scripts/generate-github-projects.js",
-    "build": "vite build",
+    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.js",
     "preview": "vite preview"
   },
   "dependencies": {

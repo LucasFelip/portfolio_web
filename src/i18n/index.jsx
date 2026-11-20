@@ -19,8 +19,15 @@ function detectInitialLang() {
 const I18nContext = createContext(null);
 
 export const LanguageProvider = ({ children, initialLang }) => {
-  const [lang, setLangState] = useState(() => initialLang ?? detectInitialLang());
+  const [lang, setLangState] = useState(initialLang ?? 'pt');
   const t = dictionaries[lang];
+
+  // A hidratação exige a mesma saída do HTML pré-gerado (pt). Só depois de hidratar troca para o idioma salvo/do navegador.
+  useEffect(() => {
+    if (initialLang) return;
+    const detected = detectInitialLang();
+    if (detected !== 'pt') setLangState(detected);
+  }, [initialLang]);
 
   const setLang = useCallback((next) => {
     if (next !== 'pt' && next !== 'en') return;

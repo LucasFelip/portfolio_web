@@ -51,7 +51,7 @@ const ProofStrip = () => {
         <m.ul {...fadeUp} className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
           {stats.map((stat) => (
             <li key={stat.label} className="dashboard-card !py-4 text-center">
-              <p className="font-mono text-3xl font-bold text-primary-text md:text-4xl">{stat.value}</p>
+              <p suppressHydrationWarning className="font-mono text-3xl font-bold text-primary-text md:text-4xl">{stat.value}</p>
               <p className="mt-1 text-xs text-muted-foreground md:text-sm">{stat.label}</p>
             </li>
           ))}

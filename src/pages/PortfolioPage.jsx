@@ -1,35 +1,22 @@
-import React, { Suspense, lazy, useEffect } from 'react';
+import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
+import ProofStrip from '@/components/ProofStrip';
 import ProjectsSection from '@/components/ProjectsSection';
 import JourneySection from '@/components/journey/JourneySection';
 import ServicesSection from '@/components/ServicesSection';
 import ContactSection from '@/components/ContactSection';
-import { Toaster } from '@/components/ui/toaster';
-import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
+import { m, AnimatePresence, MotionConfig, LazyMotion, domAnimation } from 'framer-motion';
 import { useI18n } from '@/i18n';
-import TerminalLauncher from '@/components/terminal/TerminalLauncher';
-
-// Estudos de caso, diagrama e pipeline ficam abaixo da dobra: carregam à parte, em tempo ocioso.
-const loadEngineering = () => import('@/components/engineering/CaseStudiesSection');
-const CaseStudiesSection = lazy(loadEngineering);
+import CaseStudiesSection from '@/components/engineering/CaseStudiesSection';
 
 const PortfolioPage = () => {
   const { t } = useI18n();
 
-  useEffect(() => {
-    // Pré-carrega a seção quando o navegador estiver ocioso, para não haver espera ao rolar até ela.
-    if ('requestIdleCallback' in window) {
-      const id = window.requestIdleCallback(loadEngineering, { timeout: 3000 });
-      return () => window.cancelIdleCallback(id);
-    }
-    const id = window.setTimeout(loadEngineering, 1500);
-    return () => window.clearTimeout(id);
-  }, []);
-
   return (
+    <LazyMotion features={domAnimation}>
     <MotionConfig reducedMotion="user">
     <div className="flex flex-col min-h-screen bg-background text-foreground">
       <a
@@ -40,7 +27,7 @@ const PortfolioPage = () => {
       </a>
       <Header />
       <AnimatePresence>
-        <motion.main
+        <m.main
           id="conteudo"
           tabIndex={-1}
           initial={false}
@@ -50,21 +37,19 @@ const PortfolioPage = () => {
           className="flex-grow"
         >
             <HeroSection />
+            <ProofStrip />
             <AboutSection />
             <JourneySection />
-            <Suspense fallback={<section id="engenharia" aria-hidden="true" className="min-h-[100rem]" />}>
-              <CaseStudiesSection />
-            </Suspense>
+            <CaseStudiesSection />
             <ProjectsSection />
             <ServicesSection />
             <ContactSection />
-        </motion.main>
+        </m.main>
       </AnimatePresence>
       <Footer />
-      <Toaster />
-      <TerminalLauncher />
     </div>
     </MotionConfig>
+    </LazyMotion>
   );
 };
 

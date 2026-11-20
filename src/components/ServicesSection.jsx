@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Server, Network, Database, Smartphone } from 'lucide-react';
 import { useI18n } from '@/i18n';
@@ -10,22 +10,22 @@ const serviceIcons = [Server, Network, Database, Smartphone];
 
 // Projeto de referência por serviço (mesma ordem de t.services.items). Imagens vêm de /public/projects.
 const serviceReferences = [
-  { name: 'self-stream-deck', image: '/projects/self-stream-deck.png', href: 'https://lucasfelip.github.io/self-stream-deck/' },
+  { name: 'self-stream-deck', image: '/projects/self-stream-deck.webp', href: 'https://lucasfelip.github.io/self-stream-deck/' },
   null,
   null,
-  { name: "Ana's Joias", image: '/projects/ana-joias.jpg', href: 'https://github.com/LucasFelip/ana-joiais-dev' },
+  { name: "Ana's Joias", image: '/projects/ana-joias.webp', href: 'https://github.com/LucasFelip/ana-joiais-dev' },
 ];
 
 const ServicesSection = () => {
   const { t } = useI18n();
   return (
-    <section id="servicos" className="relative overflow-hidden py-16 md:py-24 bg-background">
+    <section id="servicos" className="relative overflow-hidden py-12 md:py-24 bg-background">
       <div className="absolute inset-0 bg-grid" />
       <div className="container relative mx-auto px-4">
         <div className="text-center">
           <span className="section-label">{t.services.label}</span>
         </div>
-        <motion.h2
+        <m.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -33,8 +33,8 @@ const ServicesSection = () => {
           className="text-4xl md:text-5xl font-bold text-center mb-4"
         >
           {t.services.title}
-        </motion.h2>
-        <motion.p
+        </m.h2>
+        <m.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -42,12 +42,12 @@ const ServicesSection = () => {
           className="text-lg text-muted-foreground text-center mb-12 max-w-2xl mx-auto"
         >
           {t.services.subtitle}
-        </motion.p>
+        </m.p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {t.services.items.map((service, index) => {
             const Icon = serviceIcons[index];
             return (
-              <motion.div
+              <m.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -90,7 +90,7 @@ const ServicesSection = () => {
                     {t.services.quote}
                   </a>
                 </Button>
-              </motion.div>
+              </m.div>
             );
           })}
         </div>

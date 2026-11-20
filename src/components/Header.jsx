@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Home, User, Briefcase, Mail, Github, Wrench, Download } from 'lucide-react';
 import { navItems, useActiveSection } from '@/hooks/useActiveSection';
 import { CV_URL } from '@/lib/constants';
@@ -20,7 +20,7 @@ const Header = () => {
   const { t } = useI18n();
 
   return (
-    <motion.header
+    <m.header
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
@@ -34,27 +34,20 @@ const Header = () => {
           const Icon = icons[item.id];
           const isActive = activeSection === item.id;
           return (
-            <motion.button
+            <m.button
               key={item.id}
               type="button"
               onClick={() => scrollToSection(item.id)}
               aria-label={t.nav[item.id]}
               aria-current={isActive ? 'location' : undefined}
               className={`relative flex items-center space-x-2 px-1.5 xs:px-3 py-1.5 rounded-md font-mono text-xs uppercase tracking-wide transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
-                ${isActive ? 'text-primary-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+                ${isActive ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'}`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {isActive && (
-                <motion.div
-                  layoutId="active-nav-item-header"
-                  className="absolute inset-0 bg-primary rounded-md z-0"
-                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                />
-              )}
               <Icon aria-hidden="true" className="w-3.5 h-3.5 z-10" />
               <span className="z-10 hidden md:inline">{t.nav[item.id]}</span>
-            </motion.button>
+            </m.button>
           );
         })}
         <a
@@ -68,7 +61,7 @@ const Header = () => {
         </a>
         <LanguageToggle />
       </nav>
-    </motion.header>
+    </m.header>
   );
 };
 

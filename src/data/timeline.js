@@ -27,6 +27,7 @@ const education = [
     startLabel: 2017,
     endLabel: 2018,
     educationIndex: 1,
+    shortLabel: 'SENAI',
   },
   {
     id: 'education-ifma',
@@ -37,13 +38,41 @@ const education = [
     startLabel: 2019,
     endLabel: 2024,
     educationIndex: 0,
+    shortLabel: 'IFMA',
   },
 ];
+
+// Siglas usadas dentro das barras na versão compacta (celular), onde cada ano ocupa poucos pixels.
+const SHORT_WORK = {
+  'Pulse - Grupo Mateus': 'Pulse',
+  'LSDI - UFMA': 'LSDI',
+  'Coreplan Gestão Tecnologia e Serviços': 'Coreplan',
+  'Tribunal de Justiça do Maranhão': 'TJMA',
+  'Junta Comercial do Estado do Maranhão': 'JUC.',
+};
+const SHORT_RESEARCH = {
+  'Novos Negócios em TIC · iOS': 'IFCE',
+  'Tabuleiro BD': 'Tab. BD',
+  'Segurança da informação para mobile': 'Seg. info',
+  'TIC pra tod@s': 'TIC',
+  'Campanha de empreendedorismo em TIC': 'Cam.',
+};
+const SHORT_COURSES = {
+  'udemy-java': 'Udemy',
+  'ifma-redes': 'IFMA',
+  'alura-sql': 'SQL',
+  'alura-agil': 'Ágil',
+  'alura-processos': 'Proc',
+  'alura-front': 'Web',
+  'alura-postgres': 'PG',
+  'alura-java': 'Java',
+};
 
 const work = experiencesData.map((exp) => ({
   id: `work-${exp.inicioAno}-${exp.instituicao}`,
   lane: 'work',
   label: SHORT_NAMES[exp.instituicao] ?? exp.instituicao.split(' - ')[0],
+  shortLabel: SHORT_WORK[exp.instituicao],
   start: toYear(exp.inicioMes, exp.inicioAno),
   end: exp.terminoAno ? toYear(exp.terminoMes, exp.terminoAno) : null, // null = em andamento
   startLabel: Number(exp.inicioAno),
@@ -58,6 +87,7 @@ const research = researchProjects.map((project) => {
     lane: 'research',
     label: project.titulo,
     barLabel: project.barLabel,
+    shortLabel: SHORT_RESEARCH[project.titulo.pt],
     start: years[0],
     end: (years[1] ?? years[0]) + 1, // fim exclusivo: o projeto ocupa o ano final inteiro
     startLabel: years[0],
@@ -83,6 +113,7 @@ const courses = certificationGroups.map((group) => {
     lane: 'courses',
     label: group.label,
     barLabel: group.barLabel,
+    shortLabel: SHORT_COURSES[group.id],
     start,
     end,
     startLabel: explicit ? Math.floor(start) : Number(dates[0].slice(0, 4)),

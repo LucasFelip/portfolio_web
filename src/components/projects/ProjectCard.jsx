@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Github, Star, GitFork, ExternalLink } from 'lucide-react';
 import { useI18n } from '@/i18n';
@@ -23,7 +23,7 @@ const ProjectCard = ({ repo }) => {
   const pushedAt = new Date(repo.pushedAt || repo.pushed_at);
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -97,7 +97,7 @@ const ProjectCard = ({ repo }) => {
           </div>
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 };
 

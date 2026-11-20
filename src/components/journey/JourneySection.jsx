@@ -1,33 +1,44 @@
 import React, { useMemo, useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { Award, ChevronLeft, ChevronRight, ExternalLink, MapPin, CalendarDays, GraduationCap } from 'lucide-react';
+import { AnimatePresence, m } from 'framer-motion';
+import { Award, Briefcase, ChevronLeft, ChevronRight, ExternalLink, FlaskConical, MapPin, CalendarDays, GraduationCap } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { chronologicalItems, defaultItemId, timelineItems, timelineLanes } from '@/data/timeline';
 import { nomeDoMes, tempoDesde } from '@/lib/dateUtils';
 import { useI18n } from '@/i18n';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 const LATTES_URL = 'https://lattes.cnpq.br/1631585272117041';
 const ORCID_URL = 'https://orcid.org/0009-0000-8662-9675';
 const ROW_HEIGHT = 40; // barras com ~34 px de altura: alvo de toque confortável
 const START_YEAR = 2017;
 const MIN_SPAN = 0.7; // largura mínima visual de uma barra (em anos), para períodos curtos continuarem clicáveis
+const MIN_SPAN_COMPACT = 1; // no celular cada ano tem poucos pixels: barras de períodos curtos ficam mais largas
+
+// Ícone e tom de cada faixa: do mais forte (trabalho) ao mais discreto (cursos), todos na paleta verde do site.
+const LANE_ICONS = { work: Briefcase, research: FlaskConical, education: GraduationCap, courses: Award };
+const LANE_TONE = {
+  work: 'border-primary/60 bg-primary/35',
+  research: 'border-primary/45 bg-primary/22',
+  education: 'border-foreground/25 bg-foreground/10',
+  courses: 'border-primary/30 bg-primary/12',
+};
 
 const period = (item, present) =>
   item.endLabel === item.startLabel ? `${item.startLabel}` : `${item.startLabel}–${item.endLabel ?? present}`;
 
 // Distribui as barras de uma faixa em linhas, sem sobreposição.
-function packRows(items, endOfTime) {
+function packRows(items, endOfTime, minSpan) {
   const rows = [];
   return items
     .slice()
     .sort((a, b) => a.start - b.start)
     .map((item) => {
-      const end = Math.max(item.end ?? endOfTime, item.start + MIN_SPAN);
+      const end = Math.max(item.end ?? endOfTime, item.start + minSpan);
       let row = rows.findIndex((rowEnd) => rowEnd <= item.start);
       if (row === -1) row = rows.length;
       rows[row] = end;
-      return { ...item, end, row };
+      return { ...item, end, row, ongoing: item.end == null };
     });
 }
 
@@ -178,6 +189,8 @@ const Detail = ({ item }) => {
 
 const JourneySection = () => {
   const { t, tr } = useI18n();
+  const compact = !useMediaQuery('(min-width: 768px)'); // celular: tabela compacta, sem rolagem lateral
+  const shortNames = !useMediaQuery('(min-width: 1024px)'); // abaixo disso as barras são estreitas demais para nomes longos
   const [selectedId, setSelectedId] = useState(defaultItemId);
   const scrollerRef = useRef(null);
   const detailRef = useRef(null);
@@ -192,11 +205,12 @@ const JourneySection = () => {
   const lanes = useMemo(
     () =>
       timelineLanes.map((lane) => {
-        const items = packRows(timelineItems.filter((item) => item.lane === lane), endOfTime);
+        const items = packRows(timelineItems.filter((item) => item.lane === lane), endOfTime, compact ? MIN_SPAN_COMPACT : MIN_SPAN);
         return { lane, items, rows: Math.max(1, ...items.map((item) => item.row + 1)) };
       }),
-    [endOfTime],
+    [endOfTime, compact],
   );
+  const labelYears = compact ? years.filter((year) => (year - START_YEAR) % 2 === 0) : years;
 
   const selected = timelineItems.find((item) => item.id === selectedId) ?? timelineItems[0];
   const index = chronologicalItems.findIndex((item) => item.id === selected.id);
@@ -216,12 +230,12 @@ const JourneySection = () => {
   };
 
   return (
-    <section id="trajetoria" className="py-16 md:py-24">
+    <section id="trajetoria" className="py-12 md:py-24">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <span className="section-label">{t.journey.label}</span>
         </div>
-        <motion.h2
+        <m.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -229,8 +243,8 @@ const JourneySection = () => {
           className="mb-4 text-center text-4xl font-bold md:text-5xl"
         >
           {t.journey.title}
-        </motion.h2>
-        <motion.p
+        </m.h2>
+        <m.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -238,55 +252,95 @@ const JourneySection = () => {
           className="mx-auto mb-10 max-w-2xl text-center text-lg text-muted-foreground"
         >
           {t.journey.subtitle}
-        </motion.p>
+        </m.p>
 
-        <div className="dashboard-card overflow-x-auto" ref={scrollerRef}>
-          <div className="min-w-[44rem]">
-            <div className="relative ml-24 h-6 border-b border-border font-mono text-[0.65rem] text-muted-foreground" aria-hidden="true">
-              {years.map((year) => (
-                <span key={year} className="absolute -translate-x-1/2" style={{ left: percent(year) }}>
+        <div className={compact ? 'dashboard-card !p-2' : 'dashboard-card overflow-x-auto'} ref={scrollerRef}>
+          <div className={compact ? 'w-full' : 'min-w-[40rem]'}>
+            {/* Eixo dos anos, com o marcador de "hoje" */}
+            <div className={`relative ${compact ? '' : 'ml-28'} h-8 border-b border-border font-mono text-[0.6rem] text-muted-foreground`} aria-hidden="true">
+              {labelYears.map((year, index) => (
+                <span
+                  key={year}
+                  className={`absolute ${index === 0 ? '' : index === labelYears.length - 1 ? '-translate-x-full' : '-translate-x-1/2'}`}
+                  style={{ left: percent(year) }}
+                >
                   {year}
                 </span>
               ))}
+              <span
+                className="absolute bottom-0.5 -translate-x-1/2 rounded-sm bg-primary px-1 text-[0.5rem] uppercase leading-3 text-primary-foreground"
+                style={{ left: percent(endOfTime) }}
+              >
+                {t.timeline.today}
+              </span>
             </div>
 
-            {lanes.map(({ lane, items, rows }) => (
-              <div key={lane} className="flex border-b border-border/60 last:border-b-0">
-                <p className="w-24 shrink-0 py-3 font-mono text-[0.65rem] uppercase tracking-wide text-primary-text">{t.timeline.lanes[lane]}</p>
-                <div className="relative flex-1" style={{ height: rows * ROW_HEIGHT + 12 }}>
-                  {years.map((year) => (
-                    <span key={year} aria-hidden="true" className="absolute bottom-0 top-0 w-px bg-border/40" style={{ left: percent(year) }} />
-                  ))}
-                  {items.map((item) => {
-                    const isSelected = item.id === selected.id;
-                    return (
-                      <button
-                        key={item.id}
-                        type="button"
-                        data-item={item.id}
-                        onClick={() => select(item.id, { showDetail: true })}
-                        aria-pressed={isSelected}
-                        aria-label={`${item.barLabel ? `${tr(item.barLabel)}: ` : ''}${tr(item.label)}, ${period(item, t.timeline.present)}`}
-                        title={`${tr(item.label)} · ${period(item, t.timeline.present)}`}
-                        className={`absolute flex items-center overflow-hidden rounded-sm border px-1.5 text-left font-mono text-[0.6rem] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-                          isSelected
-                            ? 'border-primary-text bg-primary text-primary-foreground'
-                            : 'border-primary/40 bg-primary/25 text-foreground hover:border-primary-text hover:bg-primary/40'
-                        }`}
-                        style={{
-                          left: percent(item.start),
-                          width: `calc(${percent(item.end)} - ${percent(item.start)})`,
-                          top: 6 + item.row * ROW_HEIGHT,
-                          height: ROW_HEIGHT - 6,
-                        }}
-                      >
-                        <span className="truncate">{tr(item.barLabel ?? item.label)}</span>
-                      </button>
-                    );
-                  })}
+            {lanes.map(({ lane, items, rows }) => {
+              const LaneIcon = LANE_ICONS[lane];
+              const laneActive = selected.lane === lane;
+              return (
+                <div
+                  key={lane}
+                  className={`${compact ? '' : 'flex '}border-b border-border/60 transition-colors last:border-b-0 ${laneActive ? 'bg-primary/[0.04]' : ''}`}
+                >
+                  <p
+                    className={`flex items-center gap-1.5 font-mono uppercase transition-colors ${
+                      compact ? 'pb-0.5 pt-2 text-[0.55rem]' : 'w-28 shrink-0 self-start py-3 text-[0.65rem] tracking-wide'
+                    } ${laneActive ? 'text-primary-text' : 'text-muted-foreground'}`}
+                  >
+                    <LaneIcon aria-hidden="true" className={compact ? 'h-3 w-3' : 'h-3.5 w-3.5'} />
+                    {t.timeline.lanes[lane]}
+                  </p>
+                  <div className={compact ? 'relative' : 'relative flex-1'} style={{ height: rows * ROW_HEIGHT + 12 }}>
+                    {/* faixas alternadas por ano, linhas de ano e a linha de hoje */}
+                    {years.slice(0, -1).map((year, yearIndex) =>
+                      yearIndex % 2 === 0 ? (
+                        <span
+                          key={`band-${year}`}
+                          aria-hidden="true"
+                          className="absolute inset-y-0 bg-foreground/[0.025]"
+                          style={{ left: percent(year), width: `calc(${percent(year + 1)} - ${percent(year)})` }}
+                        />
+                      ) : null,
+                    )}
+                    {years.map((year) => (
+                      <span key={year} aria-hidden="true" className="absolute bottom-0 top-0 w-px bg-border/40" style={{ left: percent(year) }} />
+                    ))}
+                    <span aria-hidden="true" className="absolute bottom-0 top-0 border-l border-dashed border-primary-text/60" style={{ left: percent(endOfTime) }} />
+
+                    {items.map((item) => {
+                      const isSelected = item.id === selected.id;
+                      const shown = tr(shortNames ? item.shortLabel ?? item.barLabel ?? item.label : item.barLabel ?? item.label);
+                      return (
+                        <button
+                          key={item.id}
+                          type="button"
+                          data-item={item.id}
+                          onClick={() => select(item.id, { showDetail: true })}
+                          aria-pressed={isSelected}
+                          aria-label={`${shown === tr(item.label) ? '' : `${shown}: `}${tr(item.label)}, ${period(item, t.timeline.present)}`}
+                          title={`${tr(item.label)} · ${period(item, t.timeline.present)}`}
+                          className={`absolute flex items-center gap-1 overflow-hidden rounded border ${compact ? 'px-0.5 text-[0.5rem] xs:text-[0.55rem]' : 'px-1.5 text-[0.6rem]'} text-left font-mono transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                            isSelected
+                              ? 'z-10 border-primary-text bg-primary text-primary-foreground shadow-[0_0_14px_-4px_hsl(var(--primary))]'
+                              : `${LANE_TONE[lane]} text-foreground hover:-translate-y-px hover:border-primary-text hover:bg-primary/50`
+                          }`}
+                          style={{
+                            left: percent(item.start),
+                            width: `calc(${percent(item.end)} - ${percent(item.start)})`,
+                            top: 6 + item.row * ROW_HEIGHT,
+                            height: ROW_HEIGHT - 6,
+                          }}
+                        >
+                          <span className="min-w-0 flex-1 truncate">{shown}</span>
+                          {item.ongoing && <span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 animate-pulse rounded-full bg-primary-text" />}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
@@ -297,7 +351,7 @@ const JourneySection = () => {
 
         <div className="dashboard-card mt-6" ref={detailRef}>
           <AnimatePresence mode="wait" initial={false}>
-            <motion.div
+            <m.div
               key={selected.id}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -305,7 +359,7 @@ const JourneySection = () => {
               transition={{ duration: 0.2 }}
             >
               <Detail item={selected} />
-            </motion.div>
+            </m.div>
           </AnimatePresence>
 
           <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">

@@ -4,9 +4,8 @@ import { useCallback, useEffect, useState } from 'react';
 export const navItems = [
   { id: 'principal', label: 'Principal' },
   { id: 'sobre', label: 'Sobre' },
-  { id: 'experiencias', label: 'Experiências' },
+  { id: 'trajetoria', label: 'Trajetória' },
   { id: 'projetos', label: 'Projetos' },
-  { id: 'pesquisa', label: 'Pesquisa' },
   { id: 'servicos', label: 'Serviços' },
   { id: 'contatos', label: 'Contatos' },
 ];

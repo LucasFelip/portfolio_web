@@ -5,8 +5,7 @@ import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
 import CaseStudiesSection from '@/components/engineering/CaseStudiesSection';
 import ProjectsSection from '@/components/ProjectsSection';
-import ExperienceSection from '@/components/ExperienceSection';
-import ResearchSection from '@/components/ResearchSection';
+import JourneySection from '@/components/journey/JourneySection';
 import ServicesSection from '@/components/ServicesSection';
 import ContactSection from '@/components/ContactSection';
 import { Toaster } from '@/components/ui/toaster';
@@ -38,10 +37,9 @@ const PortfolioPage = () => {
         >
             <HeroSection />
             <AboutSection />
-            <ExperienceSection />
+            <JourneySection />
             <CaseStudiesSection />
             <ProjectsSection />
-            <ResearchSection />
             <ServicesSection />
             <ContactSection />
         </motion.main>

@@ -13,8 +13,7 @@ export const en = {
   nav: {
     principal: 'Home',
     sobre: 'About',
-    experiencias: 'Experience',
-    pesquisa: 'Research',
+    trajetoria: 'Journey',
     servicos: 'Services',
     projetos: 'Projects',
     contatos: 'Contact',
@@ -57,23 +56,24 @@ export const en = {
     ],
   },
   experience: {
-    label: '03 — Experience',
     title: 'Experience',
-    subtitle: 'My professional path and the contributions I made in each role.',
     current: 'current',
     present: 'present',
-    showMore: (n) => `Show more roles (${n})`,
-    showLess: 'Show less',
   },
   research: {
-    label: '06 — Research & Outreach',
     title: 'Research & Outreach',
-    subtitle: 'Academic projects I coordinated, from my Lattes résumé.',
     lattes: 'Lattes résumé',
     orcid: 'ORCID',
   },
+  journey: {
+    label: '03 — Journey',
+    title: 'Journey',
+    subtitle: 'Work, research and education on a single timeline. Click a period to see the details.',
+    older: 'Older',
+    newer: 'Newer',
+  },
   services: {
-    label: '07 — Services',
+    label: '06 — Services',
     title: 'Services for your project',
     subtitle: 'Available for freelance projects, from idea to a ready-to-use delivery.',
     quote: 'Request a quote',
@@ -203,7 +203,6 @@ export const en = {
     ],
   },
   timeline: {
-    title: 'Timeline',
     present: 'present',
     lanes: { education: 'Education', work: 'Work', research: 'Research' },
   },
@@ -281,7 +280,7 @@ export const en = {
     madePublic: 'made public',
   },
   contact: {
-    label: '08 — Contact',
+    label: '07 — Contact',
     prompt: '$ echo "Let\'s talk?"',
     title: 'Get in Touch',
     subtitle: "Connect with me through the channels below. I'm always open to new opportunities, collaborations and freelance projects!",

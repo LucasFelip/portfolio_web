@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { GraduationCap, Languages } from 'lucide-react';
 import { skillGroups } from '@/data/skills';
 import { useI18n } from '@/i18n';
-import CareerTimeline from '@/components/CareerTimeline';
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -77,8 +76,6 @@ const AboutSection = () => {
             </motion.div>
           </div>
         </div>
-
-        <CareerTimeline />
       </div>
     </section>
   );

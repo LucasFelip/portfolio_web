@@ -7,6 +7,9 @@ import { nomeDoMes } from '@/lib/dateUtils';
 
 export const COMMAND_NAMES = ['help', 'about', 'skills', 'experience', 'projects', 'contact', 'cv', 'goto', 'lang', 'clear', 'exit'];
 
+// Seções que foram unificadas na Trajetória continuam aceitas pelo goto.
+const GOTO_ALIASES = { experiencias: 'trajetoria', experience: 'trajetoria', pesquisa: 'trajetoria', research: 'trajetoria', journey: 'trajetoria' };
+
 const text = (value) => ({ text: value });
 const link = (value, href) => ({ text: value, href });
 
@@ -57,7 +60,8 @@ export function runCommand(input, { t, lang }) {
       return { lines: [text(t.terminal.cvOpened)] };
 
     case 'goto': {
-      const target = navItems.find((item) => item.id === args[0]?.toLowerCase() || t.nav[item.id]?.toLowerCase() === args[0]?.toLowerCase());
+      const wanted = GOTO_ALIASES[args[0]?.toLowerCase()] ?? args[0]?.toLowerCase();
+      const target = navItems.find((item) => item.id === wanted || t.nav[item.id]?.toLowerCase() === wanted);
       if (!target && args[0]?.toLowerCase() !== 'engenharia') {
         return { lines: [text(t.terminal.gotoUsage(navItems.map((item) => item.id).join(', ')))] };
       }

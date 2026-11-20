@@ -13,8 +13,7 @@ export const pt = {
   nav: {
     principal: 'Principal',
     sobre: 'Sobre',
-    experiencias: 'Experiências',
-    pesquisa: 'Pesquisa',
+    trajetoria: 'Trajetória',
     servicos: 'Serviços',
     projetos: 'Projetos',
     contatos: 'Contatos',
@@ -57,23 +56,24 @@ export const pt = {
     ],
   },
   experience: {
-    label: '03 — Experiência',
     title: 'Experiências',
-    subtitle: 'Minha trajetória profissional e as contribuições que fiz em cada função.',
     current: 'atual',
     present: 'atual',
-    showMore: (n) => `Ver mais experiências (${n})`,
-    showLess: 'Ver menos',
   },
   research: {
-    label: '06 — Pesquisa & Extensão',
     title: 'Pesquisa & Extensão',
-    subtitle: 'Projetos acadêmicos que coordenei, do currículo Lattes.',
     lattes: 'Currículo Lattes',
     orcid: 'ORCID',
   },
+  journey: {
+    label: '03 — Trajetória',
+    title: 'Trajetória',
+    subtitle: 'Trabalho, pesquisa e formação em uma só linha do tempo. Clique em um período para ver os detalhes.',
+    older: 'Mais antigo',
+    newer: 'Mais recente',
+  },
   services: {
-    label: '07 — Serviços',
+    label: '06 — Serviços',
     title: 'Serviços para o seu projeto',
     subtitle: 'Disponível para projetos freelance, da ideia à entrega pronta para usar.',
     quote: 'Solicitar orçamento',
@@ -203,7 +203,6 @@ export const pt = {
     ],
   },
   timeline: {
-    title: 'Linha do tempo',
     present: 'atual',
     lanes: { education: 'Formação', work: 'Trabalho', research: 'Pesquisa' },
   },
@@ -281,7 +280,7 @@ export const pt = {
     madePublic: 'tornou público',
   },
   contact: {
-    label: '08 — Contato',
+    label: '07 — Contato',
     prompt: '$ echo "Vamos conversar?"',
     title: 'Entre em Contato',
     subtitle: 'Conecte-se comigo através das redes abaixo. Estou sempre aberto a novas oportunidades, colaborações e projetos freelance!',

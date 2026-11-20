@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Home, User, Briefcase, Mail, Github, Wrench, FlaskConical } from 'lucide-react';
+import { Home, User, Briefcase, Mail, Github, Wrench } from 'lucide-react';
 import changelog from '@/data/changelog.generated.json';
 import { navItems, useActiveSection } from '@/hooks/useActiveSection';
 import { useI18n } from '@/i18n';
@@ -8,8 +8,7 @@ import { useI18n } from '@/i18n';
 const icons = {
   principal: Home,
   sobre: User,
-  experiencias: Briefcase,
-  pesquisa: FlaskConical,
+  trajetoria: Briefcase,
   servicos: Wrench,
   projetos: Github,
   contatos: Mail,

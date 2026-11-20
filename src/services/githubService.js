@@ -1,22 +1,26 @@
-import { toast } from '@/components/ui/use-toast';
+import { projectOverrides } from '@/data/projectOverrides';
 
 const GITHUB_USERNAME = 'LucasFelip';
 const MAX_PROJECTS_DISPLAY = 9; // Número máximo de projetos a serem exibidos
+const FETCH_LIMIT = 100; // busca mais do que exibe, para poder filtrar e priorizar os destaques
+
+// Repositórios que nunca aparecem (o repo de perfil é só o README do GitHub).
+const HIDDEN_REPOS = new Set([GITHUB_USERNAME.toLowerCase()]);
+
+// Erro com `code` estável; a UI traduz a mensagem (ver ProjectsDisplay).
+const githubError = (code, status) => Object.assign(new Error(`GitHub API: ${code}${status ? ` (${status})` : ''}`), { code });
 
 const fetchGitHubData = async () => {
   const res = await fetch(
-    `https://api.github.com/users/${GITHUB_USERNAME}/repos?type=owner&sort=pushed&direction=desc&per_page=${MAX_PROJECTS_DISPLAY}`
+    `https://api.github.com/users/${GITHUB_USERNAME}/repos?type=owner&sort=pushed&direction=desc&per_page=${FETCH_LIMIT}`
   );
 
-  if (!res.ok) {
-    if (res.status === 403) throw new Error('Limite de taxa da API pública do GitHub atingido. Tente novamente em alguns minutos.');
-    throw new Error(`Erro ao buscar dados do GitHub: ${res.status} ${res.statusText}`);
-  }
+  if (!res.ok) throw githubError(res.status === 403 ? 'rate_limit' : 'http', res.status);
 
   const repos = await res.json();
 
-  return repos
-    .filter((repo) => !repo.fork && !repo.archived)
+  const projects = repos
+    .filter((repo) => !repo.fork && !repo.archived && !HIDDEN_REPOS.has(repo.name.toLowerCase()) && repo.description)
     .map((repo) => ({
       id: repo.id,
       name: repo.name,
@@ -26,27 +30,20 @@ const fetchGitHubData = async () => {
       stargazerCount: repo.stargazers_count,
       forkCount: repo.forks_count,
       primaryLanguage: repo.language ? { name: repo.language, color: null } : null,
+      override: projectOverrides[repo.name] ?? null,
     }));
+
+  // Destaques curados primeiro; dentro de cada grupo, o mais recente primeiro (a API já vem ordenada).
+  const featured = projects.filter((p) => p.override);
+  const others = projects.filter((p) => !p.override);
+  return [...featured, ...others].slice(0, MAX_PROJECTS_DISPLAY);
 };
 
 export const getProjects = async () => {
   try {
-    const projects = await fetchGitHubData();
-    if (projects.length === 0) {
-      toast({
-        title: "Nenhum projeto encontrado",
-        description: "Não foram encontrados projetos recentes no GitHub.",
-        variant: "default",
-      });
-    }
-    return projects;
+    return await fetchGitHubData();
   } catch (err) {
-    console.error("GitHub API Error in getProjects:", err);
-    toast({
-      title: "Erro ao buscar projetos",
-      description: err.message || "Não foi possível carregar os projetos do GitHub.",
-      variant: "destructive",
-    });
-    throw err;
+    console.error('GitHub API Error in getProjects:', err);
+    throw err instanceof Error && err.code ? err : githubError('network');
   }
 };

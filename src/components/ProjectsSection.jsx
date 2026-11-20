@@ -20,7 +20,7 @@ const ProjectsSection = () => {
         const fetchedProjects = await getProjects();
         setProjects(fetchedProjects);
       } catch (err) {
-        setError(err.message);
+        setError(err.code || 'network');
       } finally {
         setLoading(false);
       }

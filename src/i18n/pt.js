@@ -113,7 +113,14 @@ export const pt = {
     noDescription: 'Sem descrição disponível.',
     updatedAt: 'atualizado em',
     viewOnGithub: 'Ver no GitHub',
-    statsAlt: 'Estatísticas do GitHub de Lucas Ferreira',
+    demo: 'Ver demo',
+    tagsLabel: 'Tecnologias',
+    errors: {
+      rate_limit: 'Limite de requisições da API pública do GitHub atingido. Tente novamente em alguns minutos.',
+      http: 'Não foi possível carregar os dados do GitHub.',
+      network: 'Não foi possível conectar ao GitHub.',
+    },
+    stats: { title: 'Estatísticas do GitHub', repos: 'repositórios públicos', stars: 'estrelas', languages: 'linguagens mais usadas' },
   },
   activity: {
     commit: 'commit em',

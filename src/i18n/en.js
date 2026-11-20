@@ -113,7 +113,14 @@ export const en = {
     noDescription: 'No description available.',
     updatedAt: 'updated on',
     viewOnGithub: 'View on GitHub',
-    statsAlt: 'GitHub stats for Lucas Ferreira',
+    demo: 'Live demo',
+    tagsLabel: 'Technologies',
+    errors: {
+      rate_limit: 'GitHub public API rate limit reached. Please try again in a few minutes.',
+      http: 'Could not load data from GitHub.',
+      network: 'Could not reach GitHub.',
+    },
+    stats: { title: 'GitHub stats', repos: 'public repositories', stars: 'stars', languages: 'top languages' },
   },
   activity: {
     commit: 'commit in',

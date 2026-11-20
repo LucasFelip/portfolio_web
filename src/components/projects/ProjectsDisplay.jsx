@@ -24,7 +24,7 @@ const ProjectsDisplay = ({ projects, loading, error }) => {
       <div className="text-center text-destructive py-10 bg-destructive/10 rounded-lg flex flex-col items-center">
         <AlertTriangle className="w-12 h-12 mb-4"/>
         <p className="text-xl font-semibold">{t.projects.errorTitle}</p>
-        <p>{error}</p>
+        <p>{t.projects.errors[error] ?? t.projects.errors.network}</p>
         <p className="mt-2 text-sm">{t.projects.errorHint}</p>
       </div>
     );

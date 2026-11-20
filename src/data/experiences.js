@@ -41,8 +41,8 @@ export const experiencesData = [
     terminoMes: '',
     terminoAno: '',
     cargo: {
-      pt: 'Voluntário em Administração de Laboratório',
-      en: 'Laboratory Administration Volunteer',
+      pt: 'Engenheiro de Infraestrutura de Software (Voluntário)',
+      en: 'Software Infrastructure Engineer (Volunteer)',
     },
     statusLabel: { pt: 'Pesquisa voluntária', en: 'Volunteer research' },
     destaques: {

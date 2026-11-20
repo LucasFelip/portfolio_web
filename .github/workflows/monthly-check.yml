@@ -8,6 +8,9 @@ on:
 jobs:
   health-check:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write # para abrir a issue quando a checagem de links falhar
     steps:
       - uses: actions/checkout@v4
 

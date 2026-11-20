@@ -8,7 +8,7 @@ export const pt = {
     skipLink: 'Pular para o conteúdo',
     mainNav: 'Navegação principal',
     footerNav: 'Navegação do rodapé',
-    switchLang: 'Mudar idioma para inglês',
+    switchLang: 'EN: mudar idioma para inglês',
   },
   nav: {
     principal: 'Principal',
@@ -34,6 +34,7 @@ export const pt = {
     'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro',
   ],
   hero: {
+    badge: 'engenheiro_software --backend --devops',
     title: 'Engenheiro de Software',
     bio: 'Engenheiro de software com foco em backend (Java, Spring Boot) e experiência em microsserviços, micro frontends e DevOps. Construo soluções escaláveis em ambientes complexos.',
     viewProjects: 'Ver projetos',
@@ -200,7 +201,6 @@ export const pt = {
     title: 'Como este site chega ao ar',
     subtitle: 'O caminho real do código deste portfólio até o visitante, com automações que eu mesmo mantenho.',
     lastCommit: 'Último commit',
-    totalCommits: (n) => `${n} ${n === 1 ? 'commit' : 'commits'} no repositório`,
     stages: [
       { title: 'Commit', description: 'Mensagens no padrão Conventional Commits, em um branch por mudança.', detail: 'git · GitHub' },
       { title: 'Pull request e preview', description: 'Cada PR gera um deploy de pré-visualização para conferir antes do merge.', detail: 'Netlify deploy preview' },

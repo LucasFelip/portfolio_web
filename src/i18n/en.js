@@ -114,6 +114,7 @@ export const en = {
     subtitle: 'One of my end-to-end projects: a Rust agent, a web panel and an Android app. Click each stage to see how it works.',
     hint: "Source: the repository's README and architecture docs.",
     loadDemo: 'Load demo',
+    openDemo: 'Open demo in a new tab',
     demoNote: 'The demo runs the real panel with fake data, with no PC or phone needed.',
     demoFrameTitle: 'Self Stream Deck demo',
     nodes: [

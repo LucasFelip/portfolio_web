@@ -10,6 +10,9 @@ const DEMO_URL = 'https://lucasfelip.github.io/self-stream-deck/';
 // Ícones por nó, na ordem de t.architecture.nodes (celular → rede → agente → Windows).
 const nodeIcons = [Smartphone, Network, Cpu, Monitor];
 
+// Abaixo desse ponto a demonstração embutida ficaria pequena demais para usar: abre em nova aba.
+const MOBILE_QUERY = '(max-width: 639px)';
+
 const ArchitectureShowcase = () => {
   const { t } = useI18n();
   const [selected, setSelected] = useState(2);
@@ -31,7 +34,7 @@ const ArchitectureShowcase = () => {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-5">
-        <div className="dashboard-card lg:col-span-3">
+        <div className="dashboard-card min-w-0 lg:col-span-3">
           <p className="font-mono text-xs text-muted-foreground mb-4">$ ssd --architecture</p>
           <div role="group" className="grid gap-2 sm:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] sm:items-stretch" aria-label={t.architecture.title}>
             {nodes.map((node, index) => {
@@ -84,21 +87,41 @@ const ArchitectureShowcase = () => {
           </Button>
         </div>
 
-        <div className="dashboard-card lg:col-span-2 flex flex-col">
+        <div className="dashboard-card min-w-0 lg:col-span-2 flex flex-col">
           <p className="font-mono text-xs text-muted-foreground mb-4">$ ssd --demo</p>
           {demoLoaded ? (
-            <iframe
-              src={DEMO_URL}
-              title={t.architecture.demoFrameTitle}
-              referrerPolicy="no-referrer"
-              className="w-full flex-1 min-h-[34rem] rounded-md border border-border bg-black"
-              sandbox="allow-scripts allow-same-origin"
-            />
+            <>
+              <iframe
+                src={DEMO_URL}
+                title={t.architecture.demoFrameTitle}
+                referrerPolicy="no-referrer"
+                sandbox="allow-scripts allow-same-origin"
+                className="h-[34rem] w-full rounded-md border border-border bg-black"
+              />
+              <a
+                href={DEMO_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex items-center gap-1.5 self-start font-mono text-xs text-primary-text hover:underline"
+              >
+                {t.architecture.openDemo} <ExternalLink aria-hidden="true" className="w-3 h-3" />
+              </a>
+            </>
           ) : (
             <div className="flex flex-1 min-h-[16rem] flex-col items-center justify-center gap-4 rounded-md border border-dashed border-border bg-black/20 p-6 text-center">
               <p className="text-sm text-muted-foreground max-w-xs">{t.architecture.demoNote}</p>
-              <Button onClick={() => setDemoLoaded(true)}>
-                <Play aria-hidden="true" className="w-4 h-4 mr-2" /> {t.architecture.loadDemo}
+              <Button
+                onClick={() => {
+                  if (window.matchMedia(MOBILE_QUERY).matches) {
+                    window.open(DEMO_URL, '_blank', 'noopener,noreferrer');
+                  } else {
+                    setDemoLoaded(true);
+                  }
+                }}
+              >
+                <Play aria-hidden="true" className="w-4 h-4 mr-2" />
+                <span className="sm:hidden">{t.architecture.openDemo}</span>
+                <span className="hidden sm:inline">{t.architecture.loadDemo}</span>
               </Button>
             </div>
           )}

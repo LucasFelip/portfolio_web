@@ -4,6 +4,9 @@ import { useI18n } from '@/i18n';
 import githubStats from '@/data/githubStats.generated.json';
 
 // Painel com dados reais do GitHub, gerados no build (scripts/generate-github-stats.js). Sem dados, não aparece.
+const formatDate = (isoDate, lang) =>
+  new Date(`${isoDate}T12:00:00`).toLocaleDateString(lang === 'pt' ? 'pt-BR' : 'en-GB');
+
 const GithubStatsCard = () => {
   const { t, lang } = useI18n();
   const { stats } = githubStats;
@@ -35,9 +38,7 @@ const GithubStatsCard = () => {
           <div className="flex items-center gap-3">
             <GitCommit aria-hidden="true" className="w-5 h-5 text-primary-text" />
             <div>
-              <p className="font-mono text-xl text-foreground">
-                {new Date(`${stats.lastPush}T12:00:00`).toLocaleDateString(lang === 'pt' ? 'pt-BR' : 'en-GB')}
-              </p>
+              <p className="font-mono text-xl text-foreground">{formatDate(stats.lastPush, lang)}</p>
               <p className="text-xs text-muted-foreground">{t.projects.stats.lastPush}</p>
             </div>
           </div>
@@ -81,7 +82,7 @@ const GithubStatsCard = () => {
       </div>
 
       <p className="mt-4 font-mono text-[0.65rem] text-muted-foreground/60">
-        {t.projects.stats.updated} {stats.generatedAt}
+        {t.projects.stats.updated} {formatDate(stats.generatedAt, lang)}
       </p>
     </div>
   );

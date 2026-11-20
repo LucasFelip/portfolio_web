@@ -114,6 +114,7 @@ export const pt = {
     subtitle: 'Um projeto meu de ponta a ponta: agente em Rust, painel web e app Android. Clique nas etapas para ver como cada parte funciona.',
     hint: 'Fonte: README e documentação de arquitetura do repositório.',
     loadDemo: 'Carregar demonstração',
+    openDemo: 'Abrir demonstração em nova aba',
     demoNote: 'A demonstração roda o painel de verdade, com dados de mentira, sem precisar de PC nem de celular.',
     demoFrameTitle: 'Demonstração do Self Stream Deck',
     nodes: [

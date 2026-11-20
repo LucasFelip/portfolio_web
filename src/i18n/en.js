@@ -84,6 +84,7 @@ export const en = {
     newer: 'Newer',
   },
   timeline: {
+    today: 'today',
     present: 'present',
     lanes: { education: 'Education', work: 'Work', research: 'Research', courses: 'Courses' },
   },

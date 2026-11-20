@@ -84,6 +84,7 @@ export const pt = {
     newer: 'Mais recente',
   },
   timeline: {
+    today: 'hoje',
     present: 'atual',
     lanes: { education: 'Formação', work: 'Trabalho', research: 'Pesquisa', courses: 'Cursos' },
   },

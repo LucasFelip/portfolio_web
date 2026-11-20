@@ -1,4 +1,4 @@
-// Campos de texto são { pt, en }. Fonte do conteúdo: currículo (PDF em /public).
+// Campos de texto são { pt, en }. Fonte do conteúdo e das datas: currículo (PDF em /public).
 // statusLabel só existe pra experiências atuais (sem terminoAno) — usado no Hero pra montar o "$ status --current".
 // Meses ficam em português (usados no cálculo de tempo). `destaques` são os bullets exibidos no card.
 export const experiencesData = [
@@ -36,7 +36,7 @@ export const experiencesData = [
     imagemLink: '/logos/lsdi.png',
     instituicao: 'LSDI - UFMA',
     localizacao: 'São Luís, MA',
-    inicioMes: 'Janeiro',
+    inicioMes: 'Abril',
     inicioAno: '2025',
     terminoMes: '',
     terminoAno: '',
@@ -64,9 +64,9 @@ export const experiencesData = [
     imagemLink: '/logos/coreplan.png',
     instituicao: 'Coreplan Gestão Tecnologia e Serviços',
     localizacao: 'Fortaleza, CE',
-    inicioMes: 'Novembro',
+    inicioMes: 'Outubro',
     inicioAno: '2023',
-    terminoMes: 'Maio',
+    terminoMes: 'Junho',
     terminoAno: '2025',
     cargo: { pt: 'Analista de Suporte de TI', en: 'IT Support Analyst' },
     destaques: {
@@ -92,7 +92,7 @@ export const experiencesData = [
     localizacao: 'São Luís, MA',
     inicioMes: 'Agosto',
     inicioAno: '2022',
-    terminoMes: 'Novembro',
+    terminoMes: 'Outubro',
     terminoAno: '2023',
     cargo: { pt: 'Estagiário de Desenvolvimento de Software', en: 'Software Development Intern' },
     destaques: {
@@ -116,7 +116,7 @@ export const experiencesData = [
     imagemLink: '/logos/jucema.png',
     instituicao: 'Junta Comercial do Estado do Maranhão',
     localizacao: 'São Luís, MA',
-    inicioMes: 'Outubro',
+    inicioMes: 'Setembro',
     inicioAno: '2021',
     terminoMes: 'Agosto',
     terminoAno: '2022',

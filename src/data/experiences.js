@@ -30,7 +30,7 @@ export const experiencesData = [
       ],
     },
     tecnologias: ['Angular', 'Micro Frontends', { pt: 'Microsserviços', en: 'Microservices' }, 'Java', 'Spring Boot', 'Kafka'],
-    link: 'https://www.grupomateus.com.br/inovacao/',
+    link: 'https://www.grupomateus.com.br/',
   },
   {
     imagemLink: '/logos/lsdi.png',

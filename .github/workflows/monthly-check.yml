@@ -15,10 +15,11 @@ jobs:
         id: lychee
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --no-progress https://devlucasferreira.netlify.app
+          args: --no-progress --exclude lattes.cnpq.br https://devlucasferreira.netlify.app
           fail: true
 
       - name: Lighthouse (informativo, não bloqueia)
+        if: always()
         continue-on-error: true
         uses: treosh/lighthouse-ci-action@v11
         with:

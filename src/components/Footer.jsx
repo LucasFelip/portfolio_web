@@ -24,7 +24,7 @@ const Footer = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="relative overflow-hidden py-12 mt-16 border-t border-border/20"
+          className="relative overflow-hidden py-12 border-t border-border/20"
       >
         <div className="absolute inset-0 bg-grid" />
         <div className="container relative mx-auto px-4 flex flex-col items-center">

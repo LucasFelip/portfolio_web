@@ -9,6 +9,10 @@ export const skillGroups = [
     items: ['Spring Boot', 'Java EE', 'Angular', 'APIs RESTful', { pt: 'Microsserviços', en: 'Microservices' }, 'Micro Frontends'],
   },
   {
+    title: { pt: 'Mensageria & Sistemas Distribuídos', en: 'Messaging & Distributed Systems' },
+    items: ['Kafka', 'ZooKeeper'],
+  },
+  {
     title: { pt: 'Bancos de Dados', en: 'Databases' },
     items: ['PostgreSQL', 'MySQL', 'Oracle PL/SQL', 'MongoDB', 'Apache Pinot', 'Firebase'],
   },

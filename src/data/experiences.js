@@ -29,7 +29,7 @@ export const experiencesData = [
         'Contributing to the definition of development and architecture best practices.',
       ],
     },
-    tecnologias: ['Angular', 'Micro Frontends', { pt: 'Microsserviços', en: 'Microservices' }, 'Java', 'Spring Boot'],
+    tecnologias: ['Angular', 'Micro Frontends', { pt: 'Microsserviços', en: 'Microservices' }, 'Java', 'Spring Boot', 'Kafka'],
     link: 'https://www.grupomateus.com.br/inovacao/',
   },
   {

@@ -179,6 +179,11 @@ export const en = {
     noLeader: 'no leader',
     eventLog: 'Events',
     emptyLog: 'No events yet. Send a message or take a broker down.',
+    experience: 'I use Kafka in my work at Pulse and studied it during my degree. The environments I build for study are in these repositories.',
+    repos: { docker: 'Kafka with Docker Compose', zookeeper: 'ZooKeeper with Spring Boot' },
+    start: 'Start simulation',
+    startHint: 'The simulation runs in your browser and only starts when you click.',
+    loading: 'Loading simulation...',
     reset: 'Reset',
     disclaimer: 'Educational in-browser simulation with replication factor 2. It is not a real Kafka cluster.',
     log: {

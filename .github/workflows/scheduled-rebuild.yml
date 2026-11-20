@@ -8,12 +8,15 @@ on:
 jobs:
   trigger-netlify:
     runs-on: ubuntu-latest
+    env:
+      # o contexto `secrets` não pode ser usado direto em `if:`; passa pelo env
+      NETLIFY_BUILD_HOOK_URL: ${{ secrets.NETLIFY_BUILD_HOOK_URL }}
     steps:
       - name: Disparar build hook da Netlify
-        if: ${{ secrets.NETLIFY_BUILD_HOOK_URL != '' }}
-        run: curl -sf -X POST "${{ secrets.NETLIFY_BUILD_HOOK_URL }}"
+        if: env.NETLIFY_BUILD_HOOK_URL != ''
+        run: curl -sf -X POST "$NETLIFY_BUILD_HOOK_URL"
 
       - name: Secret não configurado
-        if: ${{ secrets.NETLIFY_BUILD_HOOK_URL == '' }}
+        if: env.NETLIFY_BUILD_HOOK_URL == ''
         run: |
           echo "::warning::NETLIFY_BUILD_HOOK_URL não configurado. Crie um Build Hook na Netlify (Site settings > Build & deploy > Build hooks) e adicione como secret do repositório."

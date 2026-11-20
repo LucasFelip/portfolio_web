@@ -2,43 +2,19 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Home, Briefcase, Mail, Github, Wrench, FlaskConical } from 'lucide-react';
 import changelog from '@/data/changelog.generated.json';
+import { navItems, useActiveSection } from '@/hooks/useActiveSection';
 
-const navItems = [
-  { id: 'principal', label: 'Principal', icon: Home },
-  { id: 'experiencias', label: 'Experiências', icon: Briefcase },
-  { id: 'pesquisa', label: 'Pesquisa', icon: FlaskConical },
-  { id: 'servicos', label: 'Serviços', icon: Wrench },
-  { id: 'projetos', label: 'Projetos', icon: Github },
-  { id: 'contatos', label: 'Contatos', icon: Mail },
-];
+const icons = {
+  principal: Home,
+  experiencias: Briefcase,
+  pesquisa: FlaskConical,
+  servicos: Wrench,
+  projetos: Github,
+  contatos: Mail,
+};
 
 const Footer = () => {
-  const [activeSection, setActiveSection] = React.useState('principal');
-
-  const handleScroll = () => {
-    const sections = navItems.map(item => document.getElementById(item.id));
-    const scrollPosition = window.scrollY + window.innerHeight / 2;
-
-    for (const section of sections) {
-      if (section && section.offsetTop <= scrollPosition && section.offsetTop + section.offsetHeight > scrollPosition) {
-        setActiveSection(section.id);
-        break;
-      }
-    }
-  };
-
-  React.useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setActiveSection(id);
-    }
-  };
+  const { activeSection, scrollToSection } = useActiveSection();
 
   return (
       <motion.footer
@@ -49,20 +25,26 @@ const Footer = () => {
       >
         <div className="absolute inset-0 bg-grid" />
         <div className="container relative mx-auto px-4 flex flex-col items-center">
-          <nav className="flex items-center gap-1 rounded-lg border border-border bg-card/80 backdrop-blur-md pl-3 pr-1.5 py-1.5 mb-6 shadow-2xl shadow-black/40">
-            <div className="hidden xs:flex items-center gap-1.5 pr-3 mr-1 border-r border-border">
+          <nav
+            aria-label="Navegação do rodapé"
+            className="flex items-center gap-1 rounded-lg border border-border bg-card/80 backdrop-blur-md pl-3 pr-1.5 py-1.5 mb-6 shadow-2xl shadow-black/40"
+          >
+            <div className="hidden xs:flex items-center gap-1.5 pr-3 mr-1 border-r border-border" aria-hidden="true">
               <span className="w-2 h-2 rounded-full bg-destructive/70" />
               <span className="w-2 h-2 rounded-full bg-yellow-500/70" />
               <span className="w-2 h-2 rounded-full bg-primary/70" />
             </div>
             {navItems.map((item) => {
-              const Icon = item.icon;
+              const Icon = icons[item.id];
               const isActive = activeSection === item.id;
               return (
                   <motion.button
                       key={item.id}
+                      type="button"
                       onClick={() => scrollToSection(item.id)}
-                      className={`relative flex items-center space-x-2 px-3 py-1.5 rounded-md font-mono text-xs uppercase tracking-wide transition-colors duration-300
+                      aria-label={item.label}
+                      aria-current={isActive ? 'location' : undefined}
+                      className={`relative flex items-center space-x-2 px-2 xs:px-3 py-1.5 rounded-md font-mono text-xs uppercase tracking-wide transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
                   ${isActive ? 'text-primary-foreground' : 'text-muted-foreground hover:text-foreground'}`}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
@@ -74,8 +56,7 @@ const Footer = () => {
                             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                         />
                     )}
-                    <Icon className={`w-3.5 h-3.5 z-10 ${isActive ? 'text-primary-foreground' : ''}`} />
-                    {/* Alteração para ocultar o texto em mobile */}
+                    <Icon aria-hidden="true" className="w-3.5 h-3.5 z-10" />
                     <span className="z-10 hidden md:inline">{item.label}</span>
                   </motion.button>
               );

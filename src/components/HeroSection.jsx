@@ -4,6 +4,9 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { experiencesData } from '@/data/experiences';
 import { tempoDesde } from '@/lib/dateUtils';
+import { CV_URL } from '@/lib/constants';
+import { Download } from 'lucide-react';
+import { scrollToSection } from '@/hooks/useActiveSection';
 
 // só entram aqui experiências sem terminoAno (em andamento) e com statusLabel definido
 const statusItems = experiencesData
@@ -17,9 +20,7 @@ const HeroSection = () => {
   const title = "Engenheiro de Software";
   const bio = "Engenheiro de software especializado em Java e sistemas backend, com experiência em arquitetura de software, sistemas distribuídos e um leque amplo de outras tecnologias. Formação técnica em Redes de Computadores e bacharelado em Sistemas de Informação. Minha trajetória é marcada pela busca contínua por aprendizado, inovação e pelo desejo de contribuir com soluções tecnológicas que impactem positivamente pessoas e organizações.";
 
-  const scrollToSection = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const { scrollToSection } = useActiveSection();
 
   return (
     <section id="principal" className="relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden">
@@ -67,7 +68,12 @@ const HeroSection = () => {
             <Button size="lg" onClick={() => scrollToSection('projetos')}>
               Ver projetos
             </Button>
-            <Button size="lg" variant="outline" onClick={() => scrollToSection('contatos')}>
+            <Button size="lg" variant="outline" asChild>
+              <a href={CV_URL} download>
+                <Download aria-hidden="true" className="w-4 h-4 mr-2" /> Baixar CV
+              </a>
+            </Button>
+            <Button size="lg" variant="ghost" onClick={() => scrollToSection('contatos')}>
               Contato
             </Button>
           </motion.div>

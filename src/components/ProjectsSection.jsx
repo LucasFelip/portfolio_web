@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { getProjects } from '@/services/githubService';
+import { getProjects, getInitialProjects } from '@/services/githubService';
 import ProjectsDisplay from '@/components/projects/ProjectsDisplay';
 import ActivityFeed from '@/components/projects/ActivityFeed';
 import GithubStatsCard from '@/components/projects/GithubStatsCard';
@@ -8,25 +8,28 @@ import { useI18n } from '@/i18n';
 
 const ProjectsSection = () => {
   const { t } = useI18n();
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // A lista gerada no build aparece na hora. A API do GitHub só atualiza os dados; se ela falhar (limite de
+  // requisições por IP, por exemplo), o visitante continua vendo a lista do build e nenhum erro é exibido.
+  const [projects, setProjects] = useState(getInitialProjects);
+  const hadInitialProjects = useRef(projects.length > 0);
+  const [loading, setLoading] = useState(!hadInitialProjects.current);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const loadProjects = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const fetchedProjects = await getProjects();
-        setProjects(fetchedProjects);
-      } catch (err) {
-        setError(err.code || 'network');
-      } finally {
-        setLoading(false);
-      }
+    let cancelled = false;
+    getProjects()
+      .then((fresh) => {
+        if (!cancelled && fresh.length > 0) setProjects(fresh);
+      })
+      .catch((err) => {
+        if (!cancelled && !hadInitialProjects.current) setError(err.code || 'network');
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
     };
-
-    loadProjects();
   }, []);
 
   return (

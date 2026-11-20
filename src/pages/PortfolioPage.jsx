@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
-import CaseStudiesSection from '@/components/engineering/CaseStudiesSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import JourneySection from '@/components/journey/JourneySection';
 import ServicesSection from '@/components/ServicesSection';
@@ -11,10 +10,25 @@ import ContactSection from '@/components/ContactSection';
 import { Toaster } from '@/components/ui/toaster';
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
 import { useI18n } from '@/i18n';
-import TerminalDialog from '@/components/terminal/TerminalDialog';
+import TerminalLauncher from '@/components/terminal/TerminalLauncher';
+
+// Estudos de caso, diagrama e pipeline ficam abaixo da dobra: carregam à parte, em tempo ocioso.
+const loadEngineering = () => import('@/components/engineering/CaseStudiesSection');
+const CaseStudiesSection = lazy(loadEngineering);
 
 const PortfolioPage = () => {
   const { t } = useI18n();
+
+  useEffect(() => {
+    // Pré-carrega a seção quando o navegador estiver ocioso, para não haver espera ao rolar até ela.
+    if ('requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(loadEngineering, { timeout: 3000 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const id = window.setTimeout(loadEngineering, 1500);
+    return () => window.clearTimeout(id);
+  }, []);
+
   return (
     <MotionConfig reducedMotion="user">
     <div className="flex flex-col min-h-screen bg-background text-foreground">
@@ -38,7 +52,9 @@ const PortfolioPage = () => {
             <HeroSection />
             <AboutSection />
             <JourneySection />
-            <CaseStudiesSection />
+            <Suspense fallback={<section id="engenharia" aria-hidden="true" className="min-h-[100rem]" />}>
+              <CaseStudiesSection />
+            </Suspense>
             <ProjectsSection />
             <ServicesSection />
             <ContactSection />
@@ -46,7 +62,7 @@ const PortfolioPage = () => {
       </AnimatePresence>
       <Footer />
       <Toaster />
-      <TerminalDialog />
+      <TerminalLauncher />
     </div>
     </MotionConfig>
   );

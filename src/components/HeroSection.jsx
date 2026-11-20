@@ -8,7 +8,7 @@ import { useI18n } from '@/i18n';
 import { CV_URL } from '@/lib/constants';
 import { Download } from 'lucide-react';
 import { scrollToSection } from '@/hooks/useActiveSection';
-import { OPEN_TERMINAL_EVENT } from '@/components/terminal/TerminalDialog';
+import { OPEN_TERMINAL_EVENT } from '@/components/terminal/events';
 
 // só entram aqui experiências sem terminoAno (em andamento) e com statusLabel definido
 const currentExperiences = experiencesData.filter((exp) => !exp.terminoAno && exp.statusLabel);

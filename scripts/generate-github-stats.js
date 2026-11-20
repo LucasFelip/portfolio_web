@@ -2,10 +2,13 @@ import { writeFileSync, readFileSync, mkdirSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
-// Gera estatísticas do GitHub no build (sem depender de serviços de imagem de terceiros).
-// Sem GITHUB_TOKEN o limite é 60 requisições/h por IP (compartilhado no Netlify): cadastre o token como
+// Gera dados do GitHub no build (sem depender de serviços de imagem de terceiros nem da API no navegador):
+//  - `stats`: estatísticas do painel (repositórios, estrelas, linguagens, commits por semana);
+//  - `projects`: cópia dos repositórios públicos, usada como lista inicial e como alternativa quando a API do
+//    GitHub falha no navegador do visitante (limite de 60 requisições/h por IP).
+// Sem GITHUB_TOKEN o limite do build é 60 requisições/h por IP (compartilhado no Netlify): cadastre o token como
 // variável de ambiente para chegar a 5000/h. Se a API falhar, o script nunca derruba o build: mantém os dados
-// anteriores, se existirem, ou grava `stats: null` (o card some).
+// anteriores, se existirem, ou grava dados vazios (o card some e a lista usa só a API ao vivo).
 const GITHUB_USERNAME = 'LucasFelip';
 const WEEKS = 12;
 const MAX_REPOS_FOR_ACTIVITY = 15;
@@ -21,7 +24,7 @@ if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITH
 
 const readPrevious = () => {
   try {
-    return existsSync(outFile) ? JSON.parse(readFileSync(outFile, 'utf-8')).stats : null;
+    return existsSync(outFile) ? JSON.parse(readFileSync(outFile, 'utf-8')) : null;
   } catch {
     return null;
   }
@@ -76,7 +79,7 @@ async function run() {
       if (repo.language) languages[repo.language] = (languages[repo.language] ?? 0) + 1;
     }
 
-    const weeklyCommits = (await fetchWeeklyCommits(repos)) ?? previous?.weeklyCommits ?? null;
+    const weeklyCommits = (await fetchWeeklyCommits(repos)) ?? previous?.stats?.weeklyCommits ?? null;
 
     const stats = {
       publicRepos: repos.length,
@@ -89,13 +92,28 @@ async function run() {
       lastPush: repos.map((r) => r.pushed_at).sort().at(-1)?.slice(0, 10) ?? null,
       generatedAt: new Date().toISOString().slice(0, 10),
     };
-    writeFileSync(outFile, JSON.stringify({ stats }, null, 2));
+
+    // Cópia enxuta dos repos (já ordenados por push); o filtro de ocultos e os destaques ficam em githubService.
+    const projects = repos
+      .filter((r) => r.description)
+      .map((r) => ({
+        id: r.id,
+        name: r.name,
+        description: r.description,
+        url: r.html_url,
+        pushedAt: r.pushed_at,
+        stargazerCount: r.stargazers_count,
+        forkCount: r.forks_count,
+        language: r.language ?? null,
+      }));
+
+    writeFileSync(outFile, JSON.stringify({ stats, projects }, null, 2));
   } catch (err) {
     if (previous) {
       console.warn(`[github-stats] ${err.message}; mantendo dados anteriores`);
     } else {
       console.warn(`[github-stats] ${err.message}; sem dados anteriores, o card de estatísticas não será exibido`);
-      writeFileSync(outFile, JSON.stringify({ stats: null }, null, 2));
+      writeFileSync(outFile, JSON.stringify({ stats: null, projects: [] }, null, 2));
     }
   }
 }

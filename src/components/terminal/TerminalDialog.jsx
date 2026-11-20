@@ -3,19 +3,18 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { X } from 'lucide-react';
 import { useI18n } from '@/i18n';
 import { runCommand, COMMAND_NAMES } from '@/components/terminal/commands';
-
-export const OPEN_TERMINAL_EVENT = 'open-terminal';
+import { OPEN_TERMINAL_EVENT } from '@/components/terminal/events';
 
 // Terminal interativo (Ctrl/Cmd + K). Os comandos ficam em commands.js; aqui só há a interface.
-const TerminalDialog = () => {
+const TerminalDialog = ({ defaultOpen = false, initialOpener = null }) => {
   const { t, lang, setLang } = useI18n();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(defaultOpen);
   const [input, setInput] = useState('');
   const [history, setHistory] = useState([]); // { command, lines }
   const [recall, setRecall] = useState(-1);
   const inputRef = useRef(null);
   const outputRef = useRef(null);
-  const openerRef = useRef(null); // elemento que tinha o foco quando o terminal abriu
+  const openerRef = useRef(initialOpener); // elemento que tinha o foco quando o terminal abriu
 
   useEffect(() => {
     const onKey = (event) => {

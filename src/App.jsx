@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import PortfolioPage from '@/pages/PortfolioPage';
-import CvPage from '@/pages/CvPage';
+
+// A página do currículo imprimível só é baixada em /cv.
+const CvPage = lazy(() => import('@/pages/CvPage'));
 
 // Sem biblioteca de rotas: o site só tem duas telas. O Netlify serve /cv com o mesmo index.html (public/_redirects).
 const isCvRoute = () => window.location.pathname.replace(/\/+$/, '') === '/cv';
 
 function App() {
-  return isCvRoute() ? <CvPage /> : <PortfolioPage />;
+  return isCvRoute() ? (
+    <Suspense fallback={null}>
+      <CvPage />
+    </Suspense>
+  ) : (
+    <PortfolioPage />
+  );
 }
 
 export default App;

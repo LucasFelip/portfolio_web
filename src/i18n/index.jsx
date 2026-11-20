@@ -18,8 +18,8 @@ function detectInitialLang() {
 
 const I18nContext = createContext(null);
 
-export const LanguageProvider = ({ children }) => {
-  const [lang, setLangState] = useState(detectInitialLang);
+export const LanguageProvider = ({ children, initialLang }) => {
+  const [lang, setLangState] = useState(() => initialLang ?? detectInitialLang());
   const t = dictionaries[lang];
 
   const setLang = useCallback((next) => {

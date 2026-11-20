@@ -180,7 +180,8 @@ const Detail = ({ item }) => {
 
 const JourneySection = () => {
   const { t, tr } = useI18n();
-  const compact = !useMediaQuery('(min-width: 1024px)'); // celular/tablet: tabela compacta, sem rolagem lateral
+  const compact = !useMediaQuery('(min-width: 768px)'); // celular: tabela compacta, sem rolagem lateral
+  const shortNames = !useMediaQuery('(min-width: 1024px)'); // abaixo disso as barras são estreitas demais para nomes longos
   const [selectedId, setSelectedId] = useState(defaultItemId);
   const scrollerRef = useRef(null);
   const detailRef = useRef(null);
@@ -208,7 +209,7 @@ const JourneySection = () => {
   const select = (id, { reveal = false, showDetail = false } = {}) => {
     setSelectedId(id);
     // Em telas pequenas o painel fica abaixo da dobra: traz os detalhes para a vista ao escolher uma barra.
-    if (showDetail && window.innerWidth < 1024) {
+    if (showDetail && window.innerWidth < 768) {
       window.requestAnimationFrame(() => detailRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' }));
     }
     if (reveal) {
@@ -245,10 +246,14 @@ const JourneySection = () => {
         </motion.p>
 
         <div className={compact ? 'dashboard-card !p-2' : 'dashboard-card overflow-x-auto'} ref={scrollerRef}>
-          <div className={compact ? 'w-full' : 'min-w-[44rem]'}>
+          <div className={compact ? 'w-full' : 'min-w-[40rem]'}>
             <div className={`relative ${compact ? '' : 'ml-24'} h-6 border-b border-border font-mono text-[0.6rem] text-muted-foreground`} aria-hidden="true">
-              {labelYears.map((year) => (
-                <span key={year} className="absolute -translate-x-1/2" style={{ left: percent(year) }}>
+              {labelYears.map((year, index) => (
+                <span
+                  key={year}
+                  className={`absolute ${index === 0 ? '' : index === labelYears.length - 1 ? '-translate-x-full' : '-translate-x-1/2'}`}
+                  style={{ left: percent(year) }}
+                >
                   {year}
                 </span>
               ))}
@@ -265,7 +270,7 @@ const JourneySection = () => {
                   ))}
                   {items.map((item) => {
                     const isSelected = item.id === selected.id;
-            const shown = tr(compact ? item.shortLabel ?? item.barLabel ?? item.label : item.barLabel ?? item.label);
+            const shown = tr(shortNames ? item.shortLabel ?? item.barLabel ?? item.label : item.barLabel ?? item.label);
                     return (
                       <button
                         key={item.id}
@@ -275,7 +280,7 @@ const JourneySection = () => {
                         aria-pressed={isSelected}
                         aria-label={`${shown === tr(item.label) ? '' : `${shown}: `}${tr(item.label)}, ${period(item, t.timeline.present)}`}
                         title={`${tr(item.label)} · ${period(item, t.timeline.present)}`}
-                        className={`absolute flex items-center overflow-hidden rounded-sm border ${compact ? 'px-0.5 text-[0.55rem]' : 'px-1.5 text-[0.6rem]'} text-left font-mono transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                        className={`absolute flex items-center overflow-hidden rounded-sm border ${compact ? 'px-0.5 text-[0.5rem] xs:text-[0.55rem]' : 'px-1.5 text-[0.6rem]'} text-left font-mono transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                           isSelected
                             ? 'border-primary-text bg-primary text-primary-foreground'
                             : 'border-primary/40 bg-primary/25 text-foreground hover:border-primary-text hover:bg-primary/40'

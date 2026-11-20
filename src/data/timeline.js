@@ -55,14 +55,14 @@ const SHORT_RESEARCH = {
   'Tabuleiro BD': 'Tab. BD',
   'Segurança da informação para mobile': 'Seg. info',
   'TIC pra tod@s': 'TIC',
-  'Campanha de empreendedorismo em TIC': 'Camp.',
+  'Campanha de empreendedorismo em TIC': 'Cam.',
 };
 const SHORT_COURSES = {
   'udemy-java': 'Udemy',
   'ifma-redes': 'IFMA',
   'alura-sql': 'SQL',
   'alura-agil': 'Ágil',
-  'alura-processos': 'Proc.',
+  'alura-processos': 'Proc',
   'alura-front': 'Web',
   'alura-postgres': 'PG',
   'alura-java': 'Java',

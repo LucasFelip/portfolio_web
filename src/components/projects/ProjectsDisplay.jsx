@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ProjectCard from './ProjectCard';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Github, AlertTriangle, ChevronDown } from 'lucide-react';
 import { useI18n } from '@/i18n';
@@ -36,7 +36,7 @@ const ProjectsDisplay = ({ projects, loading, error }) => {
         <Github className="w-16 h-16 mx-auto mb-4 opacity-50"/>
         <p className="text-xl">{t.projects.emptyTitle}</p>
         <p>{t.projects.emptyHint}</p>
-         <motion.div
+         <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -48,7 +48,7 @@ const ProjectsDisplay = ({ projects, loading, error }) => {
                 {t.projects.visitGithub}
               </a>
             </Button>
-          </motion.div>
+          </m.div>
       </div>
     );
   }
@@ -76,7 +76,7 @@ const ProjectsDisplay = ({ projects, loading, error }) => {
         </div>
       )}
       {projects.length > 0 && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -88,7 +88,7 @@ const ProjectsDisplay = ({ projects, loading, error }) => {
                 {t.projects.viewAll}
               </a>
             </Button>
-          </motion.div>
+          </m.div>
         )}
     </>
   );

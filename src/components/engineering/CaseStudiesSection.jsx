@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { caseStudies } from '@/data/caseStudies';
 import { useI18n } from '@/i18n';
 
@@ -19,16 +19,16 @@ const CaseStudiesSection = () => {
         <div className="text-center">
           <span className="section-label">{t.cases.label}</span>
         </div>
-        <motion.h2 {...fadeUp} className="text-4xl md:text-5xl font-bold text-center mb-4">
+        <m.h2 {...fadeUp} className="text-4xl md:text-5xl font-bold text-center mb-4">
           {t.cases.title}
-        </motion.h2>
-        <motion.p {...fadeUp} className="text-lg text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+        </m.h2>
+        <m.p {...fadeUp} className="text-lg text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
           {t.cases.subtitle}
-        </motion.p>
+        </m.p>
 
         <div className="grid gap-6 lg:grid-cols-3">
           {caseStudies.map((study, index) => (
-            <motion.article
+            <m.article
               key={study.id}
               {...fadeUp}
               transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -63,7 +63,7 @@ const CaseStudiesSection = () => {
                   </li>
                 ))}
               </ul>
-            </motion.article>
+            </m.article>
           ))}
         </div>
 

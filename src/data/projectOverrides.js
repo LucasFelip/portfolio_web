@@ -10,7 +10,7 @@ export const projectOverrides = {
       en: 'Turns a phone into a control panel for a Windows PC: apps, shortcuts, sound, windows, performance and the phone camera as a webcam. Rust agent, React + TypeScript (PWA) panel and a Kotlin Android app.',
     },
     tags: ['React', 'TypeScript', 'Kotlin', 'PWA'],
-    image: '/projects/self-stream-deck.png',
+    image: '/projects/self-stream-deck.webp',
     demo: 'https://lucasfelip.github.io/self-stream-deck/',
   },
   'taskbar-battery': {
@@ -26,7 +26,7 @@ export const projectOverrides = {
       en: 'Website for a jewelry store focused on gold appraisal and purchase. Proof of concept for a prospective client.',
     },
     tags: ['HTML', 'CSS', 'Landing page'],
-    image: '/projects/ana-joias.jpg',
+    image: '/projects/ana-joias.webp',
     imageFit: 'contain',
   },
   'book-game-dev': {
@@ -35,7 +35,7 @@ export const projectOverrides = {
       en: 'Study book on game development with AI: Unreal Engine 5, C++, Blueprint, Game AI and narrative. The PDF is built automatically by CI on every push.',
     },
     tags: ['Unreal Engine 5', 'C++', 'Game AI', 'CI'],
-    image: '/projects/book-game-dev.png', // capa do PDF da release v1.0.2 (renderizada da primeira página)
+    image: '/projects/book-game-dev.webp', // capa do PDF da release v1.0.2 (renderizada da primeira página)
   },
   'kafka-docker': {
     description: {

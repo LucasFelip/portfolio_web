@@ -8,8 +8,7 @@ import ProjectsSection from '@/components/ProjectsSection';
 import JourneySection from '@/components/journey/JourneySection';
 import ServicesSection from '@/components/ServicesSection';
 import ContactSection from '@/components/ContactSection';
-import { Toaster } from '@/components/ui/toaster';
-import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
+import { m, AnimatePresence, MotionConfig, LazyMotion, domAnimation } from 'framer-motion';
 import { useI18n } from '@/i18n';
 import CaseStudiesSection from '@/components/engineering/CaseStudiesSection';
 
@@ -17,6 +16,7 @@ const PortfolioPage = () => {
   const { t } = useI18n();
 
   return (
+    <LazyMotion features={domAnimation}>
     <MotionConfig reducedMotion="user">
     <div className="flex flex-col min-h-screen bg-background text-foreground">
       <a
@@ -27,7 +27,7 @@ const PortfolioPage = () => {
       </a>
       <Header />
       <AnimatePresence>
-        <motion.main
+        <m.main
           id="conteudo"
           tabIndex={-1}
           initial={false}
@@ -44,12 +44,12 @@ const PortfolioPage = () => {
             <ProjectsSection />
             <ServicesSection />
             <ContactSection />
-        </motion.main>
+        </m.main>
       </AnimatePresence>
       <Footer />
-      <Toaster />
     </div>
     </MotionConfig>
+    </LazyMotion>
   );
 };
 

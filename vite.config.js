@@ -181,9 +181,26 @@ logger.error = (msg, options) => {
 	loggerError(msg, options);
 }
 
+// Pré-carrega as fontes do subconjunto latino (as únicas usadas pelo site): evita esperar o CSS para descobri-las.
+const preloadLatinFonts = {
+	name: 'preload-latin-fonts',
+	transformIndexHtml: {
+		order: 'post',
+		handler(html, ctx) {
+			const files = Object.keys(ctx.bundle ?? {}).filter((name) => /(inter|jetbrains-mono)-latin-wght-normal.*\.woff2$/.test(name));
+			const tags = files.map((name) => ({
+				tag: 'link',
+				attrs: { rel: 'preload', as: 'font', type: 'font/woff2', crossorigin: '', href: `/${name}` },
+				injectTo: 'head',
+			}));
+			return tags;
+		},
+	},
+};
+
 export default defineConfig({
 	customLogger: logger,
-	plugins: [react(), addTransformIndexHtml],
+	plugins: [react(), addTransformIndexHtml, preloadLatinFonts],
 	server: {
 		cors: true,
 		headers: {

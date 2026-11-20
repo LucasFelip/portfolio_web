@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { getProjects, getInitialProjects } from '@/services/githubService';
 import ProjectsDisplay from '@/components/projects/ProjectsDisplay';
 import { useI18n } from '@/i18n';
@@ -13,7 +13,32 @@ const ProjectsSection = () => {
   const [loading, setLoading] = useState(!hadInitialProjects.current);
   const [error, setError] = useState(null);
 
+  const sectionRef = useRef(null);
+  const [nearViewport, setNearViewport] = useState(false);
+
+  // A lista do build já está na tela; a API do GitHub só é consultada (e só gasta o limite de requisições do
+  // visitante) quando a seção chega perto da área visível.
   useEffect(() => {
+    const element = sectionRef.current;
+    if (!element || !('IntersectionObserver' in window)) {
+      setNearViewport(true);
+      return undefined;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setNearViewport(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '600px 0px' },
+    );
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!nearViewport) return undefined;
     let cancelled = false;
     getProjects()
       .then((fresh) => {
@@ -28,15 +53,15 @@ const ProjectsSection = () => {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [nearViewport]);
 
   return (
-    <section id="projetos" className="py-12 md:py-24 bg-background">
+    <section id="projetos" ref={sectionRef} className="py-12 md:py-24 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <span className="section-label">{t.projects.label}</span>
         </div>
-        <motion.h2
+        <m.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -44,8 +69,8 @@ const ProjectsSection = () => {
           className="text-4xl md:text-5xl font-bold text-center mb-4"
         >
           {t.projects.title}
-        </motion.h2>
-        <motion.p 
+        </m.h2>
+        <m.p 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -53,7 +78,7 @@ const ProjectsSection = () => {
           className="text-lg text-muted-foreground text-center mb-12 max-w-2xl mx-auto"
         >
           {t.projects.subtitle}
-        </motion.p>
+        </m.p>
         <ProjectsDisplay projects={projects} loading={loading} error={error} />
       </div>
     </section>

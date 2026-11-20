@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Mail, Linkedin, Github, CalendarClock, Fingerprint } from 'lucide-react';
 import { useI18n } from '@/i18n';
 import { CONTACT } from '@/lib/constants';
@@ -61,7 +61,7 @@ const ContactSection = () => {
     <section id="contatos" className="py-12 md:py-24 bg-background">
       <div className="container mx-auto px-4 text-center">
         <span className="section-label">{t.contact.label}</span>
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -77,7 +77,7 @@ const ContactSection = () => {
 
           <div className="p-10 md:p-16 text-left">
             <p className="font-mono text-sm text-primary-text mb-4">{t.contact.prompt}</p>
-            <motion.h2
+            <m.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -85,8 +85,8 @@ const ContactSection = () => {
               className="text-4xl md:text-5xl font-bold mb-4"
             >
               {t.contact.title}
-            </motion.h2>
-            <motion.p
+            </m.h2>
+            <m.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -94,9 +94,9 @@ const ContactSection = () => {
               className="text-lg text-muted-foreground mb-12 max-w-xl"
             >
               {t.contact.subtitle}
-            </motion.p>
+            </m.p>
 
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -107,7 +107,7 @@ const ContactSection = () => {
                 const IconComponent = link.icon;
                 const label = link.labelKey ? t.contact[link.labelKey] : link.label;
                 return (
-                  <motion.a
+                  <m.a
                     key={link.href}
                     href={link.href}
                     {...externalProps(link.href)}
@@ -120,12 +120,12 @@ const ContactSection = () => {
                   >
                     <IconComponent aria-hidden="true" className="h-6 w-6" />
                     <span className="font-mono text-xs">{label}</span>
-                  </motion.a>
+                  </m.a>
                 );
               })}
-            </motion.div>
+            </m.div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

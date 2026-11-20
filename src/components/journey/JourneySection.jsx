@@ -1,5 +1,5 @@
 import React, { useMemo, useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { Award, Briefcase, ChevronLeft, ChevronRight, ExternalLink, FlaskConical, MapPin, CalendarDays, GraduationCap } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -235,7 +235,7 @@ const JourneySection = () => {
         <div className="text-center">
           <span className="section-label">{t.journey.label}</span>
         </div>
-        <motion.h2
+        <m.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -243,8 +243,8 @@ const JourneySection = () => {
           className="mb-4 text-center text-4xl font-bold md:text-5xl"
         >
           {t.journey.title}
-        </motion.h2>
-        <motion.p
+        </m.h2>
+        <m.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -252,7 +252,7 @@ const JourneySection = () => {
           className="mx-auto mb-10 max-w-2xl text-center text-lg text-muted-foreground"
         >
           {t.journey.subtitle}
-        </motion.p>
+        </m.p>
 
         <div className={compact ? 'dashboard-card !p-2' : 'dashboard-card overflow-x-auto'} ref={scrollerRef}>
           <div className={compact ? 'w-full' : 'min-w-[40rem]'}>
@@ -351,7 +351,7 @@ const JourneySection = () => {
 
         <div className="dashboard-card mt-6" ref={detailRef}>
           <AnimatePresence mode="wait" initial={false}>
-            <motion.div
+            <m.div
               key={selected.id}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -359,7 +359,7 @@ const JourneySection = () => {
               transition={{ duration: 0.2 }}
             >
               <Detail item={selected} />
-            </motion.div>
+            </m.div>
           </AnimatePresence>
 
           <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">

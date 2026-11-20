@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Home, User, Briefcase, Mail, Github, Wrench } from 'lucide-react';
 import changelog from '@/data/changelog.generated.json';
 import { navItems, useActiveSection } from '@/hooks/useActiveSection';
@@ -19,7 +19,7 @@ const Footer = () => {
   const { t, lang } = useI18n();
 
   return (
-      <motion.footer
+      <m.footer
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
@@ -35,27 +35,20 @@ const Footer = () => {
               const Icon = icons[item.id];
               const isActive = activeSection === item.id;
               return (
-                  <motion.button
+                  <m.button
                       key={item.id}
                       type="button"
                       onClick={() => scrollToSection(item.id)}
                       aria-label={t.nav[item.id]}
                       aria-current={isActive ? 'location' : undefined}
                       className={`relative flex items-center space-x-2 px-1.5 xs:px-3 py-1.5 rounded-md font-mono text-xs uppercase tracking-wide transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
-                  ${isActive ? 'text-primary-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+                  ${isActive ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'}`}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                   >
-                    {isActive && (
-                        <motion.div
-                            layoutId="active-nav-item-footer"
-                            className="absolute inset-0 bg-primary rounded-md z-0"
-                            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                        />
-                    )}
                     <Icon aria-hidden="true" className="w-3.5 h-3.5 z-10" />
                     <span className="z-10 hidden md:inline">{t.nav[item.id]}</span>
-                  </motion.button>
+                  </m.button>
               );
             })}
           </nav>
@@ -80,7 +73,7 @@ const Footer = () => {
             )}
           </div>
         </div>
-      </motion.footer>
+      </m.footer>
   );
 };
 

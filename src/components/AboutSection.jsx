@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Languages } from 'lucide-react';
 import { skillGroups } from '@/data/skills';
 import { useI18n } from '@/i18n';
@@ -21,14 +21,14 @@ const AboutSection = () => {
         <div className="text-center">
           <span className="section-label">{t.about.label}</span>
         </div>
-        <motion.h2 {...fadeUp} className="text-4xl md:text-5xl font-bold text-center mb-4">
+        <m.h2 {...fadeUp} className="text-4xl md:text-5xl font-bold text-center mb-4">
           {t.about.title}
-        </motion.h2>
-        <motion.p {...fadeUp} className="text-sm sm:text-base md:text-lg text-muted-foreground text-center mb-8 max-w-2xl mx-auto">
+        </m.h2>
+        <m.p {...fadeUp} className="text-sm sm:text-base md:text-lg text-muted-foreground text-center mb-8 max-w-2xl mx-auto">
           {t.about.summary}
-        </motion.p>
+        </m.p>
 
-        <motion.div {...fadeUp} className="dashboard-card mx-auto max-w-4xl">
+        <m.div {...fadeUp} className="dashboard-card mx-auto max-w-4xl">
           <p className="font-mono text-xs text-muted-foreground mb-4">$ stack --by-category</p>
           <dl className="grid gap-x-8 gap-y-4 md:grid-cols-2">
             {skillGroups.map((group) => (
@@ -57,7 +57,7 @@ const AboutSection = () => {
               ))}
             </ul>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

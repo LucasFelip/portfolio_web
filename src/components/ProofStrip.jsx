@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { experiencesData } from '@/data/experiences';
@@ -48,16 +48,16 @@ const ProofStrip = () => {
   return (
     <section aria-label={t.proof.title} className="pb-8 md:pb-12">
       <div className="container mx-auto px-4">
-        <motion.ul {...fadeUp} className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+        <m.ul {...fadeUp} className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
           {stats.map((stat) => (
             <li key={stat.label} className="dashboard-card !py-4 text-center">
               <p className="font-mono text-3xl font-bold text-primary-text md:text-4xl">{stat.value}</p>
               <p className="mt-1 text-xs text-muted-foreground md:text-sm">{stat.label}</p>
             </li>
           ))}
-        </motion.ul>
+        </m.ul>
 
-        <motion.div {...fadeUp} className="mt-8 text-center">
+        <m.div {...fadeUp} className="mt-8 text-center">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">{t.proof.title}</p>
           <ul className="mt-4 flex flex-wrap justify-center gap-x-8 gap-y-4">
             {experiencesData.map((exp) => (
@@ -79,7 +79,7 @@ const ProofStrip = () => {
               </li>
             ))}
           </ul>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

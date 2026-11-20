@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { experiencesData } from '@/data/experiences';
 import { tempoDesde } from '@/lib/dateUtils';
@@ -29,7 +29,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-grid" />
       <div className="container relative mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
         <div className="text-center md:text-left">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
@@ -39,34 +39,34 @@ const HeroSection = () => {
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1.5 text-sm text-primary-text">
               <span className="h-2 w-2 animate-pulse rounded-full bg-primary-text" aria-hidden="true" /> {t.hero.available}
             </span>
-          </motion.div>
-          <motion.span
+          </m.div>
+          <m.span
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
             className="inline-flex items-center gap-2 font-mono text-sm text-muted-foreground border border-border rounded-full px-4 py-1.5 mb-6"
           >
             <span className="text-primary-text">●</span> {t.hero.badge}
-          </motion.span>
-          <motion.h1
+          </m.span>
+          <m.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.05, ease: "easeOut" }}
             className="text-4xl xs:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 text-foreground"
           >
             {name}
-          </motion.h1>
-          <motion.h2
+          </m.h1>
+          <m.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
             className="text-xl xs:text-2xl md:text-3xl text-primary-text mb-6 xs:mb-8"
           >
             {title}
-          </motion.h2>
+          </m.h2>
           {/* Sem animação de entrada: este parágrafo é o maior elemento da página (LCP). */}
           <p className="max-w-xl mx-auto md:mx-0 text-base xs:text-lg md:text-xl">{bio}</p>
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.15, ease: "easeOut" }}
@@ -83,10 +83,10 @@ const HeroSection = () => {
             <Button size="lg" variant="ghost" onClick={() => scrollToSection('contatos')}>
               {t.hero.contact}
             </Button>
-          </motion.div>
+          </m.div>
         </div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.15, ease: "easeOut" }}
@@ -126,7 +126,7 @@ const HeroSection = () => {
               <p className="text-foreground/90">$ <span className="blink-cursor" /></p>
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

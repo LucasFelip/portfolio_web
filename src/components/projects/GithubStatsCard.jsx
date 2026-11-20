@@ -67,21 +67,21 @@ const GithubStatsCard = () => {
         {stats.weeklyCommits && (
           <div>
             <p className="text-xs text-muted-foreground mb-3">{t.projects.stats.activity}</p>
-            <ul className="flex h-24 items-end gap-1.5" role="img" aria-label={`${t.projects.stats.activity}: ${stats.weeklyCommits.join(', ')}`}>
+            <div className="flex h-24 items-end gap-1.5" role="img" aria-label={`${t.projects.stats.activity}: ${stats.weeklyCommits.join(', ')}`}>
               {stats.weeklyCommits.map((count, index) => (
-                <li
+                <div
                   key={index}
                   title={String(count)}
                   className="flex-1 rounded-sm bg-primary-text/80"
                   style={{ height: `${Math.max(count > 0 ? 8 : 3, (count / maxWeekly) * 100)}%`, opacity: count > 0 ? 1 : 0.25 }}
                 />
               ))}
-            </ul>
+            </div>
           </div>
         )}
       </div>
 
-      <p className="mt-4 font-mono text-[0.65rem] text-muted-foreground/60">
+      <p className="mt-4 font-mono text-[0.65rem] text-muted-foreground">
         {t.projects.stats.updated} {formatDate(stats.generatedAt, lang)}
       </p>
     </div>

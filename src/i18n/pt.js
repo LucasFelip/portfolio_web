@@ -8,7 +8,7 @@ export const pt = {
     skipLink: 'Pular para o conteúdo',
     mainNav: 'Navegação principal',
     footerNav: 'Navegação do rodapé',
-    switchLang: 'Mudar idioma para inglês',
+    switchLang: 'EN: mudar idioma para inglês',
   },
   nav: {
     principal: 'Principal',

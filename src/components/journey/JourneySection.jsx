@@ -266,7 +266,7 @@ const JourneySection = () => {
                         data-item={item.id}
                         onClick={() => select(item.id, { showDetail: true })}
                         aria-pressed={isSelected}
-                        aria-label={`${tr(item.label)}, ${period(item, t.timeline.present)}`}
+                        aria-label={`${item.barLabel ? `${tr(item.barLabel)}: ` : ''}${tr(item.label)}, ${period(item, t.timeline.present)}`}
                         title={`${tr(item.label)} · ${period(item, t.timeline.present)}`}
                         className={`absolute flex items-center overflow-hidden rounded-sm border px-1.5 text-left font-mono text-[0.6rem] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                           isSelected

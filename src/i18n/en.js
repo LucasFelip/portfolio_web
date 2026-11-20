@@ -69,12 +69,15 @@ export const en = {
   journey: {
     label: '03 — Journey',
     title: 'Journey',
-    subtitle: 'Work experience, research, education and courses.',
-    work: 'Work experience',
-    research: 'Research and outreach',
-    education: 'Education',
-    courses: 'Courses and certificates',
-    coursesSummary: (count, hours) => `${count} completed certificates, adding up to ${hours} hours of study.`,
+    subtitle: 'Work, research, education and courses on a single timeline. Click a period to see the details.',
+    certificates: (n) => (n === 1 ? 'certificate' : 'certificates'),
+    tracks: 'Completed tracks',
+    older: 'Older',
+    newer: 'Newer',
+  },
+  timeline: {
+    present: 'present',
+    lanes: { education: 'Education', work: 'Work', research: 'Research', courses: 'Courses' },
   },
   services: {
     label: '06 — Services',

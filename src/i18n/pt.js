@@ -69,12 +69,15 @@ export const pt = {
   journey: {
     label: '03 — Trajetória',
     title: 'Trajetória',
-    subtitle: 'Experiência profissional, pesquisa, formação e cursos.',
-    work: 'Experiência profissional',
-    research: 'Pesquisa e extensão',
-    education: 'Formação',
-    courses: 'Cursos e certificações',
-    coursesSummary: (count, hours) => `${count} certificados concluídos, somando ${hours} horas de estudo.`,
+    subtitle: 'Trabalho, pesquisa, formação e cursos em uma só linha do tempo. Clique em um período para ver os detalhes.',
+    certificates: (n) => (n === 1 ? 'certificado' : 'certificados'),
+    tracks: 'Trilhas concluídas',
+    older: 'Mais antigo',
+    newer: 'Mais recente',
+  },
+  timeline: {
+    present: 'atual',
+    lanes: { education: 'Formação', work: 'Trabalho', research: 'Pesquisa', courses: 'Cursos' },
   },
   services: {
     label: '06 — Serviços',

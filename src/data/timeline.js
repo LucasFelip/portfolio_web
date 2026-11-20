@@ -1,5 +1,6 @@
 import { experiencesData } from '@/data/experiences';
 import { researchProjects } from '@/data/researchProjects';
+import { certificationGroups } from '@/data/certifications';
 
 // Itens da trajetória (formação, trabalho e pesquisa), montados a partir dos mesmos dados do currículo.
 // Datas em anos fracionados: 2024.5 = julho de 2024. `source` aponta para o registro completo exibido no painel.
@@ -56,6 +57,7 @@ const research = researchProjects.map((project) => {
     id: `research-${project.titulo.pt}`,
     lane: 'research',
     label: project.titulo,
+    barLabel: project.barLabel,
     start: years[0],
     end: (years[1] ?? years[0]) + 1, // fim exclusivo: o projeto ocupa o ano final inteiro
     startLabel: years[0],
@@ -64,8 +66,33 @@ const research = researchProjects.map((project) => {
   };
 });
 
-export const timelineItems = [...education, ...work, ...research];
-export const timelineLanes = ['work', 'research', 'education'];
+// Anos fracionados a partir de uma data ISO (AAAA-MM-DD). Fim do mês = início do mês seguinte.
+const isoToYear = (iso, endOfMonth) => {
+  const [year, month] = iso.split('-').map(Number);
+  return year + (endOfMonth ? month : month - 1) / 12;
+};
+
+// Cada grupo de certificados vira uma barra; sem start/end explícitos, o período vem das datas dos certificados.
+const courses = certificationGroups.map((group) => {
+  const dates = group.entries.map((entry) => entry.date).sort();
+  const explicit = group.start !== undefined && group.end !== undefined;
+  const start = explicit ? group.start : isoToYear(dates[0], false);
+  const end = explicit ? group.end : isoToYear(dates.at(-1), true);
+  return {
+    id: `courses-${group.id}`,
+    lane: 'courses',
+    label: group.label,
+    barLabel: group.barLabel,
+    start,
+    end,
+    startLabel: explicit ? Math.floor(start) : Number(dates[0].slice(0, 4)),
+    endLabel: explicit ? Math.floor(end - 0.001) : Number(dates.at(-1).slice(0, 4)),
+    source: group,
+  };
+});
+
+export const timelineItems = [...education, ...work, ...research, ...courses];
+export const timelineLanes = ['work', 'research', 'education', 'courses'];
 
 // Ordem cronológica (do mais antigo ao mais recente) para navegar com anterior/próximo.
 export const chronologicalItems = [...timelineItems].sort(

@@ -111,7 +111,7 @@ const CvPage = () => {
           <ul className="space-y-1 text-sm text-neutral-800">
             {researchProjects.map((project) => (
               <li key={project.titulo.pt}>
-                <strong>{tr(project.titulo)}</strong> ({tr(project.natureza)}, {tr(project.papel)}, {project.periodo}) — {tr(project.subtitulo)}
+                <strong>{tr(project.titulo)}</strong> ({[tr(project.natureza), project.papel && tr(project.papel), project.periodo].filter(Boolean).join(', ')}) — {tr(project.subtitulo)}
               </li>
             ))}
           </ul>

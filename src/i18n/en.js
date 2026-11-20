@@ -68,7 +68,9 @@ export const en = {
   journey: {
     label: '03 — Journey',
     title: 'Journey',
-    subtitle: 'Work, research and education on a single timeline. Click a period to see the details.',
+    subtitle: 'Work, research, education and courses on a single timeline. Click a period to see the details.',
+    certificates: (n) => (n === 1 ? 'certificate' : 'certificates'),
+    tracks: 'Completed tracks',
     older: 'Older',
     newer: 'Newer',
   },
@@ -204,7 +206,7 @@ export const en = {
   },
   timeline: {
     present: 'present',
-    lanes: { education: 'Education', work: 'Work', research: 'Research' },
+    lanes: { education: 'Education', work: 'Work', research: 'Research', courses: 'Courses' },
   },
   terminal: {
     title: 'lucas@portfolio — terminal',

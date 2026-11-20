@@ -68,7 +68,9 @@ export const pt = {
   journey: {
     label: '03 — Trajetória',
     title: 'Trajetória',
-    subtitle: 'Trabalho, pesquisa e formação em uma só linha do tempo. Clique em um período para ver os detalhes.',
+    subtitle: 'Trabalho, pesquisa, formação e cursos em uma só linha do tempo. Clique em um período para ver os detalhes.',
+    certificates: (n) => (n === 1 ? 'certificado' : 'certificados'),
+    tracks: 'Trilhas concluídas',
     older: 'Mais antigo',
     newer: 'Mais recente',
   },
@@ -204,7 +206,7 @@ export const pt = {
   },
   timeline: {
     present: 'atual',
-    lanes: { education: 'Formação', work: 'Trabalho', research: 'Pesquisa' },
+    lanes: { education: 'Formação', work: 'Trabalho', research: 'Pesquisa', courses: 'Cursos' },
   },
   terminal: {
     title: 'lucas@portfolio — terminal',

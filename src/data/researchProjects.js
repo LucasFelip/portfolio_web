@@ -1,6 +1,26 @@
 // Fonte: Lattes (lattes.cnpq.br/1631585272117041). Atualizar aqui a cada exportação nova (~trimestral).
 // Campos de texto são { pt, en }.
 export const researchProjects = [
+  // Fonte: certificado do IFCE (400 h, semestre 2023.1, emitido em 29/04/2024) e relato do Lucas. Sem `papel`: não consta no certificado.
+  {
+    titulo: { pt: 'Novos Negócios em TIC · iOS', en: 'New ICT Businesses · iOS' },
+    barLabel: 'IFCE · iOS',
+    subtitulo: {
+      pt: 'Pesquisa em novos negócios em TIC no IFCE, Campus Fortaleza',
+      en: 'New ICT businesses research at IFCE, Fortaleza Campus',
+    },
+    periodo: '2023',
+    natureza: { pt: 'Pesquisa', en: 'Research' },
+    descricao: {
+      pt: 'Pesquisa em novos negócios em Tecnologia da Informação e Comunicação (400 horas, semestre 2023.1). A startup criada no projeto se alinhou ao desenvolvimento para iOS com Swift, o que deu origem aos projetos em Swift do meu GitHub.',
+      en: 'Research on new businesses in Information and Communication Technology (400 hours, 2023.1 semester). The startup created in the project aligned with iOS development in Swift, which is where the Swift projects on my GitHub come from.',
+    },
+    // iMobility: produto da startup, segundo o currículo (SwiftRun / iMobility). Os demais repos em Swift ficam no filtro por linguagem.
+    links: [
+      { label: { pt: 'iMobility (iOS)', en: 'iMobility (iOS)' }, href: 'https://github.com/LucasFelip/iMobility' },
+      { label: { pt: 'Todos os projetos em Swift', en: 'All Swift projects' }, href: 'https://github.com/LucasFelip?tab=repositories&language=swift' },
+    ],
+  },
   {
     titulo: { pt: 'Tabuleiro BD', en: 'Tabuleiro BD (Database Board Game)' },
     subtitulo: {

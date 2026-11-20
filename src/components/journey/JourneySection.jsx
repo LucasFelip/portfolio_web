@@ -1,6 +1,6 @@
 import React, { useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight, ExternalLink, MapPin, CalendarDays, GraduationCap } from 'lucide-react';
+import { Award, ChevronLeft, ChevronRight, ExternalLink, MapPin, CalendarDays, GraduationCap } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { chronologicalItems, defaultItemId, timelineItems, timelineLanes } from '@/data/timeline';
@@ -11,6 +11,7 @@ const LATTES_URL = 'https://lattes.cnpq.br/1631585272117041';
 const ORCID_URL = 'https://orcid.org/0009-0000-8662-9675';
 const ROW_HEIGHT = 40; // barras com ~34 px de altura: alvo de toque confortável
 const START_YEAR = 2017;
+const MIN_SPAN = 0.7; // largura mínima visual de uma barra (em anos), para períodos curtos continuarem clicáveis
 
 const period = (item, present) =>
   item.endLabel === item.startLabel ? `${item.startLabel}` : `${item.startLabel}–${item.endLabel ?? present}`;
@@ -22,7 +23,7 @@ function packRows(items, endOfTime) {
     .slice()
     .sort((a, b) => a.start - b.start)
     .map((item) => {
-      const end = item.end ?? endOfTime;
+      const end = Math.max(item.end ?? endOfTime, item.start + MIN_SPAN);
       let row = rows.findIndex((rowEnd) => rowEnd <= item.start);
       if (row === -1) row = rows.length;
       rows[row] = end;
@@ -36,7 +37,10 @@ const Chip = ({ children }) => (
 
 // Painel com os detalhes do período selecionado: trabalho, pesquisa/extensão ou formação.
 const Detail = ({ item }) => {
-  const { t, tr } = useI18n();
+  const { t, tr, lang } = useI18n();
+  const locale = lang === 'pt' ? 'pt-BR' : 'en-GB';
+  const formatHours = (hours) => `${String(hours).replace('.', lang === 'pt' ? ',' : '.')} h`;
+  const formatMonth = (iso) => new Date(`${iso}T12:00:00`).toLocaleDateString(locale, { month: 'short', year: 'numeric' });
 
   if (item.lane === 'work') {
     const exp = item.source;
@@ -100,8 +104,60 @@ const Detail = ({ item }) => {
         <p className="mt-1 font-mono text-xs text-muted-foreground">{tr(project.subtitulo)}</p>
         <p className="mt-4 text-sm leading-relaxed text-foreground/80">{tr(project.descricao)}</p>
         <p className="mt-4 flex items-center gap-1 font-mono text-xs text-muted-foreground">
-          <CalendarDays aria-hidden="true" className="h-3 w-3" /> {project.periodo} · {tr(project.papel)}
+          <CalendarDays aria-hidden="true" className="h-3 w-3" /> {[project.periodo, project.papel && tr(project.papel)].filter(Boolean).join(' · ')}
         </p>
+        {project.links?.length > 0 && (
+          <div className="mt-4 flex flex-wrap gap-2">
+            {project.links.map((link) => (
+              <Button key={link.href} size="sm" variant="outline" asChild>
+                <a href={link.href} target="_blank" rel="noopener noreferrer">
+                  {tr(link.label)} <ExternalLink aria-hidden="true" className="ml-2 h-4 w-4" />
+                </a>
+              </Button>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  if (item.lane === 'courses') {
+    const group = item.source;
+    const totalHours = group.entries.reduce((sum, entry) => sum + entry.hours, 0);
+    const dates = group.entries.map((entry) => entry.date).sort();
+    const first = formatMonth(dates[0]);
+    const last = formatMonth(dates.at(-1));
+    // Quando cada certificado já traz o próprio período (ex.: semestre letivo), o resumo não repete a data de emissão.
+    const allHavePeriodLabel = group.entries.every((entry) => entry.periodLabel);
+    return (
+      <div>
+        <h3 className="flex items-center gap-2 text-xl font-semibold text-foreground">
+          <Award aria-hidden="true" className="h-5 w-5 shrink-0 text-primary-text" /> {tr(group.label)}
+        </h3>
+        <p className="mt-1 font-mono text-xs text-muted-foreground">
+          {group.institution} · {group.entries.length} {t.journey.certificates(group.entries.length)} · {formatHours(totalHours)}
+          {allHavePeriodLabel ? '' : first === last ? ` · ${first}` : ` · ${first} — ${last}`}
+        </p>
+        <ul className="mt-4 divide-y divide-border text-sm">
+          {group.entries.map((entry) => (
+            <li key={entry.title} className="flex flex-col gap-0.5 py-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+              <span className="text-foreground/90">{entry.title}</span>
+              <span className="shrink-0 font-mono text-xs text-muted-foreground">
+                {formatHours(entry.hours)} · {entry.periodLabel ? tr(entry.periodLabel) : formatMonth(entry.date)}
+              </span>
+            </li>
+          ))}
+        </ul>
+        {group.formacoes?.length > 0 && (
+          <div className="mt-4">
+            <p className="font-mono text-[0.7rem] uppercase tracking-wide text-muted-foreground">{t.journey.tracks}</p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {group.formacoes.map((track) => (
+                <Chip key={tr(track)}>{tr(track)}</Chip>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -224,7 +280,7 @@ const JourneySection = () => {
                           height: ROW_HEIGHT - 6,
                         }}
                       >
-                        <span className="truncate">{tr(item.label)}</span>
+                        <span className="truncate">{tr(item.barLabel ?? item.label)}</span>
                       </button>
                     );
                   })}

@@ -58,7 +58,7 @@ const externalProps = (href) => (href.startsWith('mailto:') ? {} : { target: '_b
 const ContactSection = () => {
   const { t } = useI18n();
   return (
-    <section id="contatos" className="py-16 md:py-24 bg-background">
+    <section id="contatos" className="py-12 md:py-24 bg-background">
       <div className="container mx-auto px-4 text-center">
         <span className="section-label">{t.contact.label}</span>
         <motion.div

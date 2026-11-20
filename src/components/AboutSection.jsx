@@ -15,7 +15,7 @@ const AboutSection = () => {
   const { t, tr } = useI18n();
 
   return (
-    <section id="sobre" className="py-16 md:py-24">
+    <section id="sobre" className="py-12 md:py-24">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <span className="section-label">{t.about.label}</span>

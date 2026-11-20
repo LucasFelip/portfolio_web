@@ -8,9 +8,9 @@ const load = () => import('@/components/engineering/CaseStudiesSection');
 const CaseStudiesSection = lazy(load);
 
 // Espaço reservado com o mesmo id (menu e `goto` continuam funcionando) e altura próxima da real (medida em
-// 375 px e ~1000 px de largura), para a página não "pular" quando o conteúdo entrar.
+// 375, 900 e 1280 px de largura), para a página não "pular" quando o conteúdo entrar.
 const Placeholder = forwardRef(function Placeholder(_, ref) {
-  return <section id="engenharia" ref={ref} aria-hidden="true" className="min-h-[368rem] md:min-h-[247rem]" />;
+  return <section id="engenharia" ref={ref} aria-hidden="true" className="min-h-[295rem] md:min-h-[213rem] lg:min-h-[160rem]" />;
 });
 
 const INTERACTION_EVENTS = ['scroll', 'pointerdown', 'touchstart', 'keydown', 'wheel'];

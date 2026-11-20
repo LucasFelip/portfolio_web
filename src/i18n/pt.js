@@ -73,6 +73,8 @@ export const pt = {
     certificates: (n) => (n === 1 ? 'certificado' : 'certificados'),
     tracks: 'Trilhas concluídas',
     older: 'Mais antigo',
+    all: 'Tudo',
+    filterLabel: 'Filtrar a trajetória por tipo',
     newer: 'Mais recente',
   },
   services: {
@@ -111,6 +113,8 @@ export const pt = {
     context: 'Contexto',
     actions: 'O que fiz',
     result: 'Resultado',
+    showDetails: 'Ver detalhes',
+    hideDetails: 'Ocultar detalhes',
   },
   architecture: {
     title: 'Arquitetura em detalhe: Self Stream Deck',

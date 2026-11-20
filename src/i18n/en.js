@@ -73,6 +73,8 @@ export const en = {
     certificates: (n) => (n === 1 ? 'certificate' : 'certificates'),
     tracks: 'Completed tracks',
     older: 'Older',
+    all: 'All',
+    filterLabel: 'Filter the journey by type',
     newer: 'Newer',
   },
   services: {
@@ -111,6 +113,8 @@ export const en = {
     context: 'Context',
     actions: 'What I did',
     result: 'Result',
+    showDetails: 'Show details',
+    hideDetails: 'Hide details',
   },
   architecture: {
     title: 'Architecture in detail: Self Stream Deck',

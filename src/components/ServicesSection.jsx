@@ -19,7 +19,7 @@ const serviceReferences = [
 const ServicesSection = () => {
   const { t } = useI18n();
   return (
-    <section id="servicos" className="relative overflow-hidden py-16 md:py-24 bg-background">
+    <section id="servicos" className="relative overflow-hidden py-12 md:py-24 bg-background">
       <div className="absolute inset-0 bg-grid" />
       <div className="container relative mx-auto px-4">
         <div className="text-center">

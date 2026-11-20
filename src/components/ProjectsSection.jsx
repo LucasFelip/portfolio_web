@@ -33,7 +33,7 @@ const ProjectsSection = () => {
   }, []);
 
   return (
-    <section id="projetos" className="py-16 md:py-24 bg-background">
+    <section id="projetos" className="py-12 md:py-24 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <span className="section-label">{t.projects.label}</span>

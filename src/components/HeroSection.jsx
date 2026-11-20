@@ -104,7 +104,7 @@ const HeroSection = () => {
                 <p className="text-muted-foreground">$ status --current</p>
                 <ul className="mt-2 space-y-1.5">
                   {statusItems.map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-foreground/90">
+                    <li key={item} suppressHydrationWarning className="flex items-center gap-2 text-foreground/90">
                       <span className="text-primary-text animate-pulse">●</span> {item}
                     </li>
                   ))}

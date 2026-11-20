@@ -80,7 +80,7 @@ const Detail = ({ item }) => {
           </a>
           <div className="mt-2 flex flex-col gap-1 font-mono text-xs text-muted-foreground sm:flex-row sm:gap-4">
             <span className="flex items-center gap-1"><MapPin aria-hidden="true" className="h-3 w-3" /> {exp.localizacao}</span>
-            <span className="flex items-center gap-1"><CalendarDays aria-hidden="true" className="h-3 w-3" /> {when}</span>
+            <span suppressHydrationWarning className="flex items-center gap-1"><CalendarDays aria-hidden="true" className="h-3 w-3" /> {when}</span>
           </div>
           <ul className="mt-4 space-y-2 text-sm leading-relaxed text-foreground/80">
             {tr(exp.destaques).map((text) => (

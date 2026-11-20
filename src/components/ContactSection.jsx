@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Linkedin, Github, CalendarClock, Fingerprint } from 'lucide-react';
+import { useI18n } from '@/i18n';
+import { CONTACT } from '@/lib/constants';
 
 const SCHEDULING_LINK = 'https://cal.com/lusca-ferreira/30min';
 
@@ -19,17 +21,17 @@ const DiscordIcon = (props) => (
 
 const contactLinks = [
   {
-    href: "mailto:lucasfelipereis@hotmail.com",
+    href: `mailto:${CONTACT.email}`,
     icon: Mail,
     label: "Email",
   },
   {
-    href: "https://www.linkedin.com/in/lucas-ferreira-5247b1221/",
+    href: CONTACT.linkedin,
     icon: Linkedin,
     label: "LinkedIn",
   },
   {
-    href: "https://github.com/LucasFelip",
+    href: CONTACT.github,
     icon: Github,
     label: "GitHub",
   },
@@ -46,15 +48,19 @@ const contactLinks = [
   {
     href: SCHEDULING_LINK,
     icon: CalendarClock,
-    label: "Agendar",
+    labelKey: "schedule",
   }
 ];
 
+// mailto: não deve abrir em nova aba
+const externalProps = (href) => (href.startsWith('mailto:') ? {} : { target: '_blank', rel: 'noopener noreferrer' });
+
 const ContactSection = () => {
+  const { t } = useI18n();
   return (
-    <section id="contatos" className="py-20 md:py-32 bg-background">
+    <section id="contatos" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4 text-center">
-        <span className="section-label">06 — Contato</span>
+        <span className="section-label">{t.contact.label}</span>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -70,7 +76,7 @@ const ContactSection = () => {
           </div>
 
           <div className="p-10 md:p-16 text-left">
-            <p className="font-mono text-sm text-primary mb-4">$ echo "Vamos conversar?"</p>
+            <p className="font-mono text-sm text-primary-text mb-4">{t.contact.prompt}</p>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -78,7 +84,7 @@ const ContactSection = () => {
               transition={{ duration: 0.5 }}
               className="text-4xl md:text-5xl font-bold mb-4"
             >
-              Entre em Contato
+              {t.contact.title}
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -87,7 +93,7 @@ const ContactSection = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-lg text-muted-foreground mb-12 max-w-xl"
             >
-              Conecte-se comigo através das redes abaixo. Estou sempre aberto a novas oportunidades, colaborações e projetos freelance!
+              {t.contact.subtitle}
             </motion.p>
 
             <motion.div
@@ -95,25 +101,25 @@ const ContactSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4, staggerChildren: 0.1 }}
-              className="flex flex-wrap gap-4"
+              className="grid grid-cols-2 sm:grid-cols-3 gap-4"
             >
               {contactLinks.map((link, index) => {
                 const IconComponent = link.icon;
+                const label = link.labelKey ? t.contact[link.labelKey] : link.label;
                 return (
                   <motion.a
-                    key={index}
+                    key={link.href}
                     href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={link.label}
-                    className="flex flex-col items-center gap-2 w-24 p-4 rounded-lg border border-border bg-background/40 text-muted-foreground transition-colors hover:border-primary hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+                    {...externalProps(link.href)}
+                    aria-label={label}
+                    className="flex flex-col items-center justify-center gap-2 p-5 rounded-lg border border-border bg-background/40 text-muted-foreground transition-colors hover:border-primary hover:text-primary-text focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
                     whileHover={{ y: -3 }}
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ type: "spring", stiffness: 260, damping: 20, delay: index * 0.1 }}
                   >
-                    <IconComponent className="h-6 w-6" />
-                    <span className="font-mono text-xs">{link.label}</span>
+                    <IconComponent aria-hidden="true" className="h-6 w-6" />
+                    <span className="font-mono text-xs">{label}</span>
                   </motion.a>
                 );
               })}

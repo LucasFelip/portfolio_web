@@ -3,12 +3,14 @@ import ProjectCard from './ProjectCard';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Github, AlertTriangle, ChevronDown } from 'lucide-react';
+import { useI18n } from '@/i18n';
 
 const GITHUB_USERNAME = 'LucasFelip';
 const MOBILE_VISIBLE_COUNT = 2;
 
 const ProjectsDisplay = ({ projects, loading, error }) => {
   const [expanded, setExpanded] = useState(false);
+  const { t } = useI18n();
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -21,9 +23,9 @@ const ProjectsDisplay = ({ projects, loading, error }) => {
     return (
       <div className="text-center text-destructive py-10 bg-destructive/10 rounded-lg flex flex-col items-center">
         <AlertTriangle className="w-12 h-12 mb-4"/>
-        <p className="text-xl font-semibold">Oops! Algo deu errado.</p>
-        <p>{error}</p>
-        <p className="mt-2 text-sm">Por favor, tente novamente mais tarde. A API pública do GitHub tem um limite de requisições por hora.</p>
+        <p className="text-xl font-semibold">{t.projects.errorTitle}</p>
+        <p>{t.projects.errors[error] ?? t.projects.errors.network}</p>
+        <p className="mt-2 text-sm">{t.projects.errorHint}</p>
       </div>
     );
   }
@@ -32,8 +34,8 @@ const ProjectsDisplay = ({ projects, loading, error }) => {
     return (
       <div className="text-center text-muted-foreground py-10">
         <Github className="w-16 h-16 mx-auto mb-4 opacity-50"/>
-        <p className="text-xl">Nenhum projeto para exibir no momento.</p>
-        <p>Verifique mais tarde ou visite meu perfil no GitHub.</p>
+        <p className="text-xl">{t.projects.emptyTitle}</p>
+        <p>{t.projects.emptyHint}</p>
          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -43,7 +45,7 @@ const ProjectsDisplay = ({ projects, loading, error }) => {
           >
             <Button size="lg" variant="outline" className="hover:bg-primary hover:text-primary-foreground">
               <a href={`https://github.com/${GITHUB_USERNAME}`} target="_blank" rel="noopener noreferrer">
-                Visitar meu GitHub
+                {t.projects.visitGithub}
               </a>
             </Button>
           </motion.div>
@@ -68,7 +70,7 @@ const ProjectsDisplay = ({ projects, loading, error }) => {
       {hasMore && (
         <div className="md:hidden text-center mt-6 px-4">
           <Button variant="outline" size="sm" onClick={() => setExpanded(!expanded)}>
-            {expanded ? 'Ver menos' : `Ver mais projetos (${projects.length - MOBILE_VISIBLE_COUNT})`}
+            {expanded ? t.projects.showLess : t.projects.showMore(projects.length - MOBILE_VISIBLE_COUNT)}
             <ChevronDown className={`w-4 h-4 ml-2 transition-transform ${expanded ? 'rotate-180' : ''}`} />
           </Button>
         </div>
@@ -83,7 +85,7 @@ const ProjectsDisplay = ({ projects, loading, error }) => {
           >
             <Button size="lg" variant="outline" className="hover:bg-primary hover:text-primary-foreground">
               <a href={`https://github.com/${GITHUB_USERNAME}?tab=repositories`} target="_blank" rel="noopener noreferrer">
-                Ver todos os repositórios no GitHub
+                {t.projects.viewAll}
               </a>
             </Button>
           </motion.div>

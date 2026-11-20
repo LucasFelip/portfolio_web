@@ -30,6 +30,7 @@ dist-ssr
 
 # Gerado em build-time por scripts/generate-changelog.js
 src/data/changelog.generated.json
+src/data/githubStats.generated.json
 
 # Next.js build output
 .next
@@ -102,3 +103,6 @@ dev.db-journal
 
 # Optional Expo files
 .expo
+
+# graft's local graph cache — regenerable, not committed (run `graft build`).
+/graft/

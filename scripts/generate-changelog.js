@@ -24,8 +24,16 @@ function run() {
     entries = [];
   }
 
+  let commitCount = null;
+  try {
+    const count = Number(execFileSync('git', ['-c', 'safe.directory=*', 'rev-list', '--count', 'HEAD'], { encoding: 'utf-8' }).trim());
+    commitCount = Number.isFinite(count) && count > 0 ? count : null;
+  } catch {
+    commitCount = null;
+  }
+
   mkdirSync(outDir, { recursive: true });
-  writeFileSync(outFile, JSON.stringify({ lastUpdated: entries[0]?.date ?? null, entries }, null, 2));
+  writeFileSync(outFile, JSON.stringify({ lastUpdated: entries[0]?.date ?? null, commitCount, entries }, null, 2));
 }
 
 run();

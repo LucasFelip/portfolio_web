@@ -4,25 +4,28 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { experiencesData } from '@/data/experiences';
 import { tempoDesde } from '@/lib/dateUtils';
+import { useI18n } from '@/i18n';
+import { CV_URL } from '@/lib/constants';
+import { Download } from 'lucide-react';
+import { scrollToSection } from '@/hooks/useActiveSection';
+import { OPEN_TERMINAL_EVENT } from '@/components/terminal/TerminalDialog';
 
 // só entram aqui experiências sem terminoAno (em andamento) e com statusLabel definido
-const statusItems = experiencesData
-  .filter((exp) => !exp.terminoAno && exp.statusLabel)
-  .map((exp) => `${exp.statusLabel} @ ${exp.instituicao} (${tempoDesde(exp.inicioMes, exp.inicioAno)})`);
+const currentExperiences = experiencesData.filter((exp) => !exp.terminoAno && exp.statusLabel);
 
 const stack = ['Java', 'Spring', 'Angular', 'Flutter', 'Docker', 'Azure', 'Go', 'Selenium'];
 
 const HeroSection = () => {
+  const { t, tr } = useI18n();
   const name = "Lucas Ferreira";
-  const title = "Engenheiro de Software";
-  const bio = "Engenheiro de software especializado em Java e sistemas backend, com experiência em arquitetura de software, sistemas distribuídos e um leque amplo de outras tecnologias. Formação técnica em Redes de Computadores e bacharelado em Sistemas de Informação. Minha trajetória é marcada pela busca contínua por aprendizado, inovação e pelo desejo de contribuir com soluções tecnológicas que impactem positivamente pessoas e organizações.";
-
-  const scrollToSection = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const title = t.hero.title;
+  const bio = t.hero.bio;
+  const statusItems = currentExperiences.map(
+    (exp) => `${tr(exp.statusLabel)} @ ${exp.instituicao} (${tempoDesde(exp.inicioMes, exp.inicioAno, t.time)})`,
+  );
 
   return (
-    <section id="principal" className="relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden">
+    <section id="principal" className="relative min-h-screen flex items-center justify-center py-16 md:py-24 overflow-hidden">
       <div className="absolute inset-0 bg-grid" />
       <div className="container relative mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
         <div className="text-center md:text-left">
@@ -32,7 +35,7 @@ const HeroSection = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="inline-flex items-center gap-2 font-mono text-sm text-muted-foreground border border-border rounded-full px-4 py-1.5 mb-6"
           >
-            <span className="text-primary">●</span> engenheiro_software --backend --devops
+            <span className="text-primary-text">●</span> engenheiro_software --backend --devops
           </motion.span>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -46,7 +49,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-            className="text-xl xs:text-2xl md:text-3xl text-primary mb-6 xs:mb-8"
+            className="text-xl xs:text-2xl md:text-3xl text-primary-text mb-6 xs:mb-8"
           >
             {title}
           </motion.h2>
@@ -65,10 +68,15 @@ const HeroSection = () => {
             className="flex flex-wrap items-center justify-center md:justify-start gap-4 mt-8 xs:mt-10"
           >
             <Button size="lg" onClick={() => scrollToSection('projetos')}>
-              Ver projetos
+              {t.hero.viewProjects}
             </Button>
-            <Button size="lg" variant="outline" onClick={() => scrollToSection('contatos')}>
-              Contato
+            <Button size="lg" variant="outline" asChild>
+              <a href={CV_URL} download>
+                <Download aria-hidden="true" className="w-4 h-4 mr-2" /> {t.cv.download}
+              </a>
+            </Button>
+            <Button size="lg" variant="ghost" onClick={() => scrollToSection('contatos')}>
+              {t.hero.contact}
             </Button>
           </motion.div>
         </div>
@@ -92,7 +100,7 @@ const HeroSection = () => {
                 <ul className="mt-2 space-y-1.5">
                   {statusItems.map((item) => (
                     <li key={item} className="flex items-center gap-2 text-foreground/90">
-                      <span className="text-primary animate-pulse">●</span> {item}
+                      <span className="text-primary-text animate-pulse">●</span> {item}
                     </li>
                   ))}
                 </ul>
@@ -110,7 +118,14 @@ const HeroSection = () => {
                   ))}
                 </div>
               </div>
-              <p className="text-foreground/90">$ <span className="blink-cursor" /></p>
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new Event(OPEN_TERMINAL_EVENT))}
+                className="flex w-full items-center gap-2 text-left text-foreground/90 hover:text-primary-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <span>$ <span className="blink-cursor" /></span>
+                <span className="text-xs text-muted-foreground">{t.terminal.hint}</span>
+              </button>
             </div>
           </div>
         </motion.div>

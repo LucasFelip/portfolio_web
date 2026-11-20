@@ -22,6 +22,10 @@ module.exports = {
 				'lg': '1024px',
 				'xl': '1280px',
 			},
+			fontFamily: {
+				sans: ['"Inter Variable"', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+				mono: ['"JetBrains Mono Variable"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -31,6 +35,7 @@ module.exports = {
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))',
+					text: 'hsl(var(--primary-text))',
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',

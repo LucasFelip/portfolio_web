@@ -2,7 +2,7 @@ import { projectOverrides } from '@/data/projectOverrides';
 import snapshot from '@/data/githubProjects.generated.json';
 
 const GITHUB_USERNAME = 'LucasFelip';
-const MAX_PROJECTS_DISPLAY = 9; // Número máximo de projetos a serem exibidos
+const MAX_PROJECTS_DISPLAY = 6; // Número máximo de projetos a serem exibidos (2 linhas de 3 no desktop)
 const FETCH_LIMIT = 100; // busca mais do que exibe, para poder filtrar e priorizar os destaques
 
 // Repositórios que nunca aparecem: o repo de perfil (só o README do GitHub), o código deste próprio portfólio

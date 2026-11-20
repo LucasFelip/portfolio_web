@@ -32,7 +32,7 @@ const HeroSection = () => {
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             className="inline-flex items-center gap-2 font-mono text-sm text-muted-foreground border border-border rounded-full px-4 py-1.5 mb-6"
           >
             <span className="text-primary-text">●</span> {t.hero.badge}
@@ -40,7 +40,7 @@ const HeroSection = () => {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            transition={{ duration: 0.4, delay: 0.05, ease: "easeOut" }}
             className="text-4xl xs:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 text-foreground"
           >
             {name}
@@ -48,23 +48,17 @@ const HeroSection = () => {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+            transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
             className="text-xl xs:text-2xl md:text-3xl text-primary-text mb-6 xs:mb-8"
           >
             {title}
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
-            className="max-w-xl mx-auto md:mx-0 text-base xs:text-lg md:text-xl"
-          >
-            {bio}
-          </motion.p>
+          {/* Sem animação de entrada: este parágrafo é o maior elemento da página (LCP). */}
+          <p className="max-w-xl mx-auto md:mx-0 text-base xs:text-lg md:text-xl">{bio}</p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.4, delay: 0.15, ease: "easeOut" }}
             className="flex flex-wrap items-center justify-center md:justify-start gap-4 mt-8 xs:mt-10"
           >
             <Button size="lg" onClick={() => scrollToSection('projetos')}>
@@ -84,7 +78,7 @@ const HeroSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+          transition={{ duration: 0.4, delay: 0.15, ease: "easeOut" }}
           className="flex flex-col gap-4"
         >
           <div className="rounded-lg border border-border bg-card/60 backdrop-blur-sm overflow-hidden font-mono text-sm shadow-2xl shadow-black/40">

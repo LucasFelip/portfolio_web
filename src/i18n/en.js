@@ -66,14 +66,14 @@ export const en = {
     showLess: 'Show less',
   },
   research: {
-    label: '05 — Research & Outreach',
+    label: '06 — Research & Outreach',
     title: 'Research & Outreach',
     subtitle: 'Academic projects I coordinated, from my Lattes résumé.',
     lattes: 'Lattes résumé',
     orcid: 'ORCID',
   },
   services: {
-    label: '06 — Services',
+    label: '07 — Services',
     title: 'Services for your project',
     subtitle: 'Available for freelance projects, from idea to a ready-to-use delivery.',
     quote: 'Request a quote',
@@ -101,8 +101,62 @@ export const en = {
       },
     ],
   },
+  cases: {
+    label: '04 — Case studies',
+    title: 'Case studies',
+    subtitle: 'Real problems I solved, what I did and the outcome.',
+    context: 'Context',
+    actions: 'What I did',
+    result: 'Result',
+  },
+  architecture: {
+    title: 'Architecture in detail: Self Stream Deck',
+    subtitle: 'One of my end-to-end projects: a Rust agent, a web panel and an Android app. Click each stage to see how it works.',
+    hint: "Source: the repository's README and architecture docs.",
+    loadDemo: 'Load demo',
+    demoNote: 'The demo runs the real panel with fake data, with no PC or phone needed.',
+    demoFrameTitle: 'Self Stream Deck demo',
+    nodes: [
+      {
+        title: 'Phone',
+        subtitle: 'Android app or Safari',
+        details: [
+          'Kotlin Android app: a thin shell (WebView) that stores the PC address, keeps the screen on and vibrates on touch.',
+          'No app on iPhone: the panel opens in Safari as a PWA (after a one-time install of a local certificate).',
+          'The phone only displays and sends taps; all the logic lives on the PC, so changing the panel does not require rebuilding the app.',
+        ],
+      },
+      {
+        title: 'Network',
+        subtitle: 'USB or local Wi-Fi',
+        details: [
+          'Over USB: HTTP through adb reverse, with no network dependency.',
+          'Over home Wi-Fi: HTTPS with a self-issued certificate pinned by the app, and a pairing link carrying a token and the certificate fingerprint.',
+          'Nothing goes through the internet.',
+        ],
+      },
+      {
+        title: 'PC agent',
+        subtitle: 'ssd.exe in Rust',
+        details: [
+          'A single executable (~5 MB, around 40–70 MB of memory) with the UI built in: no Node and no third-party services.',
+          'An HTTP API with 61 operations, described in OpenAPI, plus real-time events over SSE.',
+          'Serves the React + TypeScript (PWA) panel and runs as a Windows tray icon.',
+        ],
+      },
+      {
+        title: 'Windows',
+        subtitle: 'Native APIs',
+        details: [
+          'The agent talks to the system through native APIs: Core Audio, SMTC, DWM, PDH and WMI.',
+          'That is how it controls per-app volume, media, windows and screens, performance (CPU, memory, GPU, disk and network) and power.',
+          "It also lets you use the phone's camera as the PC's webcam.",
+        ],
+      },
+    ],
+  },
   projects: {
-    label: '04 — Projects',
+    label: '05 — Projects',
     title: 'Featured Projects',
     subtitle: 'A selection of my most recent projects on GitHub.',
     errorTitle: 'Oops! Something went wrong.',
@@ -123,7 +177,15 @@ export const en = {
       http: 'Could not load data from GitHub.',
       network: 'Could not reach GitHub.',
     },
-    stats: { title: 'GitHub stats', repos: 'public repositories', stars: 'stars', languages: 'top languages' },
+    stats: {
+      title: 'GitHub stats',
+      repos: 'public repositories',
+      stars: 'stars',
+      languages: 'top languages',
+      activity: 'commits per week (last 12 weeks)',
+      lastPush: 'last push',
+      updated: 'data from',
+    },
   },
   activity: {
     commit: 'commit in',
@@ -133,7 +195,7 @@ export const en = {
     madePublic: 'made public',
   },
   contact: {
-    label: '07 — Contact',
+    label: '08 — Contact',
     prompt: '$ echo "Let\'s talk?"',
     title: 'Get in Touch',
     subtitle: "Connect with me through the channels below. I'm always open to new opportunities, collaborations and freelance projects!",

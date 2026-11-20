@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
+import CaseStudiesSection from '@/components/engineering/CaseStudiesSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import ExperienceSection from '@/components/ExperienceSection';
 import ResearchSection from '@/components/ResearchSection';
@@ -37,6 +38,7 @@ const PortfolioPage = () => {
             <HeroSection />
             <AboutSection />
             <ExperienceSection />
+            <CaseStudiesSection />
             <ProjectsSection />
             <ResearchSection />
             <ServicesSection />

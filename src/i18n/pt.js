@@ -66,14 +66,14 @@ export const pt = {
     showLess: 'Ver menos',
   },
   research: {
-    label: '05 — Pesquisa & Extensão',
+    label: '06 — Pesquisa & Extensão',
     title: 'Pesquisa & Extensão',
     subtitle: 'Projetos acadêmicos que coordenei, do currículo Lattes.',
     lattes: 'Currículo Lattes',
     orcid: 'ORCID',
   },
   services: {
-    label: '06 — Serviços',
+    label: '07 — Serviços',
     title: 'Serviços para o seu projeto',
     subtitle: 'Disponível para projetos freelance, da ideia à entrega pronta para usar.',
     quote: 'Solicitar orçamento',
@@ -101,8 +101,62 @@ export const pt = {
       },
     ],
   },
+  cases: {
+    label: '04 — Estudos de caso',
+    title: 'Estudos de caso',
+    subtitle: 'Problemas reais que resolvi, o que fiz e o resultado.',
+    context: 'Contexto',
+    actions: 'O que fiz',
+    result: 'Resultado',
+  },
+  architecture: {
+    title: 'Arquitetura em detalhe: Self Stream Deck',
+    subtitle: 'Um projeto meu de ponta a ponta: agente em Rust, painel web e app Android. Clique nas etapas para ver como cada parte funciona.',
+    hint: 'Fonte: README e documentação de arquitetura do repositório.',
+    loadDemo: 'Carregar demonstração',
+    demoNote: 'A demonstração roda o painel de verdade, com dados de mentira, sem precisar de PC nem de celular.',
+    demoFrameTitle: 'Demonstração do Self Stream Deck',
+    nodes: [
+      {
+        title: 'Celular',
+        subtitle: 'App Android ou Safari',
+        details: [
+          'App Android em Kotlin: uma casca fina (WebView) que guarda o endereço do PC, mantém a tela ligada e vibra ao toque.',
+          'No iPhone não há app: o painel abre no Safari como PWA (com a instalação única de um certificado local).',
+          'O celular só mostra e envia toques; toda a lógica fica no PC, então mudar o painel não exige recompilar o app.',
+        ],
+      },
+      {
+        title: 'Rede',
+        subtitle: 'USB ou Wi-Fi local',
+        details: [
+          'Por USB: HTTP com adb reverse, sem depender de rede.',
+          'Pelo Wi-Fi da casa: HTTPS com certificado próprio fixado pelo app, e link de pareamento com token e impressão digital do certificado.',
+          'Nada passa pela internet.',
+        ],
+      },
+      {
+        title: 'Agente no PC',
+        subtitle: 'ssd.exe em Rust',
+        details: [
+          'Um único executável (~5 MB, cerca de 40–70 MB de memória) com a interface dentro: sem Node e sem serviços de terceiros.',
+          'API HTTP com 61 operações, descrita em OpenAPI, e eventos em tempo real por SSE.',
+          'Entrega o painel em React + TypeScript (PWA) e roda como ícone na bandeja do Windows.',
+        ],
+      },
+      {
+        title: 'Windows',
+        subtitle: 'APIs nativas',
+        details: [
+          'O agente conversa com o sistema por APIs nativas: Core Audio, SMTC, DWM, PDH e WMI.',
+          'É assim que controla volume por aplicativo, mídia, janelas e telas, desempenho (CPU, memória, GPU, disco e rede) e energia.',
+          'Também permite usar a câmera do celular como webcam do PC.',
+        ],
+      },
+    ],
+  },
   projects: {
-    label: '04 — Projetos',
+    label: '05 — Projetos',
     title: 'Projetos em Destaque',
     subtitle: 'Uma seleção dos meus projetos mais recentes no GitHub.',
     errorTitle: 'Oops! Algo deu errado.',
@@ -123,7 +177,15 @@ export const pt = {
       http: 'Não foi possível carregar os dados do GitHub.',
       network: 'Não foi possível conectar ao GitHub.',
     },
-    stats: { title: 'Estatísticas do GitHub', repos: 'repositórios públicos', stars: 'estrelas', languages: 'linguagens mais usadas' },
+    stats: {
+      title: 'Estatísticas do GitHub',
+      repos: 'repositórios públicos',
+      stars: 'estrelas',
+      languages: 'linguagens mais usadas',
+      activity: 'commits por semana (últimas 12 semanas)',
+      lastPush: 'último push',
+      updated: 'dados de',
+    },
   },
   activity: {
     commit: 'commit em',
@@ -133,7 +195,7 @@ export const pt = {
     madePublic: 'tornou público',
   },
   contact: {
-    label: '07 — Contato',
+    label: '08 — Contato',
     prompt: '$ echo "Vamos conversar?"',
     title: 'Entre em Contato',
     subtitle: 'Conecte-se comigo através das redes abaixo. Estou sempre aberto a novas oportunidades, colaborações e projetos freelance!',

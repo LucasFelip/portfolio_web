@@ -65,6 +65,9 @@ const Footer = () => {
             <p className="flex items-center gap-1.5 text-muted-foreground/70">
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" /> built with React · Vite · Tailwind
             </p>
+            <a href="/cv" className="text-muted-foreground/70 underline-offset-2 hover:text-foreground hover:underline">
+              {t.cvPage.link}
+            </a>
             {changelog.lastUpdated && (
               <p
                 className="text-muted-foreground/50"

@@ -12,6 +12,7 @@ import ContactSection from '@/components/ContactSection';
 import { Toaster } from '@/components/ui/toaster';
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
 import { useI18n } from '@/i18n';
+import TerminalDialog from '@/components/terminal/TerminalDialog';
 
 const PortfolioPage = () => {
   const { t } = useI18n();
@@ -47,6 +48,7 @@ const PortfolioPage = () => {
       </AnimatePresence>
       <Footer />
       <Toaster />
+      <TerminalDialog />
     </div>
     </MotionConfig>
   );

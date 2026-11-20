@@ -8,6 +8,7 @@ import { useI18n } from '@/i18n';
 import { CV_URL } from '@/lib/constants';
 import { Download } from 'lucide-react';
 import { scrollToSection } from '@/hooks/useActiveSection';
+import { OPEN_TERMINAL_EVENT } from '@/components/terminal/TerminalDialog';
 
 // só entram aqui experiências sem terminoAno (em andamento) e com statusLabel definido
 const currentExperiences = experiencesData.filter((exp) => !exp.terminoAno && exp.statusLabel);
@@ -117,7 +118,14 @@ const HeroSection = () => {
                   ))}
                 </div>
               </div>
-              <p className="text-foreground/90">$ <span className="blink-cursor" /></p>
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new Event(OPEN_TERMINAL_EVENT))}
+                className="flex w-full items-center gap-2 text-left text-foreground/90 hover:text-primary-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <span>$ <span className="blink-cursor" /></span>
+                <span className="text-xs text-muted-foreground">{t.terminal.hint}</span>
+              </button>
             </div>
           </div>
         </motion.div>

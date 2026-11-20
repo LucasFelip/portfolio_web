@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { caseStudies } from '@/data/caseStudies';
 import { useI18n } from '@/i18n';
 import ArchitectureShowcase from '@/components/engineering/ArchitectureShowcase';
+import KafkaSimulation from '@/components/engineering/KafkaSimulation';
+import PipelineSection from '@/components/engineering/PipelineSection';
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -69,6 +71,8 @@ const CaseStudiesSection = () => {
         </div>
 
         <ArchitectureShowcase />
+        <KafkaSimulation />
+        <PipelineSection />
       </div>
     </section>
   );

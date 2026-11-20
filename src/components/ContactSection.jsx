@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Linkedin, Github, CalendarClock, Fingerprint } from 'lucide-react';
 import { useI18n } from '@/i18n';
+import { CONTACT } from '@/lib/constants';
 
 const SCHEDULING_LINK = 'https://cal.com/lusca-ferreira/30min';
 
@@ -20,17 +21,17 @@ const DiscordIcon = (props) => (
 
 const contactLinks = [
   {
-    href: "mailto:lucasfelipereis@hotmail.com",
+    href: `mailto:${CONTACT.email}`,
     icon: Mail,
     label: "Email",
   },
   {
-    href: "https://www.linkedin.com/in/lucas-ferreira-5247b1221/",
+    href: CONTACT.linkedin,
     icon: Linkedin,
     label: "LinkedIn",
   },
   {
-    href: "https://github.com/LucasFelip",
+    href: CONTACT.github,
     icon: Github,
     label: "GitHub",
   },

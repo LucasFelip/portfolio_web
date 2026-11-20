@@ -35,7 +35,8 @@ export const LanguageProvider = ({ children }) => {
   // Atualiza <html lang>, título e meta description conforme o idioma.
   useEffect(() => {
     document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
-    document.title = t.meta.title;
+    const isCv = window.location.pathname.replace(/\/+$/, '') === '/cv';
+    document.title = isCv ? `Lucas Ferreira — ${t.cvPage.docTitle}` : t.meta.title;
     document.querySelector('meta[name="description"]')?.setAttribute('content', t.meta.description);
   }, [lang, t]);
 

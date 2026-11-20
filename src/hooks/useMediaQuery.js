@@ -1,16 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useSyncExternalStore } from 'react';
 
 // true quando a media query combina; acompanha mudanças (rotação, redimensionamento).
+// No servidor e na hidratação vale false (igual ao HTML pré-gerado); depois o navegador atualiza.
 export function useMediaQuery(query) {
-  const [matches, setMatches] = useState(() => typeof window !== 'undefined' && window.matchMedia(query).matches);
-
-  useEffect(() => {
-    const media = window.matchMedia(query);
-    const onChange = () => setMatches(media.matches);
-    onChange();
-    media.addEventListener('change', onChange);
-    return () => media.removeEventListener('change', onChange);
-  }, [query]);
-
-  return matches;
+  const subscribe = useCallback(
+    (onChange) => {
+      const media = window.matchMedia(query);
+      media.addEventListener('change', onChange);
+      return () => media.removeEventListener('change', onChange);
+    },
+    [query],
+  );
+  return useSyncExternalStore(
+    subscribe,
+    () => window.matchMedia(query).matches,
+    () => false,
+  );
 }

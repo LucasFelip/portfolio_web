@@ -53,7 +53,7 @@ const Footer = () => {
             })}
           </nav>
           <div className="flex flex-col items-center gap-2 font-mono text-xs text-muted-foreground text-center">
-            <p>&copy; {new Date().getFullYear()} Lucas Ferreira. {t.footer.rights}</p>
+            <p suppressHydrationWarning>&copy; {new Date().getFullYear()} Lucas Ferreira. {t.footer.rights}</p>
             <p className="flex items-center gap-1.5 text-muted-foreground/70">
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" /> built with React · Vite · Tailwind
             </p>

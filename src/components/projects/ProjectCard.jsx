@@ -78,7 +78,7 @@ const ProjectCard = ({ repo }) => {
               </span>
             </div>
             <p className="font-mono text-[0.7rem] text-muted-foreground/70 mb-4">
-              {t.projects.updatedAt} {pushedAt.toLocaleDateString(lang === 'pt' ? 'pt-BR' : 'en-GB')}
+              {t.projects.updatedAt} {pushedAt.toLocaleDateString(lang === 'pt' ? 'pt-BR' : 'en-GB', { timeZone: 'UTC' })}
             </p>
             <div className="flex flex-wrap gap-2">
               <Button variant="outline" size="sm" asChild className="flex-1 min-w-[9rem]">

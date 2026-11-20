@@ -56,7 +56,6 @@ const PipelineSection = () => {
             {last.hash}
           </a>{' '}
           · {formatDate(last.date)} · {last.message}
-          {changelog.commitCount > 1 ? ` · ${t.pipeline.totalCommits(changelog.commitCount)}` : ''}
         </p>
       )}
     </motion.div>

@@ -4,8 +4,8 @@ const GITHUB_USERNAME = 'LucasFelip';
 const MAX_PROJECTS_DISPLAY = 9; // Número máximo de projetos a serem exibidos
 const FETCH_LIMIT = 100; // busca mais do que exibe, para poder filtrar e priorizar os destaques
 
-// Repositórios que nunca aparecem (o repo de perfil é só o README do GitHub).
-const HIDDEN_REPOS = new Set([GITHUB_USERNAME.toLowerCase()]);
+// Repositórios que nunca aparecem: o repo de perfil (só o README do GitHub) e o código deste próprio portfólio.
+const HIDDEN_REPOS = new Set([GITHUB_USERNAME.toLowerCase(), 'portfolio_web']);
 
 // Erro com `code` estável; a UI traduz a mensagem (ver ProjectsDisplay).
 const githubError = (code, status) => Object.assign(new Error(`GitHub API: ${code}${status ? ` (${status})` : ''}`), { code });

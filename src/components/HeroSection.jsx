@@ -35,7 +35,7 @@ const HeroSection = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="inline-flex items-center gap-2 font-mono text-sm text-muted-foreground border border-border rounded-full px-4 py-1.5 mb-6"
           >
-            <span className="text-primary-text">●</span> engenheiro_software --backend --devops
+            <span className="text-primary-text">●</span> {t.hero.badge}
           </motion.span>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}

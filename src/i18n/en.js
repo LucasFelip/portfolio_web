@@ -34,6 +34,7 @@ export const en = {
     'July', 'August', 'September', 'October', 'November', 'December',
   ],
   hero: {
+    badge: 'software_engineer --backend --devops',
     title: 'Software Engineer',
     bio: 'Software engineer focused on backend (Java, Spring Boot), with experience in microservices, micro frontends and DevOps. I build scalable solutions in complex environments.',
     viewProjects: 'View projects',
@@ -200,7 +201,6 @@ export const en = {
     title: 'How this site goes live',
     subtitle: 'The real path from code to visitor for this portfolio, with automations I maintain myself.',
     lastCommit: 'Latest commit',
-    totalCommits: (n) => `${n} ${n === 1 ? 'commit' : 'commits'} in the repository`,
     stages: [
       { title: 'Commit', description: 'Conventional Commits messages, one branch per change.', detail: 'git · GitHub' },
       { title: 'Pull request and preview', description: 'Every PR produces a preview deploy to check before merging.', detail: 'Netlify deploy preview' },

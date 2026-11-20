@@ -44,7 +44,7 @@ const ActivityFeed = () => {
           const label = item.kind === 'commit' && item.count > 1 ? t.activity.commits(item.count) : t.activity[item.kind];
           return (
             <li key={item.id} className="flex items-start gap-3 text-sm">
-              <Icon className="w-4 h-4 mt-0.5 text-primary shrink-0" />
+              <Icon className="w-4 h-4 mt-0.5 text-primary-text shrink-0" />
               <span className="text-foreground/80">
                 <span className="text-muted-foreground">{label}</span>{' '}
                 <span className="font-mono text-foreground">{item.repo}</span>

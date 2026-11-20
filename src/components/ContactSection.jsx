@@ -64,7 +64,7 @@ const externalProps = (href) => (href.startsWith('mailto:') ? {} : { target: '_b
 const ContactSection = () => {
   const { t } = useI18n();
   return (
-    <section id="contatos" className="py-20 md:py-32 bg-background">
+    <section id="contatos" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4 text-center">
         <span className="section-label">{t.contact.label}</span>
         <motion.div
@@ -82,7 +82,7 @@ const ContactSection = () => {
           </div>
 
           <div className="p-10 md:p-16 text-left">
-            <p className="font-mono text-sm text-primary mb-4">{t.contact.prompt}</p>
+            <p className="font-mono text-sm text-primary-text mb-4">{t.contact.prompt}</p>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -129,7 +129,7 @@ const ContactSection = () => {
                     href={link.href}
                     {...externalProps(link.href)}
                     aria-label={label}
-                    className="flex flex-col items-center gap-2 w-24 p-4 rounded-lg border border-border bg-background/40 text-muted-foreground transition-colors hover:border-primary hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+                    className="flex flex-col items-center gap-2 w-24 p-4 rounded-lg border border-border bg-background/40 text-muted-foreground transition-colors hover:border-primary hover:text-primary-text focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
                     whileHover={{ y: -3 }}
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={{ opacity: 1, scale: 1 }}

@@ -30,19 +30,19 @@ const ExperienceCard = ({ experience, index, isLast }) => {
     >
       <Avatar className="absolute left-0 top-0 h-12 w-12 xs:h-16 xs:w-16 ring-4 ring-background">
         <AvatarImage src={imagemLink} alt={instituicao} />
-        <AvatarFallback className="text-lg bg-primary/20 text-primary">{fallbackText}</AvatarFallback>
+        <AvatarFallback className="text-lg bg-primary/20 text-primary-text">{fallbackText}</AvatarFallback>
       </Avatar>
 
       <div className="dashboard-card hover:border-primary/50 transition-colors">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 mb-1">
           <h3 className="text-xl font-semibold text-foreground">{tr(cargo)}</h3>
           {isCurrent && (
-            <span className="inline-flex items-center gap-1.5 font-mono text-[0.65rem] uppercase tracking-wide text-primary border border-primary/30 rounded-full px-2 py-0.5">
+            <span className="inline-flex items-center gap-1.5 font-mono text-[0.65rem] uppercase tracking-wide text-primary-text border border-primary/30 rounded-full px-2 py-0.5">
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" /> {t.experience.current}
             </span>
           )}
         </div>
-        <a href={link} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-flex items-center">
+        <a href={link} target="_blank" rel="noopener noreferrer" className="text-primary-text hover:underline inline-flex items-center">
           {instituicao} <ExternalLink className="w-3 h-3 ml-1.5" />
         </a>
         <div className="font-mono text-xs text-muted-foreground mt-2 flex flex-col sm:flex-row sm:gap-4">
@@ -52,7 +52,7 @@ const ExperienceCard = ({ experience, index, isLast }) => {
         <ul className="mt-3 space-y-2 text-sm text-foreground/80 leading-relaxed">
           {tr(destaques).map((item) => (
             <li key={item} className="flex gap-2">
-              <span aria-hidden="true" className="text-primary mt-1.5 w-1 h-1 shrink-0 rounded-full bg-current" />
+              <span aria-hidden="true" className="text-primary-text mt-1.5 w-1 h-1 shrink-0 rounded-full bg-current" />
               <span>{item}</span>
             </li>
           ))}
@@ -78,7 +78,7 @@ const ExperienceSection = () => {
   const hasMore = experiencesData.length > MOBILE_VISIBLE_COUNT;
 
   return (
-    <section id="experiencias" className="py-20 md:py-32">
+    <section id="experiencias" className="py-16 md:py-24">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <span className="section-label">{t.experience.label}</span>

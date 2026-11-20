@@ -15,7 +15,7 @@ const AboutSection = () => {
   const { t, tr } = useI18n();
 
   return (
-    <section id="sobre" className="py-20 md:py-32">
+    <section id="sobre" className="py-16 md:py-24">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <span className="section-label">{t.about.label}</span>
@@ -33,7 +33,7 @@ const AboutSection = () => {
             <dl className="space-y-4">
               {skillGroups.map((group) => (
                 <div key={group.title.pt} className="grid gap-2 sm:grid-cols-[11rem_1fr] sm:items-start">
-                  <dt className="font-mono text-xs uppercase tracking-wide text-primary pt-0.5">{tr(group.title)}</dt>
+                  <dt className="font-mono text-xs uppercase tracking-wide text-primary-text pt-0.5">{tr(group.title)}</dt>
                   <dd className="flex flex-wrap gap-2">
                     {group.items.map((item) => (
                       <span key={tr(item)} className="border border-border rounded px-2 py-0.5 text-xs text-foreground/80">
@@ -48,7 +48,7 @@ const AboutSection = () => {
 
           <div className="flex flex-col gap-6">
             <motion.div {...fadeUp} className="dashboard-card">
-              <h3 className="flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-primary mb-4">
+              <h3 className="flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-primary-text mb-4">
                 <GraduationCap aria-hidden="true" className="w-4 h-4" /> {t.about.educationTitle}
               </h3>
               <ul className="space-y-4">
@@ -63,7 +63,7 @@ const AboutSection = () => {
             </motion.div>
 
             <motion.div {...fadeUp} className="dashboard-card">
-              <h3 className="flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-primary mb-4">
+              <h3 className="flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-primary-text mb-4">
                 <Languages aria-hidden="true" className="w-4 h-4" /> {t.about.languagesTitle}
               </h3>
               <ul className="space-y-2">

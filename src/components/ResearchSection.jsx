@@ -11,7 +11,7 @@ const ORCID_URL = 'https://orcid.org/0009-0000-8662-9675';
 const ResearchSection = () => {
   const { t, tr } = useI18n();
   return (
-    <section id="pesquisa" className="py-20 md:py-32">
+    <section id="pesquisa" className="py-16 md:py-24">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <span className="section-label">{t.research.label}</span>
@@ -45,7 +45,7 @@ const ResearchSection = () => {
               className="dashboard-card h-full flex flex-col hover:border-primary/50 transition-colors"
             >
               <div className="flex items-start justify-between gap-3 mb-2">
-                <div className="w-9 h-9 shrink-0 rounded-md border border-primary/30 bg-primary/10 text-primary flex items-center justify-center">
+                <div className="w-9 h-9 shrink-0 rounded-md border border-primary/30 bg-primary/10 text-primary-text flex items-center justify-center">
                   <FlaskConical className="w-4 h-4" />
                 </div>
                 <span className="font-mono text-[0.65rem] uppercase tracking-wide text-muted-foreground border border-border rounded-full px-2 py-0.5">

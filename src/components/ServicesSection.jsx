@@ -19,7 +19,7 @@ const serviceReferences = [
 const ServicesSection = () => {
   const { t } = useI18n();
   return (
-    <section id="servicos" className="relative overflow-hidden py-20 md:py-32 bg-background">
+    <section id="servicos" className="relative overflow-hidden py-16 md:py-24 bg-background">
       <div className="absolute inset-0 bg-grid" />
       <div className="container relative mx-auto px-4">
         <div className="text-center">
@@ -56,7 +56,7 @@ const ServicesSection = () => {
                 className="dashboard-card h-full flex flex-col hover:border-primary/50 transition-colors"
               >
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-11 h-11 rounded-md border border-primary/30 bg-primary/10 text-primary flex items-center justify-center">
+                  <div className="w-11 h-11 rounded-md border border-primary/30 bg-primary/10 text-primary-text flex items-center justify-center">
                     <Icon className="w-5 h-5" />
                   </div>
                   <span className="font-mono text-xs text-muted-foreground">0{index + 1}</span>

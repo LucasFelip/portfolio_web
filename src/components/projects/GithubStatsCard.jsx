@@ -14,14 +14,14 @@ const GithubStatsCard = () => {
       <p className="font-mono text-xs text-muted-foreground mb-4">$ gh stats --user LucasFelip</p>
       <div className="grid gap-4 sm:grid-cols-3">
         <div className="flex items-center gap-3">
-          <FolderGit2 aria-hidden="true" className="w-5 h-5 text-primary" />
+          <FolderGit2 aria-hidden="true" className="w-5 h-5 text-primary-text" />
           <div>
             <p className="font-mono text-xl text-foreground">{stats.publicRepos}</p>
             <p className="text-xs text-muted-foreground">{t.projects.stats.repos}</p>
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <Star aria-hidden="true" className="w-5 h-5 text-primary" />
+          <Star aria-hidden="true" className="w-5 h-5 text-primary-text" />
           <div>
             <p className="font-mono text-xl text-foreground">{stats.stars}</p>
             <p className="text-xs text-muted-foreground">{t.projects.stats.stars}</p>

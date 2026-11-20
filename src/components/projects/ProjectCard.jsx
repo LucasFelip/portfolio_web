@@ -9,7 +9,7 @@ const CoverPlaceholder = ({ name, language }) => (
   <div className="relative flex h-full w-full items-center justify-center bg-black/30">
     <div className="absolute inset-0 bg-grid opacity-60" aria-hidden="true" />
     <p className="relative font-mono text-sm text-foreground/80 px-4 text-center break-all">
-      <span className="text-primary">$ </span>
+      <span className="text-primary-text">$ </span>
       {name}
       {language && <span className="block mt-1 text-xs text-muted-foreground">{language}</span>}
     </p>

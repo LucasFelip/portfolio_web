@@ -30,13 +30,8 @@ const Footer = () => {
         <div className="container relative mx-auto px-4 flex flex-col items-center">
           <nav
             aria-label={t.a11y.footerNav}
-            className="flex items-center gap-1 rounded-lg border border-border bg-card/80 backdrop-blur-md pl-3 pr-1.5 py-1.5 mb-6 shadow-2xl shadow-black/40"
+            className="flex items-center gap-1 rounded-lg border border-border bg-card/80 backdrop-blur-md pl-1.5 pr-1.5 py-1.5 mb-6 shadow-2xl shadow-black/40"
           >
-            <div className="hidden xs:flex items-center gap-1.5 pr-3 mr-1 border-r border-border" aria-hidden="true">
-              <span className="w-2 h-2 rounded-full bg-destructive/70" />
-              <span className="w-2 h-2 rounded-full bg-yellow-500/70" />
-              <span className="w-2 h-2 rounded-full bg-primary/70" />
-            </div>
             {navItems.map((item) => {
               const Icon = icons[item.id];
               const isActive = activeSection === item.id;

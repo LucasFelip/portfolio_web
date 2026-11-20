@@ -35,6 +35,7 @@ export const en = {
   ],
   hero: {
     badge: 'software_engineer --backend --devops',
+    available: 'Open to opportunities',
     title: 'Software Engineer',
     bio: 'Software engineer focused on backend (Java, Spring Boot), with experience in microservices, micro frontends and DevOps. I build scalable solutions in complex environments.',
     viewProjects: 'View projects',
@@ -65,6 +66,13 @@ export const en = {
     title: 'Research & Outreach',
     lattes: 'Lattes résumé',
     orcid: 'ORCID',
+  },
+  proof: {
+    title: 'Where I have worked',
+    experiences: 'professional roles',
+    years: 'years of experience',
+    certificates: 'courses and certificates',
+    research: 'research and outreach projects',
   },
   journey: {
     label: '03 — Journey',

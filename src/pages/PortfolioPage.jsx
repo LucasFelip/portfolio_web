@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
+import ProofStrip from '@/components/ProofStrip';
 import ProjectsSection from '@/components/ProjectsSection';
 import JourneySection from '@/components/journey/JourneySection';
 import ServicesSection from '@/components/ServicesSection';
@@ -36,6 +37,7 @@ const PortfolioPage = () => {
           className="flex-grow"
         >
             <HeroSection />
+            <ProofStrip />
             <AboutSection />
             <JourneySection />
             <CaseStudiesSection />

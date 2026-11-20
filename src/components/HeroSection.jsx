@@ -6,6 +6,7 @@ import { experiencesData } from '@/data/experiences';
 import { tempoDesde } from '@/lib/dateUtils';
 import { useI18n } from '@/i18n';
 import { CV_URL } from '@/lib/constants';
+import ProfileAvatar from '@/components/ProfileAvatar';
 import { Download } from 'lucide-react';
 import { scrollToSection } from '@/hooks/useActiveSection';
 
@@ -28,6 +29,17 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-grid" />
       <div className="container relative mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
         <div className="text-center md:text-left">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="mb-6 flex items-center justify-center gap-4 md:justify-start"
+          >
+            <ProfileAvatar />
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1.5 text-sm text-primary-text">
+              <span className="h-2 w-2 animate-pulse rounded-full bg-primary-text" aria-hidden="true" /> {t.hero.available}
+            </span>
+          </motion.div>
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

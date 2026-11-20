@@ -35,5 +35,41 @@ export const projectOverrides = {
       en: 'Study book on game development with AI: Unreal Engine 5, C++, Blueprint, Game AI and narrative. The PDF is built automatically by CI on every push.',
     },
     tags: ['Unreal Engine 5', 'C++', 'Game AI', 'CI'],
+    image: '/projects/book-game-dev.png', // capa do PDF da release v1.0.2 (renderizada da primeira página)
+  },
+  'kafka-docker': {
+    description: {
+      pt: 'Ambiente Docker Compose com Kafka, ZooKeeper, Schema Registry e Kafka UI, pronto para estudar e testar mensageria.',
+      en: 'Docker Compose environment with Kafka, ZooKeeper, Schema Registry and Kafka UI, ready for studying and testing messaging.',
+    },
+    tags: ['Kafka', 'ZooKeeper', 'Schema Registry', 'Docker'],
+  },
+  'zookeeper-demo': {
+    description: {
+      pt: 'Demonstração de Apache ZooKeeper com Spring Boot: znodes, watchers e coordenação.',
+      en: 'Apache ZooKeeper demo with Spring Boot: znodes, watchers and coordination.',
+    },
+    tags: ['ZooKeeper', 'Spring Boot', 'Java'],
+  },
+  'cosmos-docker': {
+    description: {
+      pt: 'Azure Cosmos DB Emulator rodando via Docker Compose, para desenvolver sem conta na nuvem.',
+      en: 'Azure Cosmos DB Emulator running through Docker Compose, for developing without a cloud account.',
+    },
+    tags: ['Azure Cosmos DB', 'Docker'],
+  },
+  'gateway-mqtt-ws': {
+    description: {
+      pt: 'Gateway somente leitura que expõe o broker MQTT do LSDi via WebSocket.',
+      en: "Read-only gateway that exposes the LSDi's MQTT broker over WebSocket.",
+    },
+    tags: ['MQTT', 'WebSocket', 'Docker'],
+  },
+  'py-nas': {
+    description: {
+      pt: 'Servidor NAS web para Termux: gerencie os arquivos do Android pelo navegador.',
+      en: 'Web NAS server for Termux: manage your Android files from the browser.',
+    },
+    tags: ['Python', 'Termux', 'Android'],
   },
 };

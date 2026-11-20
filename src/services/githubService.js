@@ -1,5 +1,5 @@
 import { projectOverrides } from '@/data/projectOverrides';
-import snapshot from '@/data/githubStats.generated.json';
+import snapshot from '@/data/githubProjects.generated.json';
 
 const GITHUB_USERNAME = 'LucasFelip';
 const MAX_PROJECTS_DISPLAY = 9; // Número máximo de projetos a serem exibidos
@@ -12,7 +12,7 @@ const HIDDEN_REPOS = new Set([GITHUB_USERNAME.toLowerCase(), 'portfolio_web', 't
 // Erro com `code` estável; a UI traduz a mensagem (ver ProjectsDisplay).
 const githubError = (code, status) => Object.assign(new Error(`GitHub API: ${code}${status ? ` (${status})` : ''}`), { code });
 
-// Formato comum de repositório: o da cópia gerada no build (scripts/generate-github-stats.js).
+// Formato comum de repositório: o da cópia gerada no build (scripts/generate-github-projects.js).
 const fromApi = (repo) => ({
   id: repo.id,
   name: repo.name,

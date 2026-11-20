@@ -2,8 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { getProjects, getInitialProjects } from '@/services/githubService';
 import ProjectsDisplay from '@/components/projects/ProjectsDisplay';
-import ActivityFeed from '@/components/projects/ActivityFeed';
-import GithubStatsCard from '@/components/projects/GithubStatsCard';
 import { useI18n } from '@/i18n';
 
 const ProjectsSection = () => {
@@ -33,7 +31,7 @@ const ProjectsSection = () => {
   }, []);
 
   return (
-    <section id="projetos" className="py-16 md:py-24 bg-background">
+    <section id="projetos" className="py-12 md:py-24 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <span className="section-label">{t.projects.label}</span>
@@ -57,8 +55,6 @@ const ProjectsSection = () => {
           {t.projects.subtitle}
         </motion.p>
         <ProjectsDisplay projects={projects} loading={loading} error={error} />
-        <ActivityFeed />
-        <GithubStatsCard />
       </div>
     </section>
   );

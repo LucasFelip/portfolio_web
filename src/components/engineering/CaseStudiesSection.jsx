@@ -2,9 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { caseStudies } from '@/data/caseStudies';
 import { useI18n } from '@/i18n';
-import ArchitectureShowcase from '@/components/engineering/ArchitectureShowcase';
-import KafkaSimulation from '@/components/engineering/KafkaSimulation';
-import PipelineSection from '@/components/engineering/PipelineSection';
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -17,7 +14,7 @@ const CaseStudiesSection = () => {
   const { t, tr } = useI18n();
 
   return (
-    <section id="engenharia" className="py-16 md:py-24">
+    <section id="engenharia" className="py-12 md:py-24">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <span className="section-label">{t.cases.label}</span>
@@ -70,9 +67,6 @@ const CaseStudiesSection = () => {
           ))}
         </div>
 
-        <ArchitectureShowcase />
-        <KafkaSimulation />
-        <PipelineSection />
       </div>
     </section>
   );

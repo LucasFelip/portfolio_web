@@ -10,8 +10,7 @@ import ContactSection from '@/components/ContactSection';
 import { Toaster } from '@/components/ui/toaster';
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
 import { useI18n } from '@/i18n';
-import TerminalLauncher from '@/components/terminal/TerminalLauncher';
-import LazyEngineering from '@/components/engineering/LazyEngineering';
+import CaseStudiesSection from '@/components/engineering/CaseStudiesSection';
 
 const PortfolioPage = () => {
   const { t } = useI18n();
@@ -39,7 +38,7 @@ const PortfolioPage = () => {
             <HeroSection />
             <AboutSection />
             <JourneySection />
-            <LazyEngineering />
+            <CaseStudiesSection />
             <ProjectsSection />
             <ServicesSection />
             <ContactSection />
@@ -47,7 +46,6 @@ const PortfolioPage = () => {
       </AnimatePresence>
       <Footer />
       <Toaster />
-      <TerminalLauncher />
     </div>
     </MotionConfig>
   );

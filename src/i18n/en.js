@@ -66,15 +66,18 @@ export const en = {
     showLess: 'Show less',
   },
   research: {
-    label: '04 — Research & Outreach',
+    label: '05 — Research & Outreach',
     title: 'Research & Outreach',
     subtitle: 'Academic projects I coordinated, from my Lattes résumé.',
+    lattes: 'Lattes résumé',
+    orcid: 'ORCID',
   },
   services: {
-    label: '05 — Services',
+    label: '06 — Services',
     title: 'Services for your project',
     subtitle: 'Available for freelance projects, from idea to a ready-to-use delivery.',
     quote: 'Request a quote',
+    reference: 'Reference',
     items: [
       {
         title: 'Custom software',
@@ -99,7 +102,7 @@ export const en = {
     ],
   },
   projects: {
-    label: '06 — Projects',
+    label: '04 — Projects',
     title: 'Featured Projects',
     subtitle: 'A selection of my most recent projects on GitHub.',
     errorTitle: 'Oops! Something went wrong.',

@@ -37,9 +37,9 @@ const PortfolioPage = () => {
             <HeroSection />
             <AboutSection />
             <ExperienceSection />
+            <ProjectsSection />
             <ResearchSection />
             <ServicesSection />
-            <ProjectsSection />
             <ContactSection />
         </motion.main>
       </AnimatePresence>

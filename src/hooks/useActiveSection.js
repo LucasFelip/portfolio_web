@@ -5,9 +5,9 @@ export const navItems = [
   { id: 'principal', label: 'Principal' },
   { id: 'sobre', label: 'Sobre' },
   { id: 'experiencias', label: 'Experiências' },
+  { id: 'projetos', label: 'Projetos' },
   { id: 'pesquisa', label: 'Pesquisa' },
   { id: 'servicos', label: 'Serviços' },
-  { id: 'projetos', label: 'Projetos' },
   { id: 'contatos', label: 'Contatos' },
 ];
 

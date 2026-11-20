@@ -8,6 +8,14 @@ const WHATSAPP_NUMBER = '5598991530102';
 
 const serviceIcons = [Server, Network, Database, Smartphone];
 
+// Projeto de referência por serviço (mesma ordem de t.services.items). Imagens vêm de /public/projects.
+const serviceReferences = [
+  { name: 'self-stream-deck', image: '/projects/self-stream-deck.png', href: 'https://lucasfelip.github.io/self-stream-deck/' },
+  null,
+  null,
+  { name: "Ana's Joias", image: '/projects/ana-joias.jpg', href: 'https://github.com/LucasFelip/ana-joiais-dev' },
+];
+
 const ServicesSection = () => {
   const { t } = useI18n();
   return (
@@ -55,6 +63,24 @@ const ServicesSection = () => {
                 </div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">{service.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed flex-1">{service.description}</p>
+                {serviceReferences[index] && (
+                  <a
+                    href={serviceReferences[index].href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 flex items-center gap-3 rounded-md border border-border bg-black/20 p-2 transition-colors hover:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    <img
+                      src={serviceReferences[index].image}
+                      alt=""
+                      loading="lazy"
+                      className="h-10 w-16 shrink-0 rounded object-cover"
+                    />
+                    <span className="font-mono text-xs text-muted-foreground">
+                      {t.services.reference}: <span className="text-foreground">{serviceReferences[index].name}</span>
+                    </span>
+                  </a>
+                )}
                 <Button variant="outline" size="sm" asChild className="w-full mt-5">
                   <a
                     href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(service.whatsappMessage)}`}

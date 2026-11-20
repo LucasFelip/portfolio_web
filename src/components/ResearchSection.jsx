@@ -1,8 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FlaskConical } from 'lucide-react';
+import { FlaskConical, ExternalLink } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { researchProjects } from '@/data/researchProjects';
 import { useI18n } from '@/i18n';
+
+const LATTES_URL = 'https://lattes.cnpq.br/1631585272117041';
+const ORCID_URL = 'https://orcid.org/0009-0000-8662-9675';
 
 const ResearchSection = () => {
   const { t, tr } = useI18n();
@@ -56,6 +60,18 @@ const ResearchSection = () => {
               </div>
             </motion.div>
           ))}
+        </div>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <Button variant="outline" size="sm" asChild>
+            <a href={LATTES_URL} target="_blank" rel="noopener noreferrer">
+              {t.research.lattes} <ExternalLink aria-hidden="true" className="w-4 h-4 ml-2" />
+            </a>
+          </Button>
+          <Button variant="outline" size="sm" asChild>
+            <a href={ORCID_URL} target="_blank" rel="noopener noreferrer">
+              {t.research.orcid} <ExternalLink aria-hidden="true" className="w-4 h-4 ml-2" />
+            </a>
+          </Button>
         </div>
       </div>
     </section>

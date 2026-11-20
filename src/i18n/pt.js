@@ -66,15 +66,18 @@ export const pt = {
     showLess: 'Ver menos',
   },
   research: {
-    label: '04 — Pesquisa & Extensão',
+    label: '05 — Pesquisa & Extensão',
     title: 'Pesquisa & Extensão',
     subtitle: 'Projetos acadêmicos que coordenei, do currículo Lattes.',
+    lattes: 'Currículo Lattes',
+    orcid: 'ORCID',
   },
   services: {
-    label: '05 — Serviços',
+    label: '06 — Serviços',
     title: 'Serviços para o seu projeto',
     subtitle: 'Disponível para projetos freelance, da ideia à entrega pronta para usar.',
     quote: 'Solicitar orçamento',
+    reference: 'Referência',
     items: [
       {
         title: 'Sistemas sob medida',
@@ -99,7 +102,7 @@ export const pt = {
     ],
   },
   projects: {
-    label: '06 — Projetos',
+    label: '04 — Projetos',
     title: 'Projetos em Destaque',
     subtitle: 'Uma seleção dos meus projetos mais recentes no GitHub.',
     errorTitle: 'Oops! Algo deu errado.',

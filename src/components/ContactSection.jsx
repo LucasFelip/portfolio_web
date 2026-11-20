@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Linkedin, Github, CalendarClock, Fingerprint } from 'lucide-react';
 import { useI18n } from '@/i18n';
+import { Button } from '@/components/ui/button';
 
 const SCHEDULING_LINK = 'https://cal.com/lusca-ferreira/30min';
 
@@ -22,11 +23,13 @@ const contactLinks = [
   {
     href: "mailto:lucasfelipereis@hotmail.com",
     icon: Mail,
+    primary: true,
     label: "Email",
   },
   {
     href: "https://www.linkedin.com/in/lucas-ferreira-5247b1221/",
     icon: Linkedin,
+    primary: true,
     label: "LinkedIn",
   },
   {
@@ -50,6 +53,13 @@ const contactLinks = [
     labelKey: "schedule",
   }
 ];
+
+// Links principais (e-mail e LinkedIn) viram botões; os demais ficam como cartões secundários.
+const primaryLinks = contactLinks.filter((link) => link.primary);
+const secondaryLinks = contactLinks.filter((link) => !link.primary);
+
+// mailto: não deve abrir em nova aba
+const externalProps = (href) => (href.startsWith('mailto:') ? {} : { target: '_blank', rel: 'noopener noreferrer' });
 
 const ContactSection = () => {
   const { t } = useI18n();
@@ -97,17 +107,27 @@ const ContactSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4, staggerChildren: 0.1 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-wrap items-center gap-4"
             >
-              {contactLinks.map((link, index) => {
+              {primaryLinks.map((link) => {
+                const IconComponent = link.icon;
+                const label = link.labelKey ? t.contact[link.labelKey] : link.label;
+                return (
+                  <Button key={link.href} size="lg" asChild>
+                    <a href={link.href} {...externalProps(link.href)}>
+                      <IconComponent aria-hidden="true" className="h-5 w-5 mr-2" /> {label}
+                    </a>
+                  </Button>
+                );
+              })}
+              {secondaryLinks.map((link, index) => {
                 const IconComponent = link.icon;
                 const label = link.labelKey ? t.contact[link.labelKey] : link.label;
                 return (
                   <motion.a
-                    key={index}
+                    key={link.href}
                     href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    {...externalProps(link.href)}
                     aria-label={label}
                     className="flex flex-col items-center gap-2 w-24 p-4 rounded-lg border border-border bg-background/40 text-muted-foreground transition-colors hover:border-primary hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
                     whileHover={{ y: -3 }}
@@ -115,7 +135,7 @@ const ContactSection = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ type: "spring", stiffness: 260, damping: 20, delay: index * 0.1 }}
                   >
-                    <IconComponent className="h-6 w-6" />
+                    <IconComponent aria-hidden="true" className="h-6 w-6" />
                     <span className="font-mono text-xs">{label}</span>
                   </motion.a>
                 );

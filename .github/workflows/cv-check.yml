@@ -4,8 +4,6 @@ name: Checagem do currículo
 # issue quando divergem. Nada é alterado sozinho. O PDF do botão "Baixar CV" é sincronizado no build
 # (scripts/sync-cv.js), não aqui.
 on:
-  push:
-    branches: [feat/cv-sync] # TEMPORÁRIO: teste antes do merge
   schedule:
     - cron: '30 9 * * 1' # toda segunda, 09:30 UTC (depois do rebuild semanal)
   workflow_dispatch:
@@ -35,7 +33,7 @@ jobs:
         run: node scripts/check-cv.js --out cv-report.md
 
       - name: Abrir ou atualizar a issue
-        if: steps.check.outputs.has_issue == 'true' && !inputs.dry_run && github.event_name != 'push'
+        if: steps.check.outputs.has_issue == 'true' && !inputs.dry_run
         run: |
           gh label create cv-sync --color 0e8a16 --description "Currículo no Google Docs diverge do site" --force
           number=$(gh issue list --label cv-sync --state open --json number --jq '.[0].number')
@@ -46,7 +44,7 @@ jobs:
           fi
 
       - name: Fechar a issue quando tudo bate
-        if: steps.check.outputs.has_issue == 'false' && !inputs.dry_run && github.event_name != 'push'
+        if: steps.check.outputs.has_issue == 'false' && !inputs.dry_run
         run: |
           number=$(gh issue list --label cv-sync --state open --json number --jq '.[0].number')
           if [ -n "$number" ]; then

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Send, CheckCircle2 } from 'lucide-react';
+import { Send, CheckCircle2, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useI18n } from '@/i18n';
 import { pt } from '@/i18n/pt';
@@ -21,18 +21,29 @@ const Field = ({ id, label, optionalLabel, children }) => (
   </div>
 );
 
+// Select nativo (acessível, funciona com o Netlify Forms) com a mesma aparência dos campos de texto: seta própria,
+// texto do placeholder em cinza enquanto nada foi escolhido e lista escura (ver `select option` em index.css).
 const Select = ({ id, name, label, optionalLabel, placeholder, values, labels, required }) => (
   <Field id={id} label={label} optionalLabel={optionalLabel}>
-    <select id={id} name={name} required={required} defaultValue="" className={inputClass}>
-      <option value="" disabled>
-        {placeholder}
-      </option>
-      {values.map((value, index) => (
-        <option key={value} value={value}>
-          {labels[index]}
+    <div className="relative">
+      <select
+        id={id}
+        name={name}
+        required={required}
+        defaultValue=""
+        className={`${inputClass} cursor-pointer appearance-none pr-10 [color-scheme:dark] [&:has(option[value='']:checked)]:text-muted-foreground`}
+      >
+        <option value="" disabled>
+          {placeholder}
         </option>
-      ))}
-    </select>
+        {values.map((value, index) => (
+          <option key={value} value={value}>
+            {labels[index]}
+          </option>
+        ))}
+      </select>
+      <ChevronDown aria-hidden="true" className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+    </div>
   </Field>
 );
 

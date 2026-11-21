@@ -117,13 +117,3 @@
     animation: none !important;
   }
 }
-  
-
-/* Lista dos selects (abre fora da página, no estilo do sistema): fundo e texto do tema em vez do branco padrão. */
-select option {
-  background-color: hsl(var(--card));
-  color: hsl(var(--foreground));
-}
-select option:disabled {
-  color: hsl(var(--muted-foreground));
-}

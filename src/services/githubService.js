@@ -46,6 +46,9 @@ const prepare = (repos) => {
   return [...featured, ...others].slice(0, MAX_PROJECTS_DISPLAY);
 };
 
+// Números gerados no build (null se a API do GitHub falhou e não havia cópia anterior).
+export const getGithubStats = () => snapshot.stats ?? null;
+
 // Lista gerada no build: disponível na hora e sem depender da API do GitHub no navegador.
 export const getInitialProjects = () => prepare(snapshot.projects ?? []);
 

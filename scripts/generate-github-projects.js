@@ -8,6 +8,8 @@ import { dirname, join } from 'node:path';
 // o build: mantém a cópia anterior, se existir, ou grava uma lista vazia (a seção usa só a API ao vivo).
 // Sem GITHUB_TOKEN o limite do build é 60 requisições/h por IP (compartilhado no Netlify); com o token, 5000/h.
 const GITHUB_USERNAME = 'LucasFelip';
+// Mesmos repositórios ocultos de src/services/githubService.js: não entram nos projetos nem nos números.
+const HIDDEN_REPOS = new Set([GITHUB_USERNAME.toLowerCase(), 'portfolio_web', 'teste_pulse']);
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const outDir = join(__dirname, '..', 'src', 'data');
@@ -25,8 +27,25 @@ async function run() {
     );
     if (!res.ok) throw new Error(`GitHub API ${res.status}`);
 
+    const repos = await res.json();
+
+    // Números do bloco "GitHub em números": repositórios públicos próprios (sem forks, arquivados e ocultos),
+    // linguagens mais usadas (por quantidade de repositórios) e data do último push.
+    const own = repos.filter((r) => !r.fork && !r.archived && !HIDDEN_REPOS.has(r.name.toLowerCase()));
+    const byLanguage = new Map();
+    for (const r of own) if (r.language) byLanguage.set(r.language, (byLanguage.get(r.language) ?? 0) + 1);
+    const stats = {
+      repos: own.length,
+      stars: own.reduce((sum, r) => sum + r.stargazers_count, 0),
+      languages: [...byLanguage.entries()]
+        .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+        .slice(0, 6)
+        .map(([name, count]) => ({ name, count })),
+      lastPush: own.map((r) => r.pushed_at).sort().at(-1) ?? null,
+    };
+
     // Cópia enxuta (já ordenada por push); o filtro de repos ocultos e os destaques ficam em githubService.js.
-    const projects = (await res.json())
+    const projects = repos
       .filter((r) => !r.fork && !r.archived && r.description)
       .map((r) => ({
         id: r.id,
@@ -39,13 +58,13 @@ async function run() {
         language: r.language ?? null,
       }));
 
-    writeFileSync(outFile, JSON.stringify({ projects }, null, 2));
+    writeFileSync(outFile, JSON.stringify({ projects, stats }, null, 2));
   } catch (err) {
     if (existsSync(outFile) && JSON.parse(readFileSync(outFile, 'utf-8')).projects?.length) {
       console.warn(`[github-projects] ${err.message}; mantendo a cópia anterior`);
     } else {
       console.warn(`[github-projects] ${err.message}; sem cópia anterior, a seção usará só a API ao vivo`);
-      writeFileSync(outFile, JSON.stringify({ projects: [] }, null, 2));
+      writeFileSync(outFile, JSON.stringify({ projects: [], stats: null }, null, 2));
     }
   }
 }

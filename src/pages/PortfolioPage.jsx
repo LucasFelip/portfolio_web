@@ -7,6 +7,7 @@ import ProofStrip from '@/components/ProofStrip';
 import ProjectsSection from '@/components/ProjectsSection';
 import JourneySection from '@/components/journey/JourneySection';
 import ServicesSection from '@/components/ServicesSection';
+import ProcessSection from '@/components/ProcessSection';
 import ContactSection from '@/components/ContactSection';
 import { m, AnimatePresence, MotionConfig, LazyMotion, domAnimation } from 'framer-motion';
 import { useI18n } from '@/i18n';
@@ -43,6 +44,7 @@ const PortfolioPage = () => {
             <CaseStudiesSection />
             <ProjectsSection />
             <ServicesSection />
+            <ProcessSection />
             <ContactSection />
         </m.main>
       </AnimatePresence>

@@ -1,0 +1,52 @@
+name: Checagem do currículo
+
+# Compara o currículo no Google Docs com os fatos do site (e-mail, experiências, formação) e abre/atualiza uma
+# issue quando divergem. Nada é alterado sozinho. O PDF do botão "Baixar CV" é sincronizado no build
+# (scripts/sync-cv.js), não aqui.
+on:
+  schedule:
+    - cron: '30 9 * * 1' # toda segunda, 09:30 UTC (depois do rebuild semanal)
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Só mostrar o relatório no log (não abre nem fecha issue)'
+        type: boolean
+        default: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write # abrir, atualizar e fechar a issue do relatório
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Comparar o currículo com o site
+        id: check
+        run: node scripts/check-cv.js --out cv-report.md
+
+      - name: Abrir ou atualizar a issue
+        if: steps.check.outputs.has_issue == 'true' && !inputs.dry_run
+        run: |
+          gh label create cv-sync --color 0e8a16 --description "Currículo no Google Docs diverge do site" --force
+          number=$(gh issue list --label cv-sync --state open --json number --jq '.[0].number')
+          if [ -n "$number" ]; then
+            gh issue edit "$number" --body-file cv-report.md
+          else
+            gh issue create --title "Currículo mudou: revisar o site" --label cv-sync --body-file cv-report.md
+          fi
+
+      - name: Fechar a issue quando tudo bate
+        if: steps.check.outputs.has_issue == 'false' && !inputs.dry_run
+        run: |
+          number=$(gh issue list --label cv-sync --state open --json number --jq '.[0].number')
+          if [ -n "$number" ]; then
+            gh issue close "$number" --comment "Sem divergências entre o currículo e o site na última checagem."
+          fi

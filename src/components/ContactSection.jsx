@@ -3,6 +3,7 @@ import { m } from 'framer-motion';
 import { Mail, Linkedin, Github, CalendarClock, Fingerprint } from 'lucide-react';
 import { useI18n } from '@/i18n';
 import { CONTACT } from '@/lib/constants';
+import QuoteForm from '@/components/QuoteForm';
 
 const SCHEDULING_LINK = 'https://cal.com/lusca-ferreira/30min';
 
@@ -124,6 +125,12 @@ const ContactSection = () => {
                 );
               })}
             </m.div>
+
+            <div className="mt-12 border-t border-border pt-10">
+              <h3 className="mb-2 text-2xl font-bold md:text-3xl">{t.quote.title}</h3>
+              <p className="mb-6 max-w-xl text-muted-foreground">{t.quote.subtitle}</p>
+              <QuoteForm />
+            </div>
           </div>
         </m.div>
       </div>

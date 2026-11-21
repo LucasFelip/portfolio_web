@@ -147,6 +147,13 @@ export const pt = {
     updatedAt: 'atualizado em',
     viewOnGithub: 'Ver no GitHub',
     demo: 'Ver demo',
+    stats: {
+      title: 'GitHub em números',
+      repos: 'repositórios públicos',
+      languages: 'linguagens',
+      lastActivity: 'última atividade',
+      byLanguage: 'Linguagens por quantidade de repositórios. Dados do GitHub, atualizados a cada publicação do site.',
+    },
     tagsLabel: 'Tecnologias',
     errors: {
       rate_limit: 'Limite de requisições da API pública do GitHub atingido. Tente novamente em alguns minutos.',
@@ -155,11 +162,78 @@ export const pt = {
     },
   },
   contact: {
-    label: '07 — Contato',
+    label: '08 — Contato',
     prompt: '$ echo "Vamos conversar?"',
     title: 'Entre em Contato',
     subtitle: 'Conecte-se comigo através das redes abaixo. Estou sempre aberto a novas oportunidades, colaborações e projetos freelance!',
     schedule: 'Agendar',
+  },
+  process: {
+    label: '07 — Como eu trabalho',
+    title: 'Como eu trabalho',
+    subtitle: 'Um caminho claro da primeira conversa até a entrega, sem surpresas pelo caminho.',
+    steps: [
+      {
+        title: 'Conversa inicial',
+        description: 'Entendo o problema, quem vai usar e o que significa dar certo, por WhatsApp ou em uma chamada curta.',
+      },
+      {
+        title: 'Proposta',
+        description: 'Escopo, etapas de entrega, prazo e valor combinados antes de começar.',
+      },
+      {
+        title: 'Desenvolvimento por etapas',
+        description: 'Entregas curtas e funcionais, para você testar e opinar durante o caminho. O código fica versionado no Git.',
+      },
+      {
+        title: 'Entrega e acompanhamento',
+        description: 'Publicação, orientação de uso e acompanhamento nos primeiros dias. O suporte depois fica combinado na proposta.',
+      },
+    ],
+    ai: {
+      file: 'ia-no-processo.md',
+      title: 'Como uso IA no desenvolvimento',
+      subtitle: 'A IA acelera o trabalho; as decisões e a responsabilidade pela entrega continuam comigo.',
+      helps: {
+        title: 'A IA me ajuda a',
+        items: [
+          'explorar alternativas de solução mais rápido',
+          'escrever rascunhos de código, testes e documentação',
+          'revisar trechos e apontar problemas que passariam batido',
+        ],
+      },
+      mine: {
+        title: 'Continua comigo',
+        items: [
+          'arquitetura e decisões de escopo',
+          'revisão de tudo que entra no projeto',
+          'segurança, dados sensíveis e qualidade da entrega',
+        ],
+      },
+      note: 'na prática: ciclos mais curtos, com revisão humana em tudo que vai para produção.',
+    },
+  },
+  quote: {
+    title: 'Pedir um orçamento',
+    subtitle: 'Conte o básico do projeto e eu respondo por e-mail ou WhatsApp.',
+    name: 'Nome',
+    email: 'E-mail',
+    projectType: 'Tipo de projeto',
+    timeline: 'Prazo desejado',
+    budget: 'Orçamento aproximado',
+    message: 'Conte sobre o projeto',
+    optional: '(opcional)',
+    select: 'Selecione',
+    projectTypes: ['Sistema sob medida', 'Velocidade e estabilidade', 'Dados e migração', 'Site ou aplicativo', 'Outro'],
+    timelines: ['Urgente (até 1 mês)', '1 a 3 meses', 'Sem pressa', 'Ainda não sei'],
+    budgets: ['Até R$ 2 mil', 'R$ 2 a 5 mil', 'R$ 5 a 15 mil', 'Acima de R$ 15 mil', 'Prefiro conversar'],
+    submit: 'Enviar pedido',
+    sending: 'Enviando…',
+    successTitle: 'Pedido enviado!',
+    success: 'Obrigado! Respondo no e-mail informado.',
+    another: 'Enviar outro pedido',
+    error: 'Não foi possível enviar agora. Tente de novo ou fale comigo pelo WhatsApp ou e-mail.',
+    privacy: 'Uso os dados só para responder ao seu pedido.',
   },
   footer: {
     rights: 'Todos os direitos reservados.',

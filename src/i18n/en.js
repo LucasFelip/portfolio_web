@@ -147,6 +147,13 @@ export const en = {
     updatedAt: 'updated on',
     viewOnGithub: 'View on GitHub',
     demo: 'Live demo',
+    stats: {
+      title: 'GitHub in numbers',
+      repos: 'public repositories',
+      languages: 'languages',
+      lastActivity: 'last activity',
+      byLanguage: 'Languages by number of repositories. GitHub data, refreshed on every site deployment.',
+    },
     tagsLabel: 'Technologies',
     errors: {
       rate_limit: 'GitHub public API rate limit reached. Please try again in a few minutes.',
@@ -155,11 +162,78 @@ export const en = {
     },
   },
   contact: {
-    label: '07 — Contact',
+    label: '08 — Contact',
     prompt: '$ echo "Let\'s talk?"',
     title: 'Get in Touch',
     subtitle: "Connect with me through the channels below. I'm always open to new opportunities, collaborations and freelance projects!",
     schedule: 'Schedule',
+  },
+  process: {
+    label: '07 — How I work',
+    title: 'How I work',
+    subtitle: 'A clear path from the first conversation to delivery, with no surprises along the way.',
+    steps: [
+      {
+        title: 'First conversation',
+        description: 'I learn about the problem, who will use it and what success looks like, over WhatsApp or a short call.',
+      },
+      {
+        title: 'Proposal',
+        description: 'Scope, delivery stages, timeline and price agreed before we start.',
+      },
+      {
+        title: 'Staged development',
+        description: 'Short, working deliveries so you can test and give feedback along the way. The code stays versioned in Git.',
+      },
+      {
+        title: 'Delivery and follow-up',
+        description: 'Deployment, usage guidance and follow-up in the first days. Support afterwards is agreed in the proposal.',
+      },
+    ],
+    ai: {
+      file: 'ai-in-the-process.md',
+      title: 'How I use AI in development',
+      subtitle: 'AI speeds the work up; decisions and responsibility for the delivery stay with me.',
+      helps: {
+        title: 'AI helps me',
+        items: [
+          'explore solution alternatives faster',
+          'draft code, tests and documentation',
+          'review snippets and point out problems that would slip through',
+        ],
+      },
+      mine: {
+        title: 'Stays with me',
+        items: [
+          'architecture and scope decisions',
+          'review of everything that enters the project',
+          'security, sensitive data and delivery quality',
+        ],
+      },
+      note: 'in practice: shorter cycles, with human review of everything that goes to production.',
+    },
+  },
+  quote: {
+    title: 'Request a quote',
+    subtitle: 'Tell me the basics of the project and I will reply by email or WhatsApp.',
+    name: 'Name',
+    email: 'Email',
+    projectType: 'Project type',
+    timeline: 'Desired timeline',
+    budget: 'Approximate budget',
+    message: 'Tell me about the project',
+    optional: '(optional)',
+    select: 'Select',
+    projectTypes: ['Custom system', 'Speed and stability', 'Data and migration', 'Website or app', 'Other'],
+    timelines: ['Urgent (within 1 month)', '1 to 3 months', 'No rush', 'Not sure yet'],
+    budgets: ['Up to R$ 2k', 'R$ 2k to 5k', 'R$ 5k to 15k', 'Over R$ 15k', 'I prefer to talk'],
+    submit: 'Send request',
+    sending: 'Sending…',
+    successTitle: 'Request sent!',
+    success: 'Thank you! I will reply to the email you provided.',
+    another: 'Send another request',
+    error: 'Could not send right now. Please try again or reach me on WhatsApp or by email.',
+    privacy: 'I only use the data to reply to your request.',
   },
   footer: {
     rights: 'All rights reserved.',

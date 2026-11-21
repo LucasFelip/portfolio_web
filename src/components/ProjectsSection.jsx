@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { m } from 'framer-motion';
 import { getProjects, getInitialProjects } from '@/services/githubService';
 import ProjectsDisplay from '@/components/projects/ProjectsDisplay';
+import GithubStats from '@/components/projects/GithubStats';
 import { useI18n } from '@/i18n';
 
 const ProjectsSection = () => {
@@ -79,6 +80,7 @@ const ProjectsSection = () => {
         >
           {t.projects.subtitle}
         </m.p>
+        <GithubStats />
         <ProjectsDisplay projects={projects} loading={loading} error={error} />
       </div>
     </section>

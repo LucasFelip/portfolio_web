@@ -10,6 +10,10 @@ export const navItems = [
   { id: 'contatos', label: 'Contatos' },
 ];
 
+// Seções que não têm item no menu e o item que fica ativo enquanto elas estão na tela.
+const SECTION_OWNER = { engenharia: 'trajetoria', processo: 'servicos' };
+const trackedSections = [...navItems.map(({ id }) => [id, id]), ...Object.entries(SECTION_OWNER)];
+
 const prefersReducedMotion = () =>
   typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
@@ -27,10 +31,10 @@ export function useActiveSection() {
     const update = () => {
       frame = 0;
       const position = window.scrollY + window.innerHeight / 2;
-      for (const { id } of navItems) {
-        const section = document.getElementById(id);
+      for (const [sectionId, navId] of trackedSections) {
+        const section = document.getElementById(sectionId);
         if (section && section.offsetTop <= position && section.offsetTop + section.offsetHeight > position) {
-          setActiveSection(id);
+          setActiveSection(navId);
           break;
         }
       }
